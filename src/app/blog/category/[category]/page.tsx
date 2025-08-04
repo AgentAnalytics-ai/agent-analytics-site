@@ -2,7 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getPostsByCategory, getAllCategories } from '@/lib/blog';
-import { PostCard } from '@/components/blog/PostCard';
+import PostCard from '@/components/blog/PostCard';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { ArrowLeft } from 'lucide-react';

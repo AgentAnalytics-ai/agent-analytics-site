@@ -25,7 +25,7 @@ export default function CityNotFound() {
 
           {/* Description */}
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-            We're sorry, but we don't currently have a dedicated page for this location. 
+            We&apos;re sorry, but we don&apos;t currently have a dedicated page for this location. 
             However, we still provide AI consulting services in your area!
           </p>
 
@@ -43,7 +43,7 @@ export default function CityNotFound() {
               </div>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              We're actively expanding to more cities. Contact us to discuss services in your area.
+              We&apos;re actively expanding to more cities. Contact us to discuss services in your area.
             </p>
           </div>
 
@@ -71,7 +71,7 @@ export default function CityNotFound() {
               💡 Remote Services Available
             </h3>
             <p className="text-sm text-blue-700 dark:text-blue-400">
-              Even if we don't have a local office in your city, we provide comprehensive AI consulting services remotely. 
+              Even if we don&apos;t have a local office in your city, we provide comprehensive AI consulting services remotely. 
               Our team can work with you virtually and travel for on-site implementation when needed.
             </p>
           </div>

@@ -6,7 +6,7 @@ import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { ArrowRight, Sparkles, Brain, Target, Zap, Clock, User, Tag } from 'lucide-react';
+import { ArrowRight, Sparkles, Brain, Target, Zap } from 'lucide-react';
 import { BlogMeta } from '@/lib/blog';
 
 interface BlogClientProps {
@@ -16,12 +16,6 @@ interface BlogClientProps {
 export function BlogClient({ posts }: BlogClientProps) {
   const featuredPosts = posts.slice(0, 3);
   const recentPosts = posts.slice(3, 9);
-
-  const categories = [
-    { name: 'AI Strategy', icon: <Brain className="w-4 h-4" />, color: 'emerald' },
-    { name: 'Implementation', icon: <Target className="w-4 h-4" />, color: 'blue' },
-    { name: 'Innovation', icon: <Zap className="w-4 h-4" />, color: 'emerald' }
-  ];
 
   return (
     <>

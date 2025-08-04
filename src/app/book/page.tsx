@@ -38,7 +38,7 @@ export default function Book() {
         
         <div className="text-center mt-6">
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            Can't find a time that works? <a href="/contact" className="text-blue-600 hover:text-blue-700 dark:text-blue-400">Contact us directly</a>
+            Can&apos;t find a time that works? <a href="/contact" className="text-blue-600 hover:text-blue-700 dark:text-blue-400">Contact us directly</a>
           </p>
         </div>
       </div>

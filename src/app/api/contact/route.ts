@@ -2,8 +2,21 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { prisma } from '@/lib/db';
 
+// Define proper interface for contact form data
+interface ContactSubmissionData {
+  name: string;
+  email: string;
+  company?: string;
+  phone?: string;
+  service?: string;
+  challenge?: string;
+  timeline?: string;
+  budget?: string;
+  message?: string;
+}
+
 // Add webhook function
-async function sendToCRM(submissionData: any) {
+async function sendToCRM(submissionData: ContactSubmissionData) {
   const webhookUrl = process.env.CRM_WEBHOOK_URL;
   
   if (!webhookUrl) {
@@ -35,7 +48,7 @@ async function sendToCRM(submissionData: any) {
 }
 
 // Add Notion integration function
-async function sendToNotion(submissionData: any) {
+async function sendToNotion(submissionData: ContactSubmissionData) {
   const notionApiKey = process.env.NOTION_API_KEY;
   const databaseId = process.env.NOTION_DATABASE_ID;
   
@@ -71,7 +84,7 @@ async function sendToNotion(submissionData: any) {
             rich_text: [
               {
                 text: {
-                  content: submissionData.challenge || submissionData.message
+                  content: submissionData.challenge || submissionData.message || ''
                 }
               }
             ]
@@ -109,18 +122,18 @@ async function sendToNotion(submissionData: any) {
 }
 
 // Add Airtable integration function
-async function sendToAirtable(submissionData: any) {
+async function sendToAirtable(submissionData: ContactSubmissionData) {
   const airtableApiKey = process.env.AIRTABLE_API_KEY;
   const baseId = process.env.AIRTABLE_BASE_ID;
-  const tableName = process.env.AIRTABLE_TABLE_NAME || 'Contact Submissions';
+  const tableName = process.env.AIRTABLE_TABLE_NAME;
   
-  if (!airtableApiKey || !baseId) {
+  if (!airtableApiKey || !baseId || !tableName) {
     console.log('Airtable integration not configured');
     return;
   }
 
   try {
-    const response = await fetch(`https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}`, {
+    const response = await fetch(`https://api.airtable.com/v0/${baseId}/${tableName}`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${airtableApiKey}`,
@@ -132,15 +145,17 @@ async function sendToAirtable(submissionData: any) {
             fields: {
               Name: submissionData.name,
               Email: submissionData.email,
-              Message: submissionData.challenge || submissionData.message,
               Company: submissionData.company || '',
-              Service: submissionData.service || '',
               Phone: submissionData.phone || '',
+              Service: submissionData.service || '',
+              Challenge: submissionData.challenge || '',
               Timeline: submissionData.timeline || '',
-              Budget: submissionData.budget || ''
-            }
-          }
-        ]
+              Budget: submissionData.budget || '',
+              Message: submissionData.message || '',
+              'Submission Date': new Date().toISOString(),
+            },
+          },
+        ],
       }),
     });
 
@@ -211,7 +226,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Send to external services
-    const submissionData = { name, email, company, phone, service, challenge, timeline, budget, message };
+    const submissionData: ContactSubmissionData = { name, email, company, phone, service, challenge, timeline, budget, message };
     
     // Send to Notion
     await sendToNotion(submissionData);

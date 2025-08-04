@@ -4,7 +4,7 @@ import React from 'react';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
-import { ArrowRight, Target, TrendingUp, Users, Brain, Code, Zap, BarChart3, Shield, Sparkles, Clock, User, Tag, Globe } from 'lucide-react';
+import { ArrowRight, BarChart3, Zap, Globe, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 
@@ -72,7 +72,7 @@ export default function AboutPage() {
               The Problem We Solve
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Disjointed tools, scattered platforms, and subscriptions that don't work together.
+              Disjointed tools, scattered platforms, and subscriptions that don&apos;t work together.
             </p>
           </motion.div>
 
@@ -81,7 +81,7 @@ export default function AboutPage() {
               {
                 icon: <BarChart3 className="w-8 h-8" />,
                 title: "Wasted Resources",
-                description: "Money spent on tools that don't integrate or deliver value.",
+                description: "Money spent on tools that don&apos;t integrate or deliver value.",
                 color: "emerald"
               },
               {

@@ -12,7 +12,7 @@ export function Values() {
     },
     {
       title: "Client Partnership", 
-      description: "We don't just deliver solutions—we become an extension of your team, building lasting relationships that drive sustained success and growth.",
+      description: "We don&apos;t just deliver solutions—we become an extension of your team, building lasting relationships that drive sustained success and growth.",
       icon: <Users className="h-10 w-10 text-indigo-600 dark:text-indigo-400" strokeWidth={1.5} />
     },
     {

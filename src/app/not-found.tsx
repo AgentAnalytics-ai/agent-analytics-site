@@ -64,7 +64,7 @@ export default function NotFound() {
               💡 Need Help?
             </h3>
             <p className="text-sm text-blue-700 dark:text-blue-400">
-              If you're looking for AI consulting services, we're here to help. 
+              If you&apos;re looking for AI consulting services, we&apos;re here to help. 
               Schedule a strategy call to discuss how we can solve your business challenges.
             </p>
           </div>

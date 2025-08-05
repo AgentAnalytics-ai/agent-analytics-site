@@ -15,7 +15,7 @@ export function Trust() {
       avatar: "SJ"
     },
     {
-      quote: "The team's expertise in product development and market analysis helped us launch our platform successfully and secure Series A funding. They're true strategic partners.",
+      quote: "The team&apos;s expertise in product development and market analysis helped us launch our platform successfully and secure Series A funding. They&apos;re true strategic partners.",
       author: "Michael Chen",
       title: "Founder & CEO",
       company: "HealthTech Innovations",
@@ -59,7 +59,7 @@ export function Trust() {
             Trusted by Industry Leaders
           </h2>
           <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-            We've partnered with organizations across industries to deliver 
+            We&apos;ve partnered with organizations across industries to deliver 
             transformative results and lasting impact.
           </p>
         </div>

@@ -79,7 +79,7 @@ export default function WhoWeAre() {
               Why Choose Agent Analytics
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-gray-200">
-              We're a consulting studio that quietly powers modern enterprises with custom strategy,
+              We&apos;re a consulting studio that quietly powers modern enterprises with custom strategy,
               technology, and internal tools. Built for scale, security, and results.
             </p>
           </motion.div>

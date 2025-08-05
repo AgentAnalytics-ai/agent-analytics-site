@@ -6,7 +6,7 @@ import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { ArrowRight, Sparkles, Brain, Target, Zap } from 'lucide-react';
+import { ArrowRight, Sparkles, Brain, Target, Zap, User, Clock, Tag } from 'lucide-react';
 import { BlogMeta } from '@/lib/blog';
 
 interface BlogClientProps {

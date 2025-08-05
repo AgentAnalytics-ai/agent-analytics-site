@@ -24,7 +24,7 @@ export default function Book() {
             Schedule a Strategy Session
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300">
-            Let's discuss how AI can transform your business challenges into opportunities.
+            Let&apos;s discuss how AI can transform your business challenges into opportunities.
           </p>
         </div>
         

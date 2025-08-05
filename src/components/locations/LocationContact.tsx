@@ -53,7 +53,7 @@ export default function LocationContact({ city }: LocationContactProps) {
             variants={itemVariants}
             className="max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-300"
           >
-            Let's discuss how AI can drive growth and efficiency for your organization. Our local expertise means we understand your market and can deliver solutions that work for {city.name} businesses.
+            Let&apos;s discuss how AI can drive growth and efficiency for your organization. Our local expertise means we understand your market and can deliver solutions that work for {city.name} businesses.
           </motion.p>
         </motion.div>
 

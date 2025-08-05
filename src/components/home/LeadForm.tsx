@@ -53,13 +53,13 @@ export function LeadForm() {
       <Container>
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
-            Tell us what's keeping you up at night.
+            Tell us what&apos;s keeping you up at night.
           </h2>
           
           {submitStatus === 'success' && (
             <div className="mb-6 p-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-lg">
               <p className="text-emerald-800 dark:text-emerald-200">
-                Thanks! We'll get back to you within 24 hours.
+                Thanks! We&apos;ll get back to you within 24 hours.
               </p>
             </div>
           )}
@@ -112,7 +112,7 @@ export function LeadForm() {
           </form>
           
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
-            We'll follow up within 24 hours.
+            We&apos;ll follow up within 24 hours.
           </p>
         </div>
       </Container>

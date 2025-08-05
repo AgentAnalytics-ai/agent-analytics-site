@@ -26,7 +26,7 @@ export function ContactForm() {
   const [error, setError] = useState<string | null>(null);
   const [useCase, setUseCase] = useState<UseCaseCategory | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
@@ -67,7 +67,7 @@ export function ContactForm() {
         service: formData.service,
         use_case_category: useCase?.category || 'unknown',
         use_case_confidence: useCase?.confidence || 0,
-        response_time: Date.now() - (window as any).formStartTime || 0
+        response_time: Date.now() - (window.formStartTime || 0)
       });
       
       // Reset form after 3 seconds
@@ -121,8 +121,8 @@ export function ContactForm() {
 
   // Track form start time
   const handleFormFocus = () => {
-    if (!(window as any).formStartTime) {
-      (window as any).formStartTime = Date.now();
+    if (!window.formStartTime) {
+      window.formStartTime = Date.now();
       posthog.capture('form_started', {
         form_type: 'contact'
       });
@@ -193,8 +193,8 @@ export function ContactForm() {
               Message sent successfully!
             </h1>
             <p className="text-xl text-gray-300 mb-8">
-              We've received your message and will get back to you within 24 hours. 
-              We're excited to learn more about your project!
+              We&apos;ve received your message and will get back to you within 24 hours. 
+              We&apos;re excited to learn more about your project!
             </p>
             <Button variant="primary" size="lg" onClick={() => window.location.href = '/'}>
               Back to Home
@@ -298,7 +298,7 @@ export function ContactForm() {
                   onChange={(e) => handleChallengeChange(e.target.value)}
                   rows={4}
                   className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                  placeholder="Tell us about the problem you're trying to solve..."
+                  placeholder="Tell us about the problem you&apos;re trying to solve..."
                   required
                 />
                 
@@ -406,7 +406,7 @@ export function ContactForm() {
               <ol className="space-y-2 text-gray-600">
                 <li className="flex items-start">
                   <span className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium mr-3 mt-0.5">1</span>
-                  <span>We'll review your message within 24 hours</span>
+                  <span>We&apos;ll review your message within 24 hours</span>
                 </li>
                 <li className="flex items-start">
                   <span className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium mr-3 mt-0.5">2</span>

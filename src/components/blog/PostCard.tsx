@@ -50,7 +50,7 @@ export default function PostCard({ post, featured = false }: PostCardProps) {
 
   // Get a professional icon based on the category
   const getCategoryIcon = (category: string) => {
-    const categoryIcons: { [key: string]: React.ComponentType<any> } = {
+    const categoryIcons: { [key: string]: React.ComponentType<{ className?: string; strokeWidth?: number }> } = {
       'AI Implementation': Brain,
       'AI Strategy': Cpu,
       'Digital Transformation': Rocket,

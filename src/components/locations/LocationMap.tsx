@@ -55,7 +55,7 @@ export default function LocationMap({ city }: LocationMapProps) {
             variants={itemVariants}
             className="max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-300"
           >
-            We're proud to serve {city.name}, {city.state} and the surrounding areas. Connect with us to discuss your AI transformation journey.
+            We&apos;re proud to serve {city.name}, {city.state} and the surrounding areas. Connect with us to discuss your AI transformation journey.
           </motion.p>
         </motion.div>
 
@@ -122,11 +122,11 @@ export default function LocationMap({ city }: LocationMapProps) {
               
               <div className="space-y-4 text-gray-600 dark:text-gray-300">
                 <p>
-                  We're committed to bringing world-class AI expertise to {city.name} and the surrounding {city.state} region. Our local presence means we understand your market, your challenges, and your opportunities.
+                  We&apos;re committed to bringing world-class AI expertise to {city.name} and the surrounding {city.state} region. Our local presence means we understand your market, your challenges, and your opportunities.
                 </p>
                 
                 <p>
-                  Whether you're in downtown {city.name} or the surrounding areas, we're here to help transform your business with intelligent AI solutions.
+                  Whether you&apos;re in downtown {city.name} or the surrounding areas, we&apos;re here to help transform your business with intelligent AI solutions.
                 </p>
               </div>
             </div>

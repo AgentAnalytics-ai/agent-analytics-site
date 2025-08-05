@@ -15,7 +15,7 @@ interface HeroProps {
 
 export default function Hero({ 
   title = "Strategic Intelligence in Action",
-  subtitle = "We design agentic systems that think, act, and align with your business. These aren't off-the-shelf tools — they're adaptive solutions built to understand and execute.",
+  subtitle = "We design agentic systems that think, act, and align with your business. These aren&apos;t off-the-shelf tools — they&apos;re adaptive solutions built to understand and execute.",
   primaryCTA = "Schedule a Call",
   secondaryCTA = "Learn More"
 }: HeroProps) {
@@ -45,8 +45,8 @@ export default function Hero({
   const openCalendlyPopup = () => {
     // Wait a bit for Calendly to load, then open popup
     setTimeout(() => {
-      if (typeof window !== 'undefined' && (window as any).Calendly) {
-        (window as any).Calendly.initPopupWidget({
+      if (typeof window !== 'undefined' && window.Calendly) {
+        window.Calendly.initPopupWidget({
           url: 'https://calendly.com/grant-agentanalyticsai?background_color=f8fafc&text_color=1e293b&primary_color=059669'
         });
       } else {

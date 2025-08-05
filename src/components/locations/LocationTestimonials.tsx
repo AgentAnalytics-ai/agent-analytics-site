@@ -65,7 +65,7 @@ export default function LocationTestimonials({ city }: LocationTestimonialsProps
             variants={itemVariants}
             className="max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-300"
           >
-            Discover how we've helped local companies in {city.name}, {city.state} transform their operations with AI.
+            Discover how we&apos;ve helped local companies in {city.name}, {city.state} transform their operations with AI.
           </motion.p>
         </motion.div>
 
@@ -126,7 +126,7 @@ export default function LocationTestimonials({ city }: LocationTestimonialsProps
               Ready to Join Our Success Stories?
             </h3>
             <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-              Let's discuss how AI can transform your {city.name} business. Join the growing list of local companies that have already seen remarkable results.
+              Let&apos;s discuss how AI can transform your {city.name} business. Join the growing list of local companies that have already seen remarkable results.
             </p>
             <a
               href="/book"

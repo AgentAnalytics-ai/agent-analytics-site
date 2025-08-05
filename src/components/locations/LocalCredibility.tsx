@@ -86,7 +86,7 @@ export default function LocalCredibility({ city }: LocalCredibilityProps) {
                 </h3>
               </div>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                We're proud to call {city.name}, {city.state} our home. Our deep understanding of the local business landscape helps us deliver AI solutions that work for Oklahoma companies.
+                We&apos;re proud to call {city.name}, {city.state} our home. Our deep understanding of the local business landscape helps us deliver AI solutions that work for Oklahoma companies.
               </p>
               <div className="text-sm text-gray-500 dark:text-gray-400">
                 <p><strong>Registered Address:</strong></p>
@@ -127,7 +127,7 @@ export default function LocalCredibility({ city }: LocalCredibilityProps) {
                 </h3>
               </div>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                We're a properly registered business entity with full transparency about our operations. Our registered agent ensures we maintain compliance and trust with our clients.
+                We&apos;re a properly registered business entity with full transparency about our operations. Our registered agent ensures we maintain compliance and trust with our clients.
               </p>
               <div className="text-sm text-gray-500 dark:text-gray-400">
                 <p><strong>Registered Agent:</strong> {city.businessInfo?.registeredAgent}</p>
@@ -150,7 +150,7 @@ export default function LocalCredibility({ city }: LocalCredibilityProps) {
               Ready to Transform Your Business with AI?
             </h3>
             <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-              Whether you're in {city.name} or anywhere in the country, we're here to help you navigate the AI landscape and implement solutions that drive real results.
+              Whether you&apos;re in {city.name} or anywhere in the country, we&apos;re here to help you navigate the AI landscape and implement solutions that drive real results.
             </p>
             <Link
               href="/book"

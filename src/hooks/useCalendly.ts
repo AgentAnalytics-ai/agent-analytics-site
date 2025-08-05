@@ -2,6 +2,12 @@
 
 import { useEffect } from 'react';
 
+interface CalendlyWindow extends Window {
+  Calendly?: {
+    initPopupWidget: (options: { url: string }) => void;
+  };
+}
+
 export function useCalendly() {
   useEffect(() => {
     const script = document.createElement('script');
@@ -18,8 +24,9 @@ export function useCalendly() {
 
   const openCalendlyPopup = () => {
     setTimeout(() => {
-      if (typeof window !== 'undefined' && (window as any).Calendly) {
-        (window as any).Calendly.initPopupWidget({
+      const calendlyWindow = window as CalendlyWindow;
+      if (typeof window !== 'undefined' && calendlyWindow.Calendly) {
+        calendlyWindow.Calendly.initPopupWidget({
           url: 'https://calendly.com/grant-agentanalyticsai?background_color=f8fafc&text_color=1e293b&primary_color=059669'
         });
       } else {

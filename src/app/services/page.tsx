@@ -12,7 +12,7 @@ export default function ServicesPage() {
     {
       icon: Brain,
       title: 'AI Strategy & Roadmapping',
-      description: 'We don\'t just analyze—we architect your AI future. I help you identify the right AI opportunities, build realistic roadmaps, and avoid the common pitfalls that derail AI initiatives.',
+      description: 'We don&apos;t just analyze—we architect your AI future. I help you identify the right AI opportunities, build realistic roadmaps, and avoid the common pitfalls that derail AI initiatives.',
       features: ['AI Opportunity Assessment', 'Strategic Roadmap Development', 'Technology Stack Selection', 'ROI Analysis & Planning'],
       benefits: ['Clear AI implementation path', 'Avoid costly mistakes', 'Measurable business outcomes'],
       cta: 'Book Strategy Session',
@@ -34,7 +34,7 @@ export default function ServicesPage() {
     {
       icon: Zap,
       title: 'AI Implementation & Training',
-      description: 'I don\'t just build AI—I ensure your team can use it effectively. From implementation to training, I help you maximize ROI and drive adoption across your organization.',
+      description: 'I don&apos;t just build AI—I ensure your team can use it effectively. From implementation to training, I help you maximize ROI and drive adoption across your organization.',
       features: ['Implementation Support', 'Team Training & Enablement', 'Change Management', 'Ongoing Optimization'],
       benefits: ['Faster AI adoption', 'Maximized ROI', 'Sustainable transformation'],
       cta: 'Start Implementation',
@@ -63,7 +63,7 @@ export default function ServicesPage() {
               Your AI Transformation Partner
             </h1>
             <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-12">
-              I don't just consult on AI—I build intelligent systems that transform your business. 
+              I don&apos;t just consult on AI—I build intelligent systems that transform your business. 
               We help you simplify, consolidate, and optimize your software and AI workflows. 
               No generic advice, no off-the-shelf solutions. Just strategic thinking and custom AI that delivers real results.
             </p>
@@ -87,18 +87,18 @@ export default function ServicesPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 bg-clip-text text-transparent">
-                Why I'm Different
+                Why I&apos;m Different
               </h2>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
                 I founded Agent Analytics to solve a problem I saw everywhere: teams overwhelmed by disjointed tools and scattered platforms. 
-                Most AI consultants give you generic advice and leave you to figure out the rest. I don't work that way.
+                Most AI consultants give you generic advice and leave you to figure out the rest. I don&apos;t work that way.
               </p>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <Target className="w-6 h-6 text-blue-600 mt-1 flex-shrink-0" />
                   <div>
                     <h3 className="font-semibold text-gray-900">Strategic + Hands-On</h3>
-                    <p className="text-gray-600 text-sm">I don't just create roadmaps—I help you execute them and build the actual AI solutions.</p>
+                    <p className="text-gray-600 text-sm">I don&apos;t just create roadmaps—I help you execute them and build the actual AI solutions.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
@@ -230,7 +230,7 @@ export default function ServicesPage() {
               Ready to Transform with AI?
             </h2>
             <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              Let's discuss how AI can revolutionize your business. No generic advice—just strategic solutions tailored to your unique challenges.
+              Let&apos;s discuss how AI can revolutionize your business. No generic advice—just strategic solutions tailored to your unique challenges.
             </p>
             <Button 
               variant="primary" 

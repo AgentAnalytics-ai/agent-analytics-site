@@ -4,32 +4,11 @@ import React from 'react';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
-import { ArrowRight, BarChart3, Zap, Globe, Sparkles } from 'lucide-react';
+import { ArrowRight, BarChart3, Zap, Globe, Sparkles, Brain, Target } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 
 export default function AboutPage() {
-  const problems = [
-    {
-      title: 'Wasted Resources',
-      description: 'Money spent on tools that don\'t integrate or deliver value',
-      icon: <BarChart3 className="w-8 h-8" />,
-      color: 'red'
-    },
-    {
-      title: 'Operational Friction',
-      description: 'Teams struggling with disconnected workflows and processes',
-      icon: <Zap className="w-8 h-8" />,
-      color: 'orange'
-    },
-    {
-      title: 'Unnecessary Stress',
-      description: 'Complexity that distracts from core business objectives',
-      icon: <Brain className="w-8 h-8" />,
-      color: 'yellow'
-    }
-  ];
-
   return (
     <>
       {/* Hero Section */}
@@ -141,7 +120,7 @@ export default function AboutPage() {
             </p>
             <div className="bg-white rounded-2xl p-6 border border-emerald-200/50 shadow-sm">
               <p className="text-lg text-gray-700 italic">
-                "Technology should work for you, not the other way around."
+                &quot;Technology should work for you, not the other way around.&quot;
               </p>
             </div>
           </motion.div>
@@ -156,7 +135,7 @@ export default function AboutPage() {
               Ready to Simplify Your Tech Stack?
             </h2>
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Let's discuss how we can help you eliminate complexity and build intelligent systems that work for you.
+              Let&apos;s discuss how we can help you eliminate complexity and build intelligent systems that work for you.
             </p>
             <Button 
               variant="primary" 

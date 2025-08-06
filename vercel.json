@@ -54,5 +54,8 @@
       "source": "/sitemap.xml",
       "destination": "/api/sitemap"
     }
-  ]
+  ],
+  "env": {
+    "DATABASE_URL": "@database_url"
+  }
 } 

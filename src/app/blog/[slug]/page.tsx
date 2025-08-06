@@ -12,12 +12,6 @@ import { Calendar, Clock, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getAllPosts } from '@/lib/blog';
-import { MDXRemote } from 'next-mdx-remote/rsc';
-import remarkGfm from 'remark-gfm';
-import rehypeSlug from 'rehype-slug';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypePrismPlus from 'rehype-prism-plus';
-import { mdxComponents } from '@/components/blog/mdx-components-server';
 import { Logo } from '@/components/ui/Logo';
 
 interface BlogPostPageProps {
@@ -31,10 +25,12 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
-  
+
   if (!post) {
     return {
       title: 'Post Not Found - Agent Analytics',
@@ -66,19 +62,22 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
-  
+
   if (!post) {
     notFound();
   }
 
   const relatedPosts = getRelatedPosts(post);
-  
+
   // Extract headings for TOC
   const headings = post.content
     .split('\n')
-    .filter(line => line.startsWith('## '))
-    .map(line => ({
-      id: line.replace('## ', '').toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+    .filter((line) => line.startsWith('## '))
+    .map((line) => ({
+      id: line
+        .replace('## ', '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-'),
       text: line.replace('## ', ''),
       level: 2,
     }));
@@ -88,28 +87,28 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   // Generate structured data
   const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
     headline: post.title,
     datePublished: post.date,
     dateModified: post.lastModified,
     author: {
-      "@type": "Person",
-      name: post.author.name
+      '@type': 'Person',
+      name: post.author.name,
     },
     publisher: {
-      "@type": "Organization",
-      name: "Agent Analytics",
+      '@type': 'Organization',
+      name: 'Agent Analytics',
       logo: {
-        "@type": "ImageObject",
-        url: "https://agentanalytics.com/Agent%20Analytics%20Logo.png"
-      }
+        '@type': 'ImageObject',
+        url: 'https://agentanalytics.com/Agent%20Analytics%20Logo.png',
+      },
     },
     description: post.excerpt,
     mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `https://agentanalytics.com/blog/${post.slug}`
-    }
+      '@type': 'WebPage',
+      '@id': `https://agentanalytics.com/blog/${post.slug}`,
+    },
   };
 
   return (
@@ -118,7 +117,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      
+
       <Section className="bg-white">
         <Container>
           <div className="max-w-4xl mx-auto">
@@ -129,7 +128,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <ArrowLeft className="w-4 h-4" />
               Back to Blog
             </Link>
-            
+
             <article>
               {/* Header */}
               <header className="mb-8 relative">
@@ -137,7 +136,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <div className="absolute top-0 right-0 opacity-5 pointer-events-none">
                   <Logo variant="symbol" size="watermark" showLink={false} />
                 </div>
-                
+
                 <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
                   <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-50 text-blue-700 border border-blue-200 overflow-hidden">
                     {post.category}
@@ -157,15 +156,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     <span>{post.readingTime}</span>
                   </div>
                 </div>
-                
+
                 <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
                   {post.title}
                 </h1>
-                
+
                 {post.subtitle && (
-                  <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">{post.subtitle}</p>
+                  <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">
+                    {post.subtitle}
+                  </p>
                 )}
-                
+
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     {post.author.avatar ? (
@@ -179,16 +180,24 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     ) : (
                       <div className="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center">
                         <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                          {post.author.name.split(' ').map(n => n[0]).join('').toUpperCase()}
+                          {post.author.name
+                            .split(' ')
+                            .map((n) => n[0])
+                            .join('')
+                            .toUpperCase()}
                         </span>
                       </div>
                     )}
                     <div>
-                      <p className="font-medium text-gray-900 dark:text-white">{post.author.name}</p>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Author</p>
+                      <p className="font-medium text-gray-900 dark:text-white">
+                        {post.author.name}
+                      </p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Author
+                      </p>
                     </div>
                   </div>
-                  
+
                   <ShareButtons
                     url={`https://agentanalytics.com/blog/${post.slug}`}
                     title={post.title}
@@ -211,7 +220,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               )}
 
               {/* Content */}
-              <div className="prose prose-lg max-w-none 
+              <div
+                className="prose prose-lg max-w-none 
                 prose-gray 
                 prose-headings:text-gray-900 
                 prose-p:text-gray-700 
@@ -255,14 +265,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 [&>ol]:pl-6
                 [&>li]:list-item
                 [&>li]:pl-2
-              ">
+              "
+              >
                 {mdxContent}
               </div>
 
               {/* Tags */}
               {post.tags.length > 0 && (
                 <div className="mt-8 pt-8 border-t border-gray-200">
-                  <h3 className="text-sm font-medium text-gray-900 mb-3">Tags:</h3>
+                  <h3 className="text-sm font-medium text-gray-900 mb-3">
+                    Tags:
+                  </h3>
                   <div className="flex flex-wrap gap-2">
                     {post.tags.map((tag) => (
                       <Link
@@ -288,4 +301,4 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <RelatedPosts posts={relatedPosts} />
     </>
   );
-} 
+}

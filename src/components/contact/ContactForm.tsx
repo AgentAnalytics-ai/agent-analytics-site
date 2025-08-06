@@ -5,7 +5,14 @@ import { Container } from '../ui/Container';
 import { Section } from '../ui/Section';
 import { Button } from '../ui/Button';
 import { Card } from '../ui/Card';
-import { ArrowRight, Mail, Phone, MapPin, Clock, CheckCircle } from 'lucide-react';
+import {
+  ArrowRight,
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+  CheckCircle,
+} from 'lucide-react';
 import { detectUseCase, UseCaseCategory } from '@/lib/useCaseDetection';
 import { posthog } from '@/components/analytics/Analytics';
 
@@ -18,7 +25,7 @@ export function ContactForm() {
     service: '',
     challenge: '',
     timeline: '',
-    budget: ''
+    budget: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -30,7 +37,7 @@ export function ContactForm() {
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
-    
+
     // Track form submission attempt
     posthog.capture('form_submission_attempted', {
       form_type: 'contact',
@@ -40,9 +47,9 @@ export function ContactForm() {
       has_timeline: !!formData.timeline,
       has_budget: !!formData.budget,
       use_case_category: useCase?.category || 'unknown',
-      use_case_confidence: useCase?.confidence || 0
+      use_case_confidence: useCase?.confidence || 0,
     });
-    
+
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -55,21 +62,23 @@ export function ContactForm() {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.error || 'Oops! Couldn\'t reach us. Please email us directly at contact@agentanalyticsai.com');
+        throw new Error(
+          result.error ||
+            "Oops! Couldn't reach us. Please email us directly at contact@agentanalyticsai.com"
+        );
       }
 
-      console.log('Form submitted successfully:', result);
       setIsSubmitted(true);
-      
+
       // Track successful form submission
       posthog.capture('form_submitted', {
         form_type: 'contact',
         service: formData.service,
         use_case_category: useCase?.category || 'unknown',
         use_case_confidence: useCase?.confidence || 0,
-        response_time: Date.now() - (window.formStartTime || 0)
+        response_time: Date.now() - (window.formStartTime || 0),
       });
-      
+
       // Reset form after 3 seconds
       setTimeout(() => {
         setIsSubmitted(false);
@@ -81,18 +90,20 @@ export function ContactForm() {
           service: '',
           challenge: '',
           timeline: '',
-          budget: ''
+          budget: '',
         });
       }, 3000);
-      
     } catch (error) {
-      console.error('Error submitting form:', error);
-      setError(error instanceof Error ? error.message : 'Oops! Couldn\'t reach us. Please email us directly at contact@agentanalyticsai.com');
-      
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Oops! Couldn't reach us. Please email us directly at contact@agentanalyticsai.com"
+      );
+
       // Track form submission error
       posthog.capture('form_submission_error', {
         form_type: 'contact',
-        error_message: error instanceof Error ? error.message : 'Unknown error'
+        error_message: error instanceof Error ? error.message : 'Unknown error',
       });
     } finally {
       setIsSubmitting(false);
@@ -101,17 +112,17 @@ export function ContactForm() {
 
   const handleChallengeChange = (value: string) => {
     setFormData({ ...formData, challenge: value });
-    
+
     if (value.length > 20) {
       const detected = detectUseCase(value, formData.service);
       setUseCase(detected);
-      
+
       // Track use case detection
       if (detected && detected.confidence > 0.3) {
         posthog.capture('use_case_detected', {
           category: detected.category,
           confidence: detected.confidence,
-          service: formData.service
+          service: formData.service,
         });
       }
     } else {
@@ -124,7 +135,7 @@ export function ContactForm() {
     if (!window.formStartTime) {
       window.formStartTime = Date.now();
       posthog.capture('form_started', {
-        form_type: 'contact'
+        form_type: 'contact',
       });
     }
   };
@@ -132,53 +143,53 @@ export function ContactForm() {
   const contactInfo = [
     {
       icon: Mail,
-      title: "Email",
-      details: "hello@agent-analytics.com",
-      description: "We'll respond within 24 hours"
+      title: 'Email',
+      details: 'hello@agent-analytics.com',
+      description: "We'll respond within 24 hours",
     },
     {
       icon: Phone,
-      title: "Phone",
-      details: "+1 (555) 123-4567",
-      description: "Available Mon-Fri, 9AM-6PM EST"
+      title: 'Phone',
+      details: '+1 (555) 123-4567',
+      description: 'Available Mon-Fri, 9AM-6PM EST',
     },
     {
       icon: MapPin,
-      title: "Location",
-      details: "Remote-First",
-      description: "Serving clients globally"
+      title: 'Location',
+      details: 'Remote-First',
+      description: 'Serving clients globally',
     },
     {
       icon: Clock,
-      title: "Response Time",
-      details: "< 24 hours",
-      description: "Quick turnaround on all inquiries"
-    }
+      title: 'Response Time',
+      details: '< 24 hours',
+      description: 'Quick turnaround on all inquiries',
+    },
   ];
 
   const services = [
-    "Strategic Consulting",
-    "Product Development", 
-    "Digital Transformation",
-    "Organizational Development",
-    "Market Entry & Expansion",
-    "Performance Optimization",
-    "Other"
+    'Strategic Consulting',
+    'Product Development',
+    'Digital Transformation',
+    'Organizational Development',
+    'Market Entry & Expansion',
+    'Performance Optimization',
+    'Other',
   ];
 
   const timelines = [
-    "Immediate (1-2 weeks)",
-    "Soon (1-2 months)", 
-    "Planning (3-6 months)",
-    "Future (6+ months)"
+    'Immediate (1-2 weeks)',
+    'Soon (1-2 months)',
+    'Planning (3-6 months)',
+    'Future (6+ months)',
   ];
 
   const budgets = [
-    "$10K - $25K",
-    "$25K - $50K",
-    "$50K - $100K", 
-    "$100K+",
-    "Not sure yet"
+    '$10K - $25K',
+    '$25K - $50K',
+    '$50K - $100K',
+    '$100K+',
+    'Not sure yet',
   ];
 
   if (isSubmitted) {
@@ -193,10 +204,14 @@ export function ContactForm() {
               Message sent successfully!
             </h1>
             <p className="text-xl text-gray-300 mb-8">
-              We&apos;ve received your message and will get back to you within 24 hours. 
-              We&apos;re excited to learn more about your project!
+              We&apos;ve received your message and will get back to you within
+              24 hours. We&apos;re excited to learn more about your project!
             </p>
-            <Button variant="primary" size="lg" onClick={() => window.location.href = '/'}>
+            <Button
+              variant="primary"
+              size="lg"
+              onClick={() => (window.location.href = '/')}
+            >
               Back to Home
             </Button>
           </div>
@@ -214,8 +229,12 @@ export function ContactForm() {
             <h2 className="text-3xl font-bold text-gray-900 mb-8">
               Tell us about your project
             </h2>
-            
-            <form onSubmit={handleSubmit} className="space-y-6" onFocus={handleFormFocus}>
+
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-6"
+              onFocus={handleFormFocus}
+            >
               {error && (
                 <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
                   <p className="text-red-700 text-sm">{error}</p>
@@ -229,7 +248,9 @@ export function ContactForm() {
                   <input
                     type="text"
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
                     className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                   />
@@ -241,7 +262,9 @@ export function ContactForm() {
                   <input
                     type="email"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
                     className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                   />
@@ -256,7 +279,9 @@ export function ContactForm() {
                   <input
                     type="text"
                     value={formData.company}
-                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, company: e.target.value })
+                    }
                     className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
@@ -267,7 +292,9 @@ export function ContactForm() {
                   <input
                     type="tel"
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, phone: e.target.value })
+                    }
                     className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
@@ -279,12 +306,16 @@ export function ContactForm() {
                 </label>
                 <select
                   value={formData.service}
-                  onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, service: e.target.value })
+                  }
                   className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   <option value="">Select a service...</option>
                   {services.map((service) => (
-                    <option key={service} value={service}>{service}</option>
+                    <option key={service} value={service}>
+                      {service}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -298,10 +329,10 @@ export function ContactForm() {
                   onChange={(e) => handleChallengeChange(e.target.value)}
                   rows={4}
                   className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                  placeholder="Tell us about the problem you&apos;re trying to solve..."
+                  placeholder="Tell us about the problem you're trying to solve..."
                   required
                 />
-                
+
                 {useCase && useCase.confidence > 0.3 && (
                   <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                     <h4 className="text-sm font-semibold text-blue-900 mb-2">
@@ -309,7 +340,8 @@ export function ContactForm() {
                     </h4>
                     <div className="text-sm text-blue-800">
                       <p className="mb-2">
-                        <strong>Suggested services:</strong> {useCase.suggestedServices.join(', ')}
+                        <strong>Suggested services:</strong>{' '}
+                        {useCase.suggestedServices.join(', ')}
                       </p>
                       <p>
                         <strong>Next steps:</strong> {useCase.nextSteps[0]}
@@ -326,12 +358,16 @@ export function ContactForm() {
                   </label>
                   <select
                     value={formData.timeline}
-                    onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, timeline: e.target.value })
+                    }
                     className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="">Select timeline...</option>
                     {timelines.map((timeline) => (
-                      <option key={timeline} value={timeline}>{timeline}</option>
+                      <option key={timeline} value={timeline}>
+                        {timeline}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -341,21 +377,25 @@ export function ContactForm() {
                   </label>
                   <select
                     value={formData.budget}
-                    onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, budget: e.target.value })
+                    }
                     className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="">Select budget...</option>
                     {budgets.map((budget) => (
-                      <option key={budget} value={budget}>{budget}</option>
+                      <option key={budget} value={budget}>
+                        {budget}
+                      </option>
                     ))}
                   </select>
                 </div>
               </div>
 
-              <Button 
-                type="submit" 
-                variant="primary" 
-                size="lg" 
+              <Button
+                type="submit"
+                variant="primary"
+                size="lg"
                 className="w-full group"
                 disabled={isSubmitting}
               >
@@ -370,7 +410,7 @@ export function ContactForm() {
             <h2 className="text-3xl font-bold text-gray-900 mb-8">
               Get in touch
             </h2>
-            
+
             <div className="space-y-6">
               {contactInfo.map((info, index) => {
                 const Icon = info.icon;
@@ -405,16 +445,26 @@ export function ContactForm() {
               </h3>
               <ol className="space-y-2 text-gray-600">
                 <li className="flex items-start">
-                  <span className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium mr-3 mt-0.5">1</span>
+                  <span className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium mr-3 mt-0.5">
+                    1
+                  </span>
                   <span>We&apos;ll review your message within 24 hours</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium mr-3 mt-0.5">2</span>
-                  <span>Schedule a free consultation call to discuss your needs</span>
+                  <span className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium mr-3 mt-0.5">
+                    2
+                  </span>
+                  <span>
+                    Schedule a free consultation call to discuss your needs
+                  </span>
                 </li>
                 <li className="flex items-start">
-                  <span className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium mr-3 mt-0.5">3</span>
-                  <span>Receive a customized proposal tailored to your challenge</span>
+                  <span className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium mr-3 mt-0.5">
+                    3
+                  </span>
+                  <span>
+                    Receive a customized proposal tailored to your challenge
+                  </span>
                 </li>
               </ol>
             </div>
@@ -423,4 +473,4 @@ export function ContactForm() {
       </Container>
     </Section>
   );
-} 
+}

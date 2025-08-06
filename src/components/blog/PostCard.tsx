@@ -1,23 +1,23 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { BlogMeta } from '@/lib/blog';
-import { 
-  Brain, 
-  Rocket, 
-  Target, 
-  Monitor, 
-  TrendingUp, 
-  Users, 
-  BarChart3, 
+import {
+  Brain,
+  Rocket,
+  Target,
+  Monitor,
+  TrendingUp,
+  Users,
+  Cpu,
+  BarChart3,
   Lightbulb,
   Zap,
-  Cpu,
-  Network,
-  Shield,
-  Globe,
   Database,
   Code,
-  FileText
+  Globe,
+  Shield,
+  Network,
+  FileText,
 } from 'lucide-react';
 
 interface PostCardProps {
@@ -26,7 +26,7 @@ interface PostCardProps {
 }
 
 export default function PostCard({ post, featured = false }: PostCardProps) {
-  const cardClasses = featured 
+  const cardClasses = featured
     ? 'group relative overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-[1.02]'
     : 'group relative overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-[1.01]';
 
@@ -42,7 +42,7 @@ export default function PostCard({ post, featured = false }: PostCardProps) {
       'from-emerald-50 via-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:via-emerald-800/20 dark:to-teal-900/30',
       'from-orange-50 via-orange-100 to-red-100 dark:from-orange-900/30 dark:via-orange-800/20 dark:to-red-900/30',
       'from-amber-50 via-amber-100 to-yellow-100 dark:from-amber-900/30 dark:via-amber-800/20 dark:to-yellow-900/30',
-      'from-slate-50 via-slate-100 to-gray-100 dark:from-slate-900/30 dark:via-slate-800/20 dark:to-gray-900/30'
+      'from-slate-50 via-slate-100 to-gray-100 dark:from-slate-900/30 dark:via-slate-800/20 dark:to-gray-900/30',
     ];
     const index = title.length % colors.length;
     return colors[index];
@@ -50,27 +50,37 @@ export default function PostCard({ post, featured = false }: PostCardProps) {
 
   // Get a professional icon based on the category
   const getCategoryIcon = (category: string) => {
-    const categoryIcons: { [key: string]: React.ComponentType<{ className?: string; strokeWidth?: number }> } = {
+    const categoryIcons: {
+      [key: string]: React.ComponentType<{
+        className?: string;
+        strokeWidth?: number;
+      }>;
+    } = {
       'AI Implementation': Brain,
       'AI Strategy': Cpu,
       'Digital Transformation': Rocket,
-      'Strategy': Target,
-      'Technology': Monitor,
-      'Leadership': Users,
-      'Analytics': BarChart3,
-      'Consulting': Lightbulb,
-      'Innovation': Zap,
+      Strategy: Target,
+      Technology: Monitor,
+      Leadership: Users,
+      Analytics: BarChart3,
+      Consulting: Lightbulb,
+      Innovation: Zap,
       'Machine Learning': Brain,
       'Data Science': Database,
       'Software Development': Code,
-      'Business': TrendingUp,
-      'Marketing': Globe,
-      'Security': Shield,
-      'Infrastructure': Network
+      Business: TrendingUp,
+      Marketing: Globe,
+      Security: Shield,
+      Infrastructure: Network,
     };
-    
+
     const IconComponent = categoryIcons[category] || FileText;
-    return <IconComponent className="w-12 h-12 text-gray-600 dark:text-gray-400" strokeWidth={1.5} />;
+    return (
+      <IconComponent
+        className="w-12 h-12 text-gray-600 dark:text-gray-400"
+        strokeWidth={1.5}
+      />
+    );
   };
 
   return (
@@ -100,13 +110,15 @@ export default function PostCard({ post, featured = false }: PostCardProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
             </div>
           ) : (
-            <div className={`${imageClasses} bg-gradient-to-br ${getPlaceholderGradient(post.title)} flex items-center justify-center relative overflow-hidden`}>
+            <div
+              className={`${imageClasses} bg-gradient-to-br ${getPlaceholderGradient(post.title)} flex items-center justify-center relative overflow-hidden`}
+            >
               {/* Subtle pattern overlay */}
               <div className="absolute inset-0 opacity-10">
                 <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-white/10 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
               </div>
-              
+
               {/* Icon with subtle shadow */}
               <div className="relative z-10 flex items-center justify-center w-16 h-16 bg-white/80 dark:bg-gray-800/80 rounded-xl shadow-lg backdrop-blur-sm">
                 {getCategoryIcon(post.category)}
@@ -125,9 +137,11 @@ export default function PostCard({ post, featured = false }: PostCardProps) {
           </div>
 
           {/* Title */}
-          <h3 className={`font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors ${
-            featured ? 'text-xl' : 'text-lg'
-          }`}>
+          <h3
+            className={`font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors ${
+              featured ? 'text-xl' : 'text-lg'
+            }`}
+          >
             {post.title}
           </h3>
 
@@ -154,7 +168,7 @@ export default function PostCard({ post, featured = false }: PostCardProps) {
                 {new Date(post.date).toLocaleDateString('en-US', {
                   year: 'numeric',
                   month: 'short',
-                  day: 'numeric'
+                  day: 'numeric',
                 })}
               </time>
             </div>
@@ -182,4 +196,4 @@ export default function PostCard({ post, featured = false }: PostCardProps) {
       </Link>
     </article>
   );
-} 
+}

@@ -4,9 +4,12 @@ import { Resend } from 'resend';
 export async function POST(request: NextRequest) {
   try {
     const apiKey = process.env.RESEND_API_KEY;
-    
+
     if (!apiKey) {
-      return NextResponse.json({ error: 'Email service not configured' }, { status: 500 });
+      return NextResponse.json(
+        { error: 'Email service not configured' },
+        { status: 500 }
+      );
     }
 
     const resend = new Resend(apiKey);
@@ -15,7 +18,7 @@ export async function POST(request: NextRequest) {
     const htmlContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #1f2937;">Thanks for reaching out, ${name}!</h2>
-        
+
         <p style="color: #374151; font-size: 16px; line-height: 1.6;">
           We've received your message and are excited to learn more about your project. 
           Our team will review your inquiry and get back to you within 24 hours.
@@ -44,22 +47,19 @@ export async function POST(request: NextRequest) {
       </div>
     `;
 
-    const { error } = await resend.emails.send({
+    // No need to destructure `error`, let Resend throw an error if it fails
+    await resend.emails.send({
       from: 'contact@agentanalyticsai.com',
       to: email,
       subject: 'Thanks for reaching out - Agent Analytics',
       html: htmlContent,
     });
 
-    if (error) {
-      console.error('Confirmation email error:', error);
-      return NextResponse.json({ error: 'Failed to send confirmation' }, { status: 500 });
-    }
-
     return NextResponse.json({ message: 'Confirmation sent' }, { status: 200 });
-
-  } catch (error) {
-    console.error('Confirmation email error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  } catch {
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
   }
-} 
+}

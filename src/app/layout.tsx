@@ -3,14 +3,14 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
-import { DarkModeToggle } from '@/components/ui/DarkModeToggle';
 import { ThemeProvider } from '@/components/ui/ThemeProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Agent Analytics - AI-Powered Problem Solving',
-  description: 'We help leaders solve hard problems using AI, product thinking, and real strategy.',
+  description:
+    'We help leaders solve hard problems using AI, product thinking, and real strategy.',
   keywords: ['AI', 'problem solving', 'strategy', 'consulting', 'analytics'],
   authors: [{ name: 'Agent Analytics' }],
   creator: 'Agent Analytics',
@@ -23,7 +23,8 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://agentanalytics.com'),
   openGraph: {
     title: 'Agent Analytics - AI-Powered Problem Solving',
-    description: 'We help leaders solve hard problems using AI, product thinking, and real strategy.',
+    description:
+      'We help leaders solve hard problems using AI, product thinking, and real strategy.',
     url: 'https://agentanalytics.com',
     siteName: 'Agent Analytics',
     images: [
@@ -40,7 +41,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Agent Analytics - AI-Powered Problem Solving',
-    description: 'We help leaders solve hard problems using AI, product thinking, and real strategy.',
+    description:
+      'We help leaders solve hard problems using AI, product thinking, and real strategy.',
     images: ['/images/Agent Analytics Official Logo.png'],
   },
   robots: {
@@ -63,7 +65,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100`}>
+      <body
+        className={`${inter.className} antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100`}
+      >
         <ThemeProvider>
           <Navigation />
           <main>{children}</main>

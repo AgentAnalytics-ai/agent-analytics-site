@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { Shield, Users, Globe, Award, Clock, TrendingUp } from 'lucide-react'
+import { motion } from 'framer-motion';
+import { Shield, Users, Globe, Award, TrendingUp } from 'lucide-react';
 
 export default function WhoWeAre() {
   const containerVariants = {
@@ -13,7 +13,7 @@ export default function WhoWeAre() {
         delayChildren: 0.1,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -25,47 +25,46 @@ export default function WhoWeAre() {
         ease: [0.22, 1, 0.36, 1],
       },
     },
-  }
+  };
 
   const capabilities = [
     {
       icon: Shield,
-      title: "Enterprise Security",
-      description: "Built on Microsoft Azure with enterprise-grade security and compliance.",
+      title: 'Enterprise Security',
+      description:
+        'Built on Microsoft Azure with enterprise-grade security and compliance.',
     },
     {
       icon: Users,
-      title: "Team Integration",
-      description: "Seamlessly integrate with your existing workflows and team structures.",
+      title: 'Team Integration',
+      description:
+        'Seamlessly integrate with your existing workflows and team structures.',
     },
     {
       icon: Globe,
-      title: "Global Scale",
-      description: "Deploy solutions that scale with your business across multiple regions.",
+      title: 'Global Scale',
+      description:
+        'Deploy solutions that scale with your business across multiple regions.',
     },
     {
       icon: Award,
-      title: "Proven Results",
-      description: "Track record of delivering measurable ROI and business transformation.",
-    },
-    {
-      icon: Clock,
-      title: "Rapid Deployment",
-      description: "From concept to production in weeks, not months.",
+      title: 'Proven Results',
+      description:
+        'Track record of delivering measurable ROI and business transformation.',
     },
     {
       icon: TrendingUp,
-      title: "Continuous Optimization",
-      description: "Ongoing analytics and refinement to maximize performance.",
+      title: 'Continuous Optimization',
+      description: 'Ongoing analytics and refinement to maximize performance.',
     },
-  ]
+  ];
 
   return (
     <section className="relative bg-gray-950 py-24 overflow-hidden">
       {/* Background elements */}
       <div className="absolute top-20 right-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
       <div className="absolute bottom-20 left-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse animation-delay-2000"></div>
-      
+
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10 relative z-10">
         <motion.div
           variants={containerVariants}
@@ -79,17 +78,18 @@ export default function WhoWeAre() {
               Why Choose Agent Analytics
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-gray-200">
-              We&apos;re a consulting studio that quietly powers modern enterprises with custom strategy,
-              technology, and internal tools. Built for scale, security, and results.
+              We&apos;re a consulting studio that quietly powers modern
+              enterprises with custom strategy, technology, and internal tools.
+              Built for scale, security, and results.
             </p>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             variants={containerVariants}
             className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12"
           >
             {capabilities.map((capability, index) => {
-              const Icon = capability.icon
+              const Icon = capability.icon;
               return (
                 <motion.div
                   key={index}
@@ -106,11 +106,11 @@ export default function WhoWeAre() {
                     {capability.description}
                   </p>
                 </motion.div>
-              )
+              );
             })}
           </motion.div>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

@@ -9,26 +9,26 @@ interface SectionProps {
   id?: string;
 }
 
-export function Section({ 
-  children, 
-  className, 
+export function Section({
+  children,
+  className,
   spacing = 'lg',
   background = 'white',
-  id
+  id,
 }: SectionProps) {
   const spacingStyles = {
     sm: 'py-12',
-    md: 'py-16', 
+    md: 'py-16',
     lg: 'py-20',
     xl: 'py-24',
-    '2xl': 'py-32'
+    '2xl': 'py-32',
   };
 
   const backgroundStyles = {
     white: 'bg-white dark:bg-gray-950',
     gray: 'bg-gray-50 dark:bg-gray-900',
     blue: 'bg-blue-50 dark:bg-blue-950/20',
-    dark: 'bg-gray-950 dark:bg-black'
+    dark: 'bg-gray-950 dark:bg-black',
   };
 
   return (
@@ -44,5 +44,3 @@ export function Section({
     </section>
   );
 }
-
-export default Section; 

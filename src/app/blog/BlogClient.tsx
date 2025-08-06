@@ -1,32 +1,36 @@
-'use client'
+'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
+import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { ArrowRight, Sparkles, Brain, Target, Zap, User, Clock, Tag } from 'lucide-react';
+import { ArrowRight, Sparkles, User, Clock, Tag } from 'lucide-react';
 import { BlogMeta } from '@/lib/blog';
 
 interface BlogClientProps {
   posts: BlogMeta[];
 }
 
-export function BlogClient({ posts }: BlogClientProps) {
+export default function BlogClient({ posts }: BlogClientProps) {
   const featuredPosts = posts.slice(0, 3);
   const recentPosts = posts.slice(3, 9);
 
   return (
     <>
       {/* Hero Section */}
-      <Section spacing="xl" background="dark" className="pt-32 relative overflow-hidden">
+      <Section
+        spacing="xl"
+        background="dark"
+        className="pt-32 relative overflow-hidden"
+      >
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
         <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse animation-delay-2000"></div>
-        
+
         <Container className="relative z-10">
-          <motion.div 
+          <motion.div
             className="text-center"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -40,7 +44,9 @@ export function BlogClient({ posts }: BlogClientProps) {
               Insights for the Strategically-Minded
             </h1>
             <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-12">
-              Essays and frameworks for building agentic systems, scaling intelligent infrastructure, and making strategy real. Written for thinkers, operators, and those shaping the future.
+              Essays and frameworks for building agentic systems, scaling
+              intelligent infrastructure, and making strategy real. Written for
+              thinkers, operators, and those shaping the future.
             </p>
           </motion.div>
         </Container>
@@ -49,7 +55,7 @@ export function BlogClient({ posts }: BlogClientProps) {
       {/* Featured Posts */}
       <Section spacing="xl" background="white">
         <Container>
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -59,7 +65,8 @@ export function BlogClient({ posts }: BlogClientProps) {
               Featured Posts
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Deep dives into the most critical aspects of AI strategy and implementation.
+              Deep dives into the most critical aspects of AI strategy and
+              implementation.
             </p>
           </motion.div>
 
@@ -72,9 +79,9 @@ export function BlogClient({ posts }: BlogClientProps) {
                 transition={{ duration: 0.8, delay: index * 0.2 }}
                 className="group"
               >
-                <Card 
-                  variant="elevated" 
-                  padding="lg" 
+                <Card
+                  variant="elevated"
+                  padding="lg"
                   className="h-full hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-2 border border-gray-200/20 hover:border-emerald-200/40 bg-white/5 backdrop-blur-sm"
                 >
                   {/* Professional badge */}
@@ -119,7 +126,7 @@ export function BlogClient({ posts }: BlogClientProps) {
                   {/* Professional tags */}
                   <div className="flex flex-wrap gap-2 mb-6">
                     {post.tags?.slice(0, 3).map((tag, tagIndex) => (
-                      <span 
+                      <span
                         key={tagIndex}
                         className="inline-flex items-center gap-1 bg-gray-800/50 text-gray-300 px-2 py-1 rounded-md text-xs font-medium border border-gray-700/50"
                       >
@@ -130,11 +137,13 @@ export function BlogClient({ posts }: BlogClientProps) {
                   </div>
 
                   {/* Professional CTA */}
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
+                  <Button
+                    variant="outline"
+                    size="sm"
                     className="group-hover:bg-blue-50 group-hover:border-blue-300 group-hover:text-blue-700 transition-all duration-300"
-                    onClick={() => window.location.href = `/blog/${post.slug}`}
+                    onClick={() =>
+                      (window.location.href = `/blog/${post.slug}`)
+                    }
                   >
                     Read More
                     <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -149,7 +158,7 @@ export function BlogClient({ posts }: BlogClientProps) {
       {/* Recent Posts Grid */}
       <Section spacing="xl" background="gray">
         <Container>
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -159,7 +168,8 @@ export function BlogClient({ posts }: BlogClientProps) {
               Latest Insights
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Stay ahead with our latest strategic thinking and implementation guides.
+              Stay ahead with our latest strategic thinking and implementation
+              guides.
             </p>
           </motion.div>
 
@@ -172,9 +182,9 @@ export function BlogClient({ posts }: BlogClientProps) {
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 className="group"
               >
-                <Card 
-                  variant="elevated" 
-                  padding="md" 
+                <Card
+                  variant="elevated"
+                  padding="md"
                   className="h-full hover:shadow-xl transition-all duration-500 group-hover:-translate-y-1 border border-gray-200 hover:border-emerald-200"
                 >
                   {/* Category */}
@@ -211,4 +221,4 @@ export function BlogClient({ posts }: BlogClientProps) {
       </Section>
     </>
   );
-} 
+}

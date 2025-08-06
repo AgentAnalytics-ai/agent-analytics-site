@@ -18,9 +18,8 @@ interface ContactSubmissionData {
 // Add webhook function
 async function sendToCRM(submissionData: ContactSubmissionData) {
   const webhookUrl = process.env.CRM_WEBHOOK_URL;
-  
+
   if (!webhookUrl) {
-    console.log('No CRM webhook configured');
     return;
   }
 
@@ -40,10 +39,8 @@ async function sendToCRM(submissionData: ContactSubmissionData) {
     if (!response.ok) {
       throw new Error(`CRM webhook failed: ${response.status}`);
     }
-
-    console.log('Contact submission sent to CRM');
-  } catch (error) {
-    console.error('CRM webhook error:', error);
+  } catch {
+    // Silently fail for webhook errors
   }
 }
 
@@ -51,9 +48,8 @@ async function sendToCRM(submissionData: ContactSubmissionData) {
 async function sendToNotion(submissionData: ContactSubmissionData) {
   const notionApiKey = process.env.NOTION_API_KEY;
   const databaseId = process.env.NOTION_DATABASE_ID;
-  
+
   if (!notionApiKey || !databaseId) {
-    console.log('Notion integration not configured');
     return;
   }
 
@@ -61,7 +57,7 @@ async function sendToNotion(submissionData: ContactSubmissionData) {
     const response = await fetch(`https://api.notion.com/v1/pages`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${notionApiKey}`,
+        Authorization: `Bearer ${notionApiKey}`,
         'Notion-Version': '2022-06-28',
         'Content-Type': 'application/json',
       },
@@ -72,52 +68,51 @@ async function sendToNotion(submissionData: ContactSubmissionData) {
             title: [
               {
                 text: {
-                  content: submissionData.name
-                }
-              }
-            ]
+                  content: submissionData.name,
+                },
+              },
+            ],
           },
           Email: {
-            email: submissionData.email
+            email: submissionData.email,
           },
           Message: {
             rich_text: [
               {
                 text: {
-                  content: submissionData.challenge || submissionData.message || ''
-                }
-              }
-            ]
+                  content:
+                    submissionData.challenge || submissionData.message || '',
+                },
+              },
+            ],
           },
           Company: {
             rich_text: [
               {
                 text: {
-                  content: submissionData.company || 'N/A'
-                }
-              }
-            ]
+                  content: submissionData.company || 'N/A',
+                },
+              },
+            ],
           },
           Service: {
             rich_text: [
               {
                 text: {
-                  content: submissionData.service || 'N/A'
-                }
-              }
-            ]
-          }
-        }
+                  content: submissionData.service || 'N/A',
+                },
+              },
+            ],
+          },
+        },
       }),
     });
 
     if (!response.ok) {
       throw new Error(`Notion API failed: ${response.status}`);
     }
-
-    console.log('Contact submission sent to Notion');
-  } catch (error) {
-    console.error('Notion API error:', error);
+  } catch {
+    // Silently fail for Notion errors
   }
 }
 
@@ -126,46 +121,46 @@ async function sendToAirtable(submissionData: ContactSubmissionData) {
   const airtableApiKey = process.env.AIRTABLE_API_KEY;
   const baseId = process.env.AIRTABLE_BASE_ID;
   const tableName = process.env.AIRTABLE_TABLE_NAME;
-  
+
   if (!airtableApiKey || !baseId || !tableName) {
-    console.log('Airtable integration not configured');
     return;
   }
 
   try {
-    const response = await fetch(`https://api.airtable.com/v0/${baseId}/${tableName}`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${airtableApiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        records: [
-          {
-            fields: {
-              Name: submissionData.name,
-              Email: submissionData.email,
-              Company: submissionData.company || '',
-              Phone: submissionData.phone || '',
-              Service: submissionData.service || '',
-              Challenge: submissionData.challenge || '',
-              Timeline: submissionData.timeline || '',
-              Budget: submissionData.budget || '',
-              Message: submissionData.message || '',
-              'Submission Date': new Date().toISOString(),
+    const response = await fetch(
+      `https://api.airtable.com/v0/${baseId}/${tableName}`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${airtableApiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          records: [
+            {
+              fields: {
+                Name: submissionData.name,
+                Email: submissionData.email,
+                Company: submissionData.company || '',
+                Phone: submissionData.phone || '',
+                Service: submissionData.service || '',
+                Challenge: submissionData.challenge || '',
+                Timeline: submissionData.timeline || '',
+                Budget: submissionData.budget || '',
+                Message: submissionData.message || '',
+                'Submission Date': new Date().toISOString(),
+              },
             },
-          },
-        ],
-      }),
-    });
+          ],
+        }),
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`Airtable API failed: ${response.status}`);
     }
-
-    console.log('Contact submission sent to Airtable');
-  } catch (error) {
-    console.error('Airtable API error:', error);
+  } catch {
+    // Silently fail for Airtable errors
   }
 }
 
@@ -173,16 +168,28 @@ export async function POST(request: NextRequest) {
   try {
     // SECURITY: Only use environment variable, no fallback
     const apiKey = process.env.RESEND_API_KEY;
-    
+
     if (!apiKey) {
-      console.error('RESEND_API_KEY not set in environment');
-      return NextResponse.json({ error: 'Email service not configured' }, { status: 500 });
+      return NextResponse.json(
+        { error: 'Email service not configured' },
+        { status: 500 }
+      );
     }
 
     const resend = new Resend(apiKey);
-    
+
     const body = await request.json();
-    const { name, email, company, phone, service, challenge, timeline, budget, message } = body;
+    const {
+      name,
+      email,
+      company,
+      phone,
+      service,
+      challenge,
+      timeline,
+      budget,
+      message,
+    } = body;
 
     // Validate required fields
     if (!name || !email || !challenge) {
@@ -201,9 +208,7 @@ export async function POST(request: NextRequest) {
           message: challenge || message,
         },
       });
-      console.log('Contact submission logged to database');
-    } catch (dbError) {
-      console.error('Database logging error:', dbError);
+    } catch {
       // Continue with email sending even if DB logging fails
     }
 
@@ -221,19 +226,29 @@ export async function POST(request: NextRequest) {
           budget,
         },
       });
-    } catch (dbError) {
-      console.error('ContactSubmission logging error:', dbError);
+    } catch {
+      // Continue with email sending even if DB logging fails
     }
 
     // Send to external services
-    const submissionData: ContactSubmissionData = { name, email, company, phone, service, challenge, timeline, budget, message };
-    
+    const submissionData: ContactSubmissionData = {
+      name,
+      email,
+      company,
+      phone,
+      service,
+      challenge,
+      timeline,
+      budget,
+      message,
+    };
+
     // Send to Notion
     await sendToNotion(submissionData);
-    
+
     // Send to Airtable
     await sendToAirtable(submissionData);
-    
+
     // Send to CRM webhook
     await sendToCRM(submissionData);
 
@@ -267,7 +282,7 @@ export async function POST(request: NextRequest) {
     `;
 
     // Send email using Resend
-    const { data, error } = await resend.emails.send({
+    const { error } = await resend.emails.send({
       from: 'contact@agentanalyticsai.com',
       to: 'grant@agentanalyticsai.com',
       subject: `New Contact Form Submission from ${name}`,
@@ -276,38 +291,40 @@ export async function POST(request: NextRequest) {
     });
 
     if (error) {
-      console.error('Resend error:', error);
       return NextResponse.json(
-        { error: 'Oops! Couldn\'t reach us. Please email us directly at contact@agentanalyticsai.com' },
+        {
+          error:
+            "Oops! Couldn't reach us. Please email us directly at contact@agentanalyticsai.com",
+        },
         { status: 500 }
       );
     }
 
     // Send confirmation email to user
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/contact/confirm`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, email }),
-      });
-    } catch (confirmError) {
-      console.error('Confirmation email error:', confirmError);
+      await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/contact/confirm`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name, email }),
+        }
+      );
+    } catch {
       // Don't fail the main submission if confirmation fails
     }
 
-    console.log('Email sent successfully:', data);
     return NextResponse.json(
       { message: 'Message sent successfully!' },
       { status: 200 }
     );
-
   } catch (error) {
-    console.error('Contact form error:', error);
+    console.error('Error sending email:', error);
     return NextResponse.json(
-      { error: 'Oops! Couldn\'t reach us. Please email us directly at contact@agentanalyticsai.com' },
+      { error: 'Failed to send email' },
       { status: 500 }
     );
   }
-} 
+}

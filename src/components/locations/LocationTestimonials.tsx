@@ -1,14 +1,16 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { Star, Quote } from 'lucide-react'
-import { CityData } from '@/types/location'
+import { motion } from 'framer-motion';
+import { Star, Quote } from 'lucide-react';
+import { CityData } from '@/types/location';
 
 interface LocationTestimonialsProps {
   city: CityData;
 }
 
-export default function LocationTestimonials({ city }: LocationTestimonialsProps) {
+export default function LocationTestimonials({
+  city,
+}: LocationTestimonialsProps) {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -18,7 +20,7 @@ export default function LocationTestimonials({ city }: LocationTestimonialsProps
         delayChildren: 0.1,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -30,7 +32,7 @@ export default function LocationTestimonials({ city }: LocationTestimonialsProps
         ease: [0.22, 1, 0.36, 1],
       },
     },
-  }
+  };
 
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, i) => (
@@ -42,8 +44,8 @@ export default function LocationTestimonials({ city }: LocationTestimonialsProps
             : 'text-gray-300 dark:text-gray-600'
         }`}
       />
-    ))
-  }
+    ));
+  };
 
   return (
     <section className="py-20 bg-white dark:bg-gray-950">
@@ -52,20 +54,21 @@ export default function LocationTestimonials({ city }: LocationTestimonialsProps
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: '-100px' }}
           className="text-center mb-16"
         >
-          <motion.h2 
+          <motion.h2
             variants={itemVariants}
             className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl lg:text-5xl mb-6"
           >
             What {city.name} Businesses Say
           </motion.h2>
-          <motion.p 
+          <motion.p
             variants={itemVariants}
             className="max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-300"
           >
-            Discover how we&apos;ve helped local companies in {city.name}, {city.state} transform their operations with AI.
+            Discover how we&apos;ve helped local companies in {city.name},{' '}
+            {city.state} transform their operations with AI.
           </motion.p>
         </motion.div>
 
@@ -73,7 +76,7 @@ export default function LocationTestimonials({ city }: LocationTestimonialsProps
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: '-100px' }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {city.testimonials.map((testimonial, index) => (
@@ -86,17 +89,16 @@ export default function LocationTestimonials({ city }: LocationTestimonialsProps
               <div className="absolute top-6 right-6 text-gray-300 dark:text-gray-600 group-hover:text-blue-400 transition-colors">
                 <Quote className="w-8 h-8" />
               </div>
-              
+
               {/* Rating */}
               <div className="flex items-center mb-4">
                 {renderStars(testimonial.rating)}
               </div>
-              
+
               {/* Testimonial Content */}
               <blockquote className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6 italic">
-                "{testimonial.content}"
+                &ldquo;{testimonial.content}&rdquo;
               </blockquote>
-              
               {/* Author Info */}
               <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
                 <div className="font-semibold text-gray-900 dark:text-white">
@@ -106,7 +108,7 @@ export default function LocationTestimonials({ city }: LocationTestimonialsProps
                   {testimonial.role} at {testimonial.company}
                 </div>
               </div>
-              
+
               {/* Hover Effect */}
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
             </motion.div>
@@ -118,7 +120,7 @@ export default function LocationTestimonials({ city }: LocationTestimonialsProps
           variants={itemVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: '-100px' }}
           className="mt-16 text-center"
         >
           <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-8 text-white">
@@ -126,7 +128,9 @@ export default function LocationTestimonials({ city }: LocationTestimonialsProps
               Ready to Join Our Success Stories?
             </h3>
             <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-              Let&apos;s discuss how AI can transform your {city.name} business. Join the growing list of local companies that have already seen remarkable results.
+              Let&apos;s discuss how AI can transform your {city.name} business.
+              Join the growing list of local companies that have already seen
+              remarkable results.
             </p>
             <a
               href="/book"
@@ -138,5 +142,5 @@ export default function LocationTestimonials({ city }: LocationTestimonialsProps
         </motion.div>
       </div>
     </section>
-  )
-} 
+  );
+}

@@ -111,10 +111,10 @@ export function ContactForm() {
   };
 
   const handleChallengeChange = (value: string) => {
-    setFormData({ ...formData, challenge: value });
+    setFormData((prev) => ({ ...prev, challenge: value }));
 
     if (value.length > 20) {
-      const detected = detectUseCase(value, formData.service);
+      const detected = detectUseCase(value);
       setUseCase(detected);
 
       // Track use case detection

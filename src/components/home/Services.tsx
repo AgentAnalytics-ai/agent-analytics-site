@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Brain, Code, Users, ArrowRight, Sparkles } from 'lucide-react';
+import { Brain, Code, Users, Sparkles, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 export default function ServicesPage() {
@@ -10,7 +10,7 @@ export default function ServicesPage() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
     },
   };
 

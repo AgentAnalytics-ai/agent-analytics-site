@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import Link from 'next/link'
-import { ArrowRight, MapPin, Sparkles } from 'lucide-react'
-import { CityData } from '@/types/location'
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { ArrowRight, MapPin, Sparkles } from 'lucide-react';
+import { CityData } from '@/types/location';
 
 interface LocationHeroProps {
   city: CityData;
@@ -19,25 +19,25 @@ export default function LocationHero({ city }: LocationHeroProps) {
         delayChildren: 0.2,
       },
     },
-  }
+  };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.6,
-        ease: [0.22, 1, 0.36, 1],
+        ease: [0.22, 1, 0.36, 1] as const,
       },
     },
-  }
+  };
 
   return (
     <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-white dark:bg-gray-950">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 via-white to-white dark:from-blue-950/30 dark:via-gray-950 dark:to-gray-950" />
-      
+
       {/* Subtle grid pattern */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:radial-gradient(white,transparent_85%)] opacity-[0.02] dark:opacity-[0.05]" />
 
@@ -50,7 +50,7 @@ export default function LocationHero({ city }: LocationHeroProps) {
           className="mx-auto max-w-4xl text-center"
         >
           {/* Location Badge */}
-          <motion.div 
+          <motion.div
             variants={itemVariants}
             className="mb-6 inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2 dark:bg-blue-950/30"
           >
@@ -61,7 +61,7 @@ export default function LocationHero({ city }: LocationHeroProps) {
           </motion.div>
 
           {/* Main Headline */}
-          <motion.h1 
+          <motion.h1
             variants={itemVariants}
             className="mb-6 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl lg:text-6xl"
           >
@@ -71,7 +71,7 @@ export default function LocationHero({ city }: LocationHeroProps) {
           </motion.h1>
 
           {/* Supporting Text */}
-          <motion.p 
+          <motion.p
             variants={itemVariants}
             className="mx-auto mb-10 max-w-3xl text-lg leading-relaxed text-gray-600 dark:text-gray-300 sm:text-xl"
           >
@@ -79,7 +79,7 @@ export default function LocationHero({ city }: LocationHeroProps) {
           </motion.p>
 
           {/* CTA Buttons */}
-          <motion.div 
+          <motion.div
             variants={itemVariants}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
@@ -90,7 +90,7 @@ export default function LocationHero({ city }: LocationHeroProps) {
               <span className="relative z-10">Start Your AI Journey</span>
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
-            
+
             <Link
               href="#services"
               className="group inline-flex items-center justify-center px-8 py-4 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-lg transition-all duration-200 hover:border-gray-400 dark:hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400/50 focus:ring-offset-2"
@@ -101,7 +101,7 @@ export default function LocationHero({ city }: LocationHeroProps) {
           </motion.div>
 
           {/* Location Info */}
-          <motion.div 
+          <motion.div
             variants={itemVariants}
             className="mt-12 p-6 bg-white/50 dark:bg-gray-800/50 rounded-xl backdrop-blur-sm border border-gray-200 dark:border-gray-700"
           >
@@ -127,5 +127,5 @@ export default function LocationHero({ city }: LocationHeroProps) {
         </motion.div>
       </div>
     </section>
-  )
-} 
+  );
+}

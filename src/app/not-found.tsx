@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
-import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { Home, Mail } from 'lucide-react'
-import { Logo } from '@/components/ui/Logo'
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { Home, Mail } from 'lucide-react';
+import { Logo } from '@/components/ui/Logo';
 
 export default function NotFound() {
   return (
@@ -12,7 +12,7 @@ export default function NotFound() {
       <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
         <Logo variant="symbol" size="watermark" showLink={false} />
       </div>
-      
+
       <div className="max-w-2xl mx-auto px-6 text-center relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -36,7 +36,8 @@ export default function NotFound() {
 
           {/* Description */}
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-            The page you&apos;re looking for doesn&apos;t exist. It might have been moved, deleted, or you entered the wrong URL.
+            The page you&apos;re looking for doesn&apos;t exist. It might have
+            been moved, deleted, or you entered the wrong URL.
           </p>
 
           {/* Action Buttons */}
@@ -48,7 +49,7 @@ export default function NotFound() {
               <Home className="mr-2 w-4 h-4" />
               Go Home
             </Link>
-            
+
             <Link
               href="/contact"
               className="inline-flex items-center justify-center px-6 py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-lg hover:border-gray-400 dark:hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200"
@@ -64,12 +65,13 @@ export default function NotFound() {
               💡 Need Help?
             </h3>
             <p className="text-sm text-blue-700 dark:text-blue-400">
-              If you&apos;re looking for AI consulting services, we&apos;re here to help. 
-              Schedule a strategy call to discuss how we can solve your business challenges.
+              If you&apos;re looking for AI consulting services, we&apos;re here
+              to help. Schedule a strategy call to discuss how we can solve your
+              business challenges.
             </p>
           </div>
         </motion.div>
       </div>
     </div>
-  )
-} 
+  );
+}

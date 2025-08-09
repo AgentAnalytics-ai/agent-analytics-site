@@ -7,17 +7,17 @@ interface ContainerProps {
   size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 }
 
-export function Container({ 
-  children, 
-  className, 
-  size = '2xl' 
+export function Container({
+  children,
+  className,
+  size = '2xl',
 }: ContainerProps) {
   const sizeStyles = {
     sm: 'max-w-4xl',
-    md: 'max-w-5xl', 
+    md: 'max-w-5xl',
     lg: 'max-w-6xl',
     xl: 'max-w-7xl',
-    '2xl': 'max-w-screen-xl'
+    '2xl': 'max-w-screen-xl',
   };
 
   return (
@@ -33,4 +33,4 @@ export function Container({
   );
 }
 
-export default Container; 
+export default Container;

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Button } from '@/components/ui/Button';
+import Button from '@/components/ui/Button';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 interface BlogPaginationProps {
@@ -9,7 +9,10 @@ interface BlogPaginationProps {
   totalPages: number;
 }
 
-export function BlogPagination({ currentPage, totalPages }: BlogPaginationProps) {
+export function BlogPagination({
+  currentPage,
+  totalPages,
+}: BlogPaginationProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -32,11 +35,11 @@ export function BlogPagination({ currentPage, totalPages }: BlogPaginationProps)
           Previous
         </Button>
       )}
-      
+
       <span className="text-sm text-gray-600 dark:text-gray-400">
         Page {currentPage} of {totalPages}
       </span>
-      
+
       {currentPage < totalPages && (
         <Button
           variant="secondary"
@@ -48,4 +51,4 @@ export function BlogPagination({ currentPage, totalPages }: BlogPaginationProps)
       )}
     </div>
   );
-} 
+}

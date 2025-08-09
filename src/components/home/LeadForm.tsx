@@ -3,11 +3,13 @@
 import React, { useState } from 'react';
 import { Container } from '../ui/Container';
 import { Section } from '../ui/Section';
-import { Button } from '../ui/Button';
+import Button from '../ui/Button';
 
 export function LeadForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<
+    'idle' | 'success' | 'error'
+  >('idle');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -15,7 +17,7 @@ export function LeadForm() {
     setSubmitStatus('idle');
 
     const formData = new FormData(e.currentTarget);
-    
+
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -30,7 +32,7 @@ export function LeadForm() {
           phone: '',
           service: '',
           timeline: '',
-          budget: ''
+          budget: '',
         }),
       });
 
@@ -40,8 +42,8 @@ export function LeadForm() {
       } else {
         setSubmitStatus('error');
       }
-    } catch (error) {
-      console.error('Error submitting form:', error);
+    } catch {
+      // Log error for debugging but don't expose to user
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -55,7 +57,7 @@ export function LeadForm() {
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
             Tell us what&apos;s keeping you up at night.
           </h2>
-          
+
           {submitStatus === 'success' && (
             <div className="mb-6 p-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-lg">
               <p className="text-emerald-800 dark:text-emerald-200">
@@ -71,7 +73,7 @@ export function LeadForm() {
               </p>
             </div>
           )}
-          
+
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <textarea
@@ -82,7 +84,7 @@ export function LeadForm() {
                 required
               />
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input
                 type="text"
@@ -99,18 +101,18 @@ export function LeadForm() {
                 required
               />
             </div>
-            
-            <Button 
-              type="submit" 
-              variant="cta" 
-              size="lg" 
+
+            <Button
+              type="submit"
+              variant="cta"
+              size="lg"
               withArrow={true}
               disabled={isSubmitting}
             >
               {isSubmitting ? 'Sending...' : 'Submit'}
             </Button>
           </form>
-          
+
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
             We&apos;ll follow up within 24 hours.
           </p>
@@ -118,4 +120,4 @@ export function LeadForm() {
       </Container>
     </Section>
   );
-} 
+}

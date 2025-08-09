@@ -24,4 +24,4 @@ export function Analytics() {
 }
 
 // Export PostHog instance for use in other components
-export { posthog }; 
+export { posthog };

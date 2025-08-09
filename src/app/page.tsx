@@ -11,8 +11,8 @@ export default function Home() {
     <>
       <Hero
         title="Strategic Intelligence in Action"
-        subtitle="We design agentic systems that think, act, and align with your business. These aren't off-the-shelf tools — they're adaptive solutions built to understand and execute."
-        primaryCTA="Let's Talk Strategy"
+        subtitle="We design agentic systems that think, act, and align with your business. These aren&apos;t off-the-shelf tools — they&apos;re adaptive solutions built to understand and execute."
+        primaryCTA="Let&apos;s Talk Strategy"
         secondaryCTA="Explore Solutions"
       />
 

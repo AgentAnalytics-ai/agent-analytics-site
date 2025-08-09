@@ -2,10 +2,22 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Quote as QuoteIcon, AlertTriangle, Info, CheckCircle, TrendingUp } from 'lucide-react';
+import {
+  Quote as QuoteIcon,
+  AlertTriangle,
+  Info,
+  CheckCircle,
+  TrendingUp,
+} from 'lucide-react';
 
 // Quote Component
-export function Quote({ children, author }: { children: React.ReactNode; author?: string }) {
+export function Quote({
+  children,
+  author,
+}: {
+  children: React.ReactNode;
+  author?: string;
+}) {
   return (
     <motion.blockquote
       className="relative my-8 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-500 rounded-r-lg"
@@ -66,7 +78,9 @@ export function Callout({ children, type = 'info', title }: CalloutProps) {
       transition={{ duration: 0.5 }}
     >
       <div className="flex items-start gap-3">
-        <Icon className={`w-5 h-5 mt-0.5 flex-shrink-0 ${variant.iconClassName}`} />
+        <Icon
+          className={`w-5 h-5 mt-0.5 flex-shrink-0 ${variant.iconClassName}`}
+        />
         <div>
           {title && <h4 className="font-semibold mb-2">{title}</h4>}
           <div className="text-sm">{children}</div>
@@ -84,7 +98,12 @@ interface MetricCardProps {
   subtitle?: string;
 }
 
-export function MetricCard({ number, trend, label, subtitle }: MetricCardProps) {
+export function MetricCard({
+  number,
+  trend,
+  label,
+  subtitle,
+}: MetricCardProps) {
   return (
     <motion.div
       className="my-6 p-6 bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-lg"
@@ -96,7 +115,9 @@ export function MetricCard({ number, trend, label, subtitle }: MetricCardProps) 
         <div className="flex items-center justify-center gap-2 mb-2">
           <span className="text-4xl font-bold text-gray-900">{number}</span>
           {trend && (
-            <span className={`text-sm font-medium ${trend === 'up' ? 'text-green-600' : 'text-red-600'}`}>
+            <span
+              className={`text-sm font-medium ${trend === 'up' ? 'text-green-600' : 'text-red-600'}`}
+            >
               {trend === 'up' ? '↗' : '↘'}
             </span>
           )}
@@ -200,7 +221,9 @@ export function Timeline({ events }: TimelineProps) {
             </div>
             <div className="flex-shrink-0 w-4 h-4 bg-blue-500 rounded-full mt-1" />
             <div className="flex-1">
-              <h4 className="font-semibold text-gray-900 mb-1">{event.title}</h4>
+              <h4 className="font-semibold text-gray-900 mb-1">
+                {event.title}
+              </h4>
               <p className="text-gray-600">{event.description}</p>
             </div>
           </div>
@@ -211,7 +234,13 @@ export function Timeline({ events }: TimelineProps) {
 }
 
 // CodeBlock Component
-export function CodeBlock({ children, language }: { children: React.ReactNode; language?: string }) {
+export function CodeBlock({
+  children,
+  language,
+}: {
+  children: React.ReactNode;
+  language?: string;
+}) {
   return (
     <motion.div
       className="my-6 overflow-hidden rounded-lg border border-gray-200"
@@ -240,4 +269,4 @@ export const mdxComponents = {
   ComparisonTable,
   Timeline,
   CodeBlock,
-}; 
+};

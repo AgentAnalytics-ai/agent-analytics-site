@@ -3,14 +3,13 @@
 import { useState } from 'react';
 import { Container } from '../ui/Container';
 import { Section } from '../ui/Section';
-import { Button } from '../ui/Button';
+import Button from '../ui/Button';
 import { Card } from '../ui/Card';
 import {
   ArrowRight,
   Mail,
   Phone,
   MapPin,
-  Clock,
   CheckCircle,
 } from 'lucide-react';
 import { detectUseCase, UseCaseCategory } from '@/lib/useCaseDetection';
@@ -64,7 +63,7 @@ export function ContactForm() {
       if (!response.ok) {
         throw new Error(
           result.error ||
-            "Oops! Couldn't reach us. Please email us directly at contact@agentanalyticsai.com"
+            'Oops! Couldn&apos;t reach us. Please email us directly at contact@agentanalyticsai.com'
         );
       }
 
@@ -97,13 +96,14 @@ export function ContactForm() {
       setError(
         error instanceof Error
           ? error.message
-          : "Oops! Couldn't reach us. Please email us directly at contact@agentanalyticsai.com"
+          : 'Oops! Couldn&apos;t reach us. Please email us directly at contact@agentanalyticsai.com'
       );
 
       // Track form submission error
       posthog.capture('form_submission_error', {
         form_type: 'contact',
         error_message: error instanceof Error ? error.message : 'Unknown error',
+        use_case_category: useCase?.category || 'unknown',
       });
     } finally {
       setIsSubmitting(false);
@@ -111,109 +111,86 @@ export function ContactForm() {
   };
 
   const handleChallengeChange = (value: string) => {
-    setFormData((prev) => ({ ...prev, challenge: value }));
-
-    if (value.length > 20) {
-      const detected = detectUseCase(value);
-      setUseCase(detected);
-
-      // Track use case detection
-      if (detected && detected.confidence > 0.3) {
-        posthog.capture('use_case_detected', {
-          category: detected.category,
-          confidence: detected.confidence,
-          service: formData.service,
-        });
-      }
-    } else {
-      setUseCase(null);
-    }
-  };
-
-  // Track form start time
-  const handleFormFocus = () => {
-    if (!window.formStartTime) {
-      window.formStartTime = Date.now();
-      posthog.capture('form_started', {
-        form_type: 'contact',
+    setFormData(prev => ({ ...prev, challenge: value }));
+    
+    // Detect use case from challenge text
+    const detectedUseCase = detectUseCase(value);
+    setUseCase(detectedUseCase);
+    
+    // Track use case detection
+    if (detectedUseCase) {
+      posthog.capture('use_case_detected', {
+        category: detectedUseCase.category,
+        confidence: detectedUseCase.confidence,
+        keywords: detectedUseCase.keywords,
       });
     }
   };
 
+  const handleFormFocus = () => {
+    if (!window.formStartTime) {
+      window.formStartTime = Date.now();
+    }
+    
+    posthog.capture('form_started', {
+      form_type: 'contact',
+    });
+  };
+
   const contactInfo = [
     {
-      icon: Mail,
+      icon: <Mail className="w-5 h-5" />,
       title: 'Email',
       details: 'hello@agent-analytics.com',
-      description: "We'll respond within 24 hours",
+      description: 'We&apos;ll respond within 24 hours',
     },
     {
-      icon: Phone,
+      icon: <Phone className="w-5 h-5" />,
       title: 'Phone',
       details: '+1 (555) 123-4567',
       description: 'Available Mon-Fri, 9AM-6PM EST',
     },
     {
-      icon: MapPin,
+      icon: <MapPin className="w-5 h-5" />,
       title: 'Location',
       details: 'Remote-First',
       description: 'Serving clients globally',
     },
-    {
-      icon: Clock,
-      title: 'Response Time',
-      details: '< 24 hours',
-      description: 'Quick turnaround on all inquiries',
-    },
-  ];
-
-  const services = [
-    'Strategic Consulting',
-    'Product Development',
-    'Digital Transformation',
-    'Organizational Development',
-    'Market Entry & Expansion',
-    'Performance Optimization',
-    'Other',
-  ];
-
-  const timelines = [
-    'Immediate (1-2 weeks)',
-    'Soon (1-2 months)',
-    'Planning (3-6 months)',
-    'Future (6+ months)',
-  ];
-
-  const budgets = [
-    '$10K - $25K',
-    '$25K - $50K',
-    '$50K - $100K',
-    '$100K+',
-    'Not sure yet',
   ];
 
   if (isSubmitted) {
     return (
-      <Section spacing="xl" background="dark" className="pt-32">
+      <Section className="bg-gray-50">
         <Container>
           <div className="max-w-2xl mx-auto text-center">
-            <div className="mb-8">
-              <CheckCircle className="w-20 h-20 text-green-500 mx-auto" />
+            <div className="mb-6">
+              <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Message sent successfully!
-            </h1>
-            <p className="text-xl text-gray-300 mb-8">
-              We&apos;ve received your message and will get back to you within
-              24 hours. We&apos;re excited to learn more about your project!
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Message Sent Successfully!
+            </h2>
+            <p className="text-lg text-gray-600 mb-8">
+              Thank you for reaching out. We&apos;ll get back to you within 24
+              hours with a personalized response.
             </p>
-            <Button
-              variant="primary"
-              size="lg"
-              onClick={() => (window.location.href = '/')}
-            >
-              Back to Home
-            </Button>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {contactInfo.map((info, index) => (
+                <div key={index} className="text-center">
+                  <div className="flex justify-center mb-3">
+                    <div className="p-2 bg-blue-100 rounded-full">
+                      {info.icon}
+                    </div>
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-1">
+                    {info.title}
+                  </h3>
+                  <p className="text-blue-600 font-medium mb-1">
+                    {info.details}
+                  </p>
+                  <p className="text-sm text-gray-600">{info.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </Container>
       </Section>
@@ -221,252 +198,300 @@ export function ContactForm() {
   }
 
   return (
-    <Section spacing="xl" background="gray">
+    <Section className="bg-gray-50">
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">
-              Tell us about your project
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Let&apos;s Start Your AI Transformation
             </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Tell us about your challenge and we&apos;ll craft a strategic
+              solution tailored to your business needs.
+            </p>
+          </div>
 
-            <form
-              onSubmit={handleSubmit}
-              className="space-y-6"
-              onFocus={handleFormFocus}
-            >
-              {error && (
-                <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-                  <p className="text-red-700 text-sm">{error}</p>
-                </div>
-              )}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Name *
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email *
-                  </label>
-                  <input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    required
-                  />
-                </div>
-              </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div>
+              <Card className="p-8">
+                <form onSubmit={handleSubmit} onFocus={handleFormFocus}>
+                  <div className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label
+                          htmlFor="name"
+                          className="block text-sm font-medium text-gray-700 mb-2"
+                        >
+                          Full Name *
+                        </label>
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          required
+                          value={formData.name}
+                          onChange={e =>
+                            setFormData(prev => ({ ...prev, name: e.target.value }))
+                          }
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          placeholder="Your full name"
+                        />
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="email"
+                          className="block text-sm font-medium text-gray-700 mb-2"
+                        >
+                          Email Address *
+                        </label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          required
+                          value={formData.email}
+                          onChange={e =>
+                            setFormData(prev => ({ ...prev, email: e.target.value }))
+                          }
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          placeholder="your.email@company.com"
+                        />
+                      </div>
+                    </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Company
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.company}
-                    onChange={(e) =>
-                      setFormData({ ...formData, company: e.target.value })
-                    }
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Phone
-                  </label>
-                  <input
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) =>
-                      setFormData({ ...formData, phone: e.target.value })
-                    }
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                </div>
-              </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label
+                          htmlFor="company"
+                          className="block text-sm font-medium text-gray-700 mb-2"
+                        >
+                          Company
+                        </label>
+                        <input
+                          type="text"
+                          id="company"
+                          name="company"
+                          value={formData.company}
+                          onChange={e =>
+                            setFormData(prev => ({ ...prev, company: e.target.value }))
+                          }
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          placeholder="Your company name"
+                        />
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="phone"
+                          className="block text-sm font-medium text-gray-700 mb-2"
+                        >
+                          Phone Number
+                        </label>
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={e =>
+                            setFormData(prev => ({ ...prev, phone: e.target.value }))
+                          }
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          placeholder="+1 (555) 123-4567"
+                        />
+                      </div>
+                    </div>
 
+                    <div>
+                      <label
+                        htmlFor="service"
+                        className="block text-sm font-medium text-gray-700 mb-2"
+                      >
+                        Service Interest *
+                      </label>
+                      <select
+                        id="service"
+                        name="service"
+                        required
+                        value={formData.service}
+                        onChange={e =>
+                          setFormData(prev => ({ ...prev, service: e.target.value }))
+                        }
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      >
+                        <option value="">Select a service</option>
+                        <option value="ai-strategy">AI Strategy & Consulting</option>
+                        <option value="ai-implementation">AI Implementation</option>
+                        <option value="custom-development">Custom AI Development</option>
+                        <option value="data-analytics">Data Analytics & Insights</option>
+                        <option value="process-automation">Process Automation</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label
+                        htmlFor="challenge"
+                        className="block text-sm font-medium text-gray-700 mb-2"
+                      >
+                        Describe Your Challenge *
+                      </label>
+                      <textarea
+                        id="challenge"
+                        name="challenge"
+                        required
+                        rows={4}
+                        value={formData.challenge}
+                        onChange={e => handleChallengeChange(e.target.value)}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Tell us about the problem you're trying to solve, your current situation, and what you hope to achieve..."
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label
+                          htmlFor="timeline"
+                          className="block text-sm font-medium text-gray-700 mb-2"
+                        >
+                          Timeline
+                        </label>
+                        <select
+                          id="timeline"
+                          name="timeline"
+                          value={formData.timeline}
+                          onChange={e =>
+                            setFormData(prev => ({ ...prev, timeline: e.target.value }))
+                          }
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        >
+                          <option value="">Select timeline</option>
+                          <option value="immediate">Immediate (1-3 months)</option>
+                          <option value="short-term">Short-term (3-6 months)</option>
+                          <option value="medium-term">Medium-term (6-12 months)</option>
+                          <option value="long-term">Long-term (12+ months)</option>
+                          <option value="exploring">Just exploring options</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="budget"
+                          className="block text-sm font-medium text-gray-700 mb-2"
+                        >
+                          Budget Range
+                        </label>
+                        <select
+                          id="budget"
+                          name="budget"
+                          value={formData.budget}
+                          onChange={e =>
+                            setFormData(prev => ({ ...prev, budget: e.target.value }))
+                          }
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        >
+                          <option value="">Select budget range</option>
+                          <option value="under-50k">Under $50K</option>
+                          <option value="50k-100k">$50K - $100K</option>
+                          <option value="100k-250k">$100K - $250K</option>
+                          <option value="250k-500k">$250K - $500K</option>
+                          <option value="500k-plus">$500K+</option>
+                          <option value="undecided">Undecided</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    {error && (
+                      <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+                        <p className="text-red-700">{error}</p>
+                      </div>
+                    )}
+
+                    <Button
+                      type="submit"
+                      variant="cta"
+                      size="lg"
+                      className="w-full"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          Send Message
+                          <ArrowRight className="ml-2 w-5 h-5" />
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </form>
+              </Card>
+            </div>
+
+            <div className="space-y-8">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Service of Interest
-                </label>
-                <select
-                  value={formData.service}
-                  onChange={(e) =>
-                    setFormData({ ...formData, service: e.target.value })
-                  }
-                  className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                >
-                  <option value="">Select a service...</option>
-                  {services.map((service) => (
-                    <option key={service} value={service}>
-                      {service}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Describe your challenge *
-                </label>
-                <textarea
-                  value={formData.challenge}
-                  onChange={(e) => handleChallengeChange(e.target.value)}
-                  rows={4}
-                  className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                  placeholder="Tell us about the problem you're trying to solve..."
-                  required
-                />
-
-                {useCase && useCase.confidence > 0.3 && (
-                  <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                    <h4 className="text-sm font-semibold text-blue-900 mb-2">
-                      💡 We think this might be a {useCase.category} challenge
-                    </h4>
-                    <div className="text-sm text-blue-800">
-                      <p className="mb-2">
-                        <strong>Suggested services:</strong>{' '}
-                        {useCase.suggestedServices.join(', ')}
-                      </p>
-                      <p>
-                        <strong>Next steps:</strong> {useCase.nextSteps[0]}
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  Why Choose Agent Analytics?
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex items-start space-x-3">
+                    <CheckCircle className="w-6 h-6 text-green-500 mt-1 flex-shrink-0" />
+                    <div>
+                      <h4 className="font-semibold text-gray-900">
+                        Strategic Approach
+                      </h4>
+                      <p className="text-gray-600">
+                        We don&apos;t just implement AI—we align it with your
+                        business strategy for maximum impact.
                       </p>
                     </div>
                   </div>
-                )}
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Timeline
-                  </label>
-                  <select
-                    value={formData.timeline}
-                    onChange={(e) =>
-                      setFormData({ ...formData, timeline: e.target.value })
-                    }
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  >
-                    <option value="">Select timeline...</option>
-                    {timelines.map((timeline) => (
-                      <option key={timeline} value={timeline}>
-                        {timeline}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Budget Range
-                  </label>
-                  <select
-                    value={formData.budget}
-                    onChange={(e) =>
-                      setFormData({ ...formData, budget: e.target.value })
-                    }
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  >
-                    <option value="">Select budget...</option>
-                    {budgets.map((budget) => (
-                      <option key={budget} value={budget}>
-                        {budget}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              <Button
-                type="submit"
-                variant="primary"
-                size="lg"
-                className="w-full group"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </form>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">
-              Get in touch
-            </h2>
-
-            <div className="space-y-6">
-              {contactInfo.map((info, index) => {
-                const Icon = info.icon;
-                return (
-                  <Card key={index} className="p-6">
-                    <div className="flex items-start">
-                      <div className="flex-shrink-0">
-                        <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                          <Icon className="w-6 h-6 text-blue-600" />
-                        </div>
-                      </div>
-                      <div className="ml-4">
-                        <h3 className="text-lg font-semibold text-gray-900">
-                          {info.title}
-                        </h3>
-                        <p className="text-gray-900 font-medium">
-                          {info.details}
-                        </p>
-                        <p className="text-gray-600 text-sm">
-                          {info.description}
-                        </p>
-                      </div>
+                  <div className="flex items-start space-x-3">
+                    <CheckCircle className="w-6 h-6 text-green-500 mt-1 flex-shrink-0" />
+                    <div>
+                      <h4 className="font-semibold text-gray-900">
+                        Proven Results
+                      </h4>
+                      <p className="text-gray-600">
+                        Our clients see an average of 40% growth and achieve ROI
+                        within 18 months.
+                      </p>
                     </div>
-                  </Card>
-                );
-              })}
-            </div>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <CheckCircle className="w-6 h-6 text-green-500 mt-1 flex-shrink-0" />
+                    <div>
+                      <h4 className="font-semibold text-gray-900">
+                        End-to-End Support
+                      </h4>
+                      <p className="text-gray-600">
+                        From strategy to implementation to ongoing optimization,
+                        we&apos;re with you every step.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-            <div className="mt-8 p-6 bg-blue-50 rounded-lg">
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                What happens next?
-              </h3>
-              <ol className="space-y-2 text-gray-600">
-                <li className="flex items-start">
-                  <span className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium mr-3 mt-0.5">
-                    1
-                  </span>
-                  <span>We&apos;ll review your message within 24 hours</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium mr-3 mt-0.5">
-                    2
-                  </span>
-                  <span>
-                    Schedule a free consultation call to discuss your needs
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium mr-3 mt-0.5">
-                    3
-                  </span>
-                  <span>
-                    Receive a customized proposal tailored to your challenge
-                  </span>
-                </li>
-              </ol>
+              <div className="bg-blue-50 p-6 rounded-lg">
+                <h4 className="font-semibold text-blue-900 mb-3">
+                  Need Immediate Help?
+                </h4>
+                <p className="text-blue-800 mb-4">
+                  For urgent inquiries or to schedule a consultation, reach out
+                  directly:
+                </p>
+                <div className="space-y-2">
+                  <div className="flex items-center text-blue-800">
+                    <Mail className="w-4 h-4 mr-2" />
+                    <span>hello@agent-analytics.com</span>
+                  </div>
+                  <div className="flex items-center text-blue-800">
+                    <Phone className="w-4 h-4 mr-2" />
+                    <span>+1 (555) 123-4567</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -8,23 +8,25 @@ interface CardProps {
   padding?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
-export function Card({ 
-  children, 
-  className, 
+export function Card({
+  children,
+  className,
   variant = 'default',
-  padding = 'lg'
+  padding = 'lg',
 }: CardProps) {
   const variants = {
-    default: 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm',
-    elevated: 'bg-white dark:bg-gray-900 shadow-lg hover:shadow-xl border border-gray-200 dark:border-gray-800 transition-all duration-200',
-    outlined: 'bg-transparent border-2 border-gray-200 dark:border-gray-700'
+    default:
+      'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm',
+    elevated:
+      'bg-white dark:bg-gray-900 shadow-lg hover:shadow-xl border border-gray-200 dark:border-gray-800 transition-all duration-200',
+    outlined: 'bg-transparent border-2 border-gray-200 dark:border-gray-700',
   };
 
   const paddingStyles = {
     sm: 'p-4',
-    md: 'p-6', 
+    md: 'p-6',
     lg: 'p-8',
-    xl: 'p-12'
+    xl: 'p-12',
   };
 
   return (
@@ -39,4 +41,4 @@ export function Card({
       {children}
     </div>
   );
-} 
+}

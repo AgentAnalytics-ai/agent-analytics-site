@@ -3,6 +3,7 @@ export interface UseCaseCategory {
   confidence: number;
   suggestedServices: string[];
   nextSteps: string[];
+  keywords: string[];
 }
 
 export function detectUseCase(service: string): UseCaseCategory {
@@ -74,11 +75,12 @@ export function detectUseCase(service: string): UseCaseCategory {
     },
   };
 
-  let bestMatch = {
+  let bestMatch: UseCaseCategory = {
     category: 'general',
     confidence: 0,
     suggestedServices: ['Strategic Consulting'],
     nextSteps: ['Schedule consultation call'],
+    keywords: [],
   };
 
   for (const [category, pattern] of Object.entries(patterns)) {
@@ -94,6 +96,7 @@ export function detectUseCase(service: string): UseCaseCategory {
         confidence,
         suggestedServices: pattern.services,
         nextSteps: pattern.nextSteps,
+        keywords: pattern.keywords,
       };
     }
   }

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useEffect } from 'react';
 
@@ -24,24 +24,31 @@ export default function Book() {
             Schedule a Strategy Session
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300">
-            Let&apos;s discuss how AI can transform your business challenges into opportunities.
+            Let&apos;s discuss how AI can transform your business challenges
+            into opportunities.
           </p>
         </div>
-        
+
         <div className="bg-white dark:bg-gray-900 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-          <div 
-            className="calendly-inline-widget" 
-            data-url="https://calendly.com/grant-agentanalyticsai?background_color=f8fafc&text_color=1e293b&primary_color=059669" 
-            style={{minWidth: '320px', height: '700px'}}
+          <div
+            className="calendly-inline-widget"
+            data-url="https://calendly.com/grant-agentanalyticsai?background_color=f8fafc&text_color=1e293b&primary_color=059669"
+            style={{ minWidth: '320px', height: '700px' }}
           />
         </div>
-        
+
         <div className="text-center mt-6">
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            Can&apos;t find a time that works? <a href="/contact" className="text-blue-600 hover:text-blue-700 dark:text-blue-400">Contact us directly</a>
+            Can&apos;t find a time that works?{' '}
+            <a
+              href="/contact"
+              className="text-blue-600 hover:text-blue-700 dark:text-blue-400"
+            >
+              Contact us directly
+            </a>
           </p>
         </div>
       </div>
     </div>
   );
-} 
+}

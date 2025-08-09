@@ -6,20 +6,38 @@ import { Target, Users, Rocket } from 'lucide-react';
 export function Values() {
   const values = [
     {
-      title: "Strategic Precision",
-      description: "Every solution is crafted with surgical precision, targeting your specific business challenges with data-driven insights and proven methodologies.",
-      icon: <Target className="h-10 w-10 text-blue-600 dark:text-blue-400" strokeWidth={1.5} />
+      title: 'Strategic Precision',
+      description:
+        'Every solution is crafted with surgical precision, targeting your specific business challenges with data-driven insights and proven methodologies.',
+      icon: (
+        <Target
+          className="h-10 w-10 text-blue-600 dark:text-blue-400"
+          strokeWidth={1.5}
+        />
+      ),
     },
     {
-      title: "Client Partnership", 
-      description: "We don&apos;t just deliver solutions—we become an extension of your team, building lasting relationships that drive sustained success and growth.",
-      icon: <Users className="h-10 w-10 text-indigo-600 dark:text-indigo-400" strokeWidth={1.5} />
+      title: 'Client Partnership',
+      description:
+        'We don&apos;t just deliver solutions—we become an extension of your team, building lasting relationships that drive sustained success and growth.',
+      icon: (
+        <Users
+          className="h-10 w-10 text-indigo-600 dark:text-indigo-400"
+          strokeWidth={1.5}
+        />
+      ),
     },
     {
-      title: "Innovation Velocity",
-      description: "We accelerate your transformation with cutting-edge AI and technology, turning complex challenges into competitive advantages at speed.",
-      icon: <Rocket className="h-10 w-10 text-emerald-600 dark:text-emerald-400" strokeWidth={1.5} />
-    }
+      title: 'Innovation Velocity',
+      description:
+        'We accelerate your transformation with cutting-edge AI and technology, turning complex challenges into competitive advantages at speed.',
+      icon: (
+        <Rocket
+          className="h-10 w-10 text-emerald-600 dark:text-emerald-400"
+          strokeWidth={1.5}
+        />
+      ),
+    },
   ];
 
   return (
@@ -33,10 +51,15 @@ export function Values() {
             The principles that guide everything we do
           </p>
         </div>
-        
+
         <div className="grid md:grid-cols-3 gap-8">
           {values.map((value, index) => (
-            <Card key={index} variant="elevated" padding="lg" className="text-center group hover:shadow-lg transition-all duration-300">
+            <Card
+              key={index}
+              variant="elevated"
+              padding="lg"
+              className="text-center group hover:shadow-lg transition-all duration-300"
+            >
               <div className="flex justify-center mb-6">
                 <div className="p-3 rounded-full bg-gray-50 dark:bg-gray-800 group-hover:bg-blue-50 dark:group-hover:bg-blue-950/30 transition-colors duration-300">
                   {value.icon}
@@ -54,4 +77,4 @@ export function Values() {
       </Container>
     </Section>
   );
-} 
+}

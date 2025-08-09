@@ -1,9 +1,7 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
-  content: [
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   darkMode: 'class',
   theme: {
     extend: {
@@ -30,7 +28,7 @@ const config: Config = {
         border: {
           primary: 'rgb(var(--border-primary) / <alpha-value>)',
           accent: 'rgb(var(--border-accent) / <alpha-value>)',
-        }
+        },
       },
       typography: {
         DEFAULT: {

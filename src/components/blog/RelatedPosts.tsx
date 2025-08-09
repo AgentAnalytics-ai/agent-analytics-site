@@ -21,4 +21,4 @@ export function RelatedPosts({ posts }: RelatedPostsProps) {
       </div>
     </section>
   );
-} 
+}

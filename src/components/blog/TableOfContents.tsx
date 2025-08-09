@@ -53,7 +53,7 @@ export function TableOfContents({ headings }: TableOfContentsProps) {
 
   const scrollToHeading = (id: string) => {
     if (typeof window === 'undefined') return;
-    
+
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -94,4 +94,4 @@ export function TableOfContents({ headings }: TableOfContentsProps) {
       </ul>
     </motion.nav>
   );
-} 
+}

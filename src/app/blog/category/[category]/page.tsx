@@ -19,11 +19,13 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: CategoryPageProps): Promise<Metadata> {
   const { category } = await params;
   const decodedCategory = decodeURIComponent(category);
   const posts = getPostsByCategory(decodedCategory);
-  
+
   if (posts.length === 0) {
     return {
       title: 'Category Not Found - Agent Analytics',
@@ -44,7 +46,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const { category } = await params;
   const decodedCategory = decodeURIComponent(category);
   const posts = getPostsByCategory(decodedCategory);
-  
+
   if (posts.length === 0) {
     notFound();
   }
@@ -61,13 +63,14 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               <ArrowLeft className="w-4 h-4" />
               Back to Blog
             </Link>
-            
+
             <div className="text-center">
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                 {decodedCategory}
               </h1>
               <p className="text-xl text-gray-600">
-                {posts.length} post{posts.length !== 1 ? 's' : ''} in this category
+                {posts.length} post{posts.length !== 1 ? 's' : ''} in this
+                category
               </p>
             </div>
           </div>
@@ -85,4 +88,4 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       </Section>
     </>
   );
-} 
+}

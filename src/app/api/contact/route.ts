@@ -208,8 +208,9 @@ export async function POST(request: NextRequest) {
           message: challenge || message,
         },
       });
-    } catch {
-      // Continue with email sending even if DB logging fails
+    } catch (err) {
+      // Log server-side error but continue with email sending
+      console.error('Contact DB logging failed:', err);
     }
 
     // Also log to ContactSubmission model for backward compatibility
@@ -226,8 +227,9 @@ export async function POST(request: NextRequest) {
           budget,
         },
       });
-    } catch {
-      // Continue with email sending even if DB logging fails
+    } catch (err) {
+      // Log server-side error but continue with email sending
+      console.error('ContactSubmission DB logging failed:', err);
     }
 
     // Send to external services
@@ -282,7 +284,7 @@ export async function POST(request: NextRequest) {
     `;
 
     // Send email using Resend
-    const { error } = await resend.emails.send({
+    const result = await resend.emails.send({
       from: 'contact@agentanalyticsai.com',
       to: 'grant@agentanalyticsai.com',
       subject: `New Contact Form Submission from ${name}`,
@@ -290,11 +292,11 @@ export async function POST(request: NextRequest) {
       reply_to: email,
     });
 
-    if (error) {
+    if (result.error) {
       return NextResponse.json(
         {
           error:
-            "Oops! Couldn't reach us. Please email us directly at contact@agentanalyticsai.com",
+            'Oops! Couldn&apos;t reach us. Please email us directly at contact@agentanalyticsai.com',
         },
         { status: 500 }
       );
@@ -302,26 +304,29 @@ export async function POST(request: NextRequest) {
 
     // Send confirmation email to user
     try {
-      await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/contact/confirm`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ name, email }),
-        }
-      );
-    } catch {
-      // Don't fail the main submission if confirmation fails
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+      if (!baseUrl) {
+        throw new Error('NEXT_PUBLIC_BASE_URL is not configured');
+      }
+      
+      await fetch(`${baseUrl}/api/contact/confirm`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email }),
+      });
+    } catch (err) {
+      // Log server-side error but don't fail the main submission
+      console.error('Contact confirmation failed:', err);
     }
 
     return NextResponse.json(
       { message: 'Message sent successfully!' },
       { status: 200 }
     );
-  } catch (error) {
-    console.error('Error sending email:', error);
+  } catch (err) {
+    console.error('Contact form submission failed:', err);
     return NextResponse.json(
       { error: 'Failed to send email' },
       { status: 500 }

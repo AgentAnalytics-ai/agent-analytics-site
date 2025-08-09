@@ -5,7 +5,7 @@ import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
+import Button from '@/components/ui/Button';
 import { ArrowRight, Sparkles, User, Clock, Tag } from 'lucide-react';
 import { BlogMeta } from '@/lib/blog';
 

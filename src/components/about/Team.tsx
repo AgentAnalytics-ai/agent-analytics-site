@@ -15,14 +15,14 @@ export function Team() {
             The mind behind Agent Analytics Studio
           </p>
         </div>
-        
+
         <div className="max-w-2xl mx-auto">
           <Card variant="elevated" padding="xl" className="text-center">
-            <Image 
-              src="/images/Professional Photo.png" 
-              alt="Grant Decker - Founder" 
-              width={128} 
-              height={128} 
+            <Image
+              src="/images/Professional Photo.png"
+              alt="Grant Decker - Founder"
+              width={128}
+              height={128}
               className="rounded-full mx-auto mb-6 object-cover"
             />
             <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
@@ -32,11 +32,14 @@ export function Team() {
               Founder & Principal Consultant
             </p>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              Strategic consultant with expertise in AI systems, organizational transformation, and digital innovation. Helping organizations navigate complex challenges with data-driven insights and proven methodologies.
+              Strategic consultant with expertise in AI systems, organizational
+              transformation, and digital innovation. Helping organizations
+              navigate complex challenges with data-driven insights and proven
+              methodologies.
             </p>
           </Card>
         </div>
       </Container>
     </Section>
   );
-} 
+}

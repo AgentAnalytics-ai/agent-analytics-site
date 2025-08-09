@@ -2,16 +2,18 @@ import React from 'react';
 import { Metadata } from 'next';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
-import { Button } from '@/components/ui/Button';
+import Button from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { PenTool, Sparkles, Zap, Target } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'AI Writer Tool - Agent Analytics',
-  description: 'AI-powered writing assistant to help you create compelling content, strategies, and communications.',
+  description:
+    'AI-powered writing assistant to help you create compelling content, strategies, and communications.',
   openGraph: {
     title: 'AI Writer Tool - Agent Analytics',
-    description: 'AI-powered writing assistant to help you create compelling content, strategies, and communications.',
+    description:
+      'AI-powered writing assistant to help you create compelling content, strategies, and communications.',
   },
 };
 
@@ -25,7 +27,8 @@ export default function AIWriterPage() {
               AI Writing Assistant
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              Transform your ideas into compelling content with our AI-powered writing tool.
+              Transform your ideas into compelling content with our AI-powered
+              writing tool.
             </p>
           </div>
         </Container>
@@ -44,7 +47,8 @@ export default function AIWriterPage() {
                 Content Creation
               </h3>
               <p className="text-gray-600 mb-6">
-                Generate blog posts, articles, and marketing copy that resonates with your audience.
+                Generate blog posts, articles, and marketing copy that resonates
+                with your audience.
               </p>
               <Button variant="primary" size="md" className="w-full">
                 Start Writing
@@ -61,7 +65,8 @@ export default function AIWriterPage() {
                 Strategy Documents
               </h3>
               <p className="text-gray-600 mb-6">
-                Create business plans, strategic frameworks, and executive summaries.
+                Create business plans, strategic frameworks, and executive
+                summaries.
               </p>
               <Button variant="primary" size="md" className="w-full">
                 Create Strategy
@@ -78,7 +83,8 @@ export default function AIWriterPage() {
                 Communication
               </h3>
               <p className="text-gray-600 mb-6">
-                Craft emails, presentations, and communications that drive action.
+                Craft emails, presentations, and communications that drive
+                action.
               </p>
               <Button variant="primary" size="md" className="w-full">
                 Compose Message

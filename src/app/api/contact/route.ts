@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import { prisma } from '@/lib/db';
+import { getPrisma } from '@/lib/db';
+import { getEnv } from '@/lib/env';
 
 // Define proper interface for contact form data
 interface ContactSubmissionData {
@@ -164,10 +165,13 @@ async function sendToAirtable(submissionData: ContactSubmissionData) {
   }
 }
 
+export const runtime = "nodejs";
+
 export async function POST(request: NextRequest) {
   try {
-    // SECURITY: Only use environment variable, no fallback
-    const apiKey = process.env.RESEND_API_KEY;
+    // Get environment variables using the new helper
+    const env = getEnv();
+    const apiKey = env.RESEND_API_KEY;
 
     if (!apiKey) {
       return NextResponse.json(
@@ -177,6 +181,7 @@ export async function POST(request: NextRequest) {
     }
 
     const resend = new Resend(apiKey);
+    const prisma = getPrisma();
 
     const body = await request.json();
     const {
@@ -304,7 +309,7 @@ export async function POST(request: NextRequest) {
 
     // Send confirmation email to user
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+      const baseUrl = env.NEXT_PUBLIC_BASE_URL;
       if (!baseUrl) {
         throw new Error('NEXT_PUBLIC_BASE_URL is not configured');
       }

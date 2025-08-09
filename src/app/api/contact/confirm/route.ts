@@ -1,9 +1,13 @@
+export const runtime = "nodejs";
+
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { getEnv } from '@/lib/env';
 
 export async function POST(request: NextRequest) {
   try {
-    const apiKey = process.env.RESEND_API_KEY;
+    const env = getEnv();
+    const apiKey = env.RESEND_API_KEY;
 
     if (!apiKey) {
       return NextResponse.json(

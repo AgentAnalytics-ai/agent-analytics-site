@@ -15,7 +15,9 @@
     "db:reset": "prisma migrate reset",
     "db:studio": "prisma studio",
     "type-check": "tsc --noEmit",
-    "vercel-build": "pnpm build"
+    "vercel-build": "pnpm build",
+    "postinstall": "prisma generate",
+    "prisma:deploy": "prisma migrate deploy"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
@@ -33,7 +35,6 @@
     "next-seo": "^6.8.0",
     "pg": "^8.16.3",
     "posthog-js": "^1.118.0",
-    "prisma": "^5.22.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-intersection-observer": "^9.16.0",

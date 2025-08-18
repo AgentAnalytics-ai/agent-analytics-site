@@ -11,20 +11,24 @@ import { compileMDX } from '@/lib/mdx';
 import { Calendar, Clock, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { getAllPosts } from '@/lib/blog';
 import { Logo } from '@/components/ui/Logo';
 import { MDXRemote } from "next-mdx-remote/rsc";
+
+// Add these two exports at the top to make the page dynamic
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateStaticParams() {
-  const allPosts = getAllPosts();
-  return allPosts.map((post) => ({
-    slug: post.slug,
-  }));
-}
+// Comment out generateStaticParams to prevent pre-rendering
+// export async function generateStaticParams() {
+//   const allPosts = getAllPosts();
+//   return allPosts.map((post) => ({
+//     slug: post.slug,
+//   }));
+// }
 
 export async function generateMetadata({
   params,

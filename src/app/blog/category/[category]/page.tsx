@@ -1,23 +1,28 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getPostsByCategory, getAllCategories } from '@/lib/blog';
+import { getPostsByCategory } from '@/lib/blog';
 import PostCard from '@/components/blog/PostCard';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
+// Add these two exports at the top to make the page dynamic
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 interface CategoryPageProps {
   params: Promise<{ category: string }>;
 }
 
-export async function generateStaticParams() {
-  const categories = getAllCategories();
-  return categories.map((category) => ({
-    category: category.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-  }));
-}
+// Comment out generateStaticParams to prevent pre-rendering
+// export async function generateStaticParams() {
+//   const categories = getAllCategories();
+//   return categories.map((category) => ({
+//     category: category.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+//   }));
+// }
 
 export async function generateMetadata({
   params,

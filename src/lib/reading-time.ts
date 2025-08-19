@@ -1,7 +1,10 @@
-export function calculateReadingTime(content: string, wordsPerMinute: number = 200): string {
+export function calculateReadingTime(
+  content: string,
+  wordsPerMinute: number = 200
+): string {
   const words = content.trim().split(/\s+/).length;
   const minutes = Math.ceil(words / wordsPerMinute);
-  
+
   if (minutes < 1) {
     return 'Less than 1 min read';
   } else if (minutes === 1) {
@@ -11,9 +14,12 @@ export function calculateReadingTime(content: string, wordsPerMinute: number = 2
   }
 }
 
-export function calculateReadingTimeFromWords(wordCount: number, wordsPerMinute: number = 200): string {
+export function calculateReadingTimeFromWords(
+  wordCount: number,
+  wordsPerMinute: number = 200
+): string {
   const minutes = Math.ceil(wordCount / wordsPerMinute);
-  
+
   if (minutes < 1) {
     return 'Less than 1 min read';
   } else if (minutes === 1) {
@@ -21,4 +27,4 @@ export function calculateReadingTimeFromWords(wordCount: number, wordsPerMinute:
   } else {
     return `${minutes} min read`;
   }
-} 
+}

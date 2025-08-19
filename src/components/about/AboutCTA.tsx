@@ -1,6 +1,6 @@
 import { Container } from '../ui/Container';
 import { Section } from '../ui/Section';
-import { Button } from '../ui/Button';
+import Button from '../ui/Button';
 import Link from 'next/link';
 
 export function AboutCTA() {
@@ -12,7 +12,8 @@ export function AboutCTA() {
             Ready to Transform Your Tech Stack?
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
-            Let&apos;s discuss how we can help simplify your software systems and implement custom AI solutions that work for your business.
+            Let&apos;s discuss how we can help simplify your software systems
+            and implement custom AI solutions that work for your business.
           </p>
           <Link href="/book">
             <Button variant="primary" size="lg">
@@ -23,4 +24,4 @@ export function AboutCTA() {
       </Container>
     </Section>
   );
-} 
+}

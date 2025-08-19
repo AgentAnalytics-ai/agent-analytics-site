@@ -6,7 +6,7 @@ export function Credibility() {
   const stats = [
     { number: '95%', label: 'retention rate' },
     { number: 'Built IP', label: 'used by global leaders' },
-    { number: '50+', label: 'strategy engagements' }
+    { number: '50+', label: 'strategy engagements' },
   ];
 
   return (
@@ -18,13 +18,11 @@ export function Credibility() {
               <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-gray-300 to-gray-100 bg-clip-text text-transparent mb-2">
                 {stat.number}
               </div>
-              <div className="text-gray-200 font-medium">
-                {stat.label}
-              </div>
+              <div className="text-gray-200 font-medium">{stat.label}</div>
             </div>
           ))}
         </div>
       </Container>
     </Section>
   );
-} 
+}

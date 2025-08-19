@@ -1,9 +1,13 @@
+export const runtime = "nodejs";
+
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { getEnv } from '@/lib/env';
 
 export async function POST(request: NextRequest) {
   try {
-    const apiKey = process.env.RESEND_API_KEY;
+    const env = getEnv();
+    const apiKey = env.RESEND_API_KEY;
 
     if (!apiKey) {
       return NextResponse.json(
@@ -27,7 +31,7 @@ export async function POST(request: NextRequest) {
         <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; margin: 20px 0;">
           <h3 style="color: #374151; margin-top: 0;">What happens next?</h3>
           <ol style="color: #374151; line-height: 1.8;">
-            <li>We'll review your message within 24 hours</li>
+            <li>We&apos;ll review your message within 24 hours</li>
             <li>Schedule a free consultation call to discuss your needs</li>
             <li>Receive a customized proposal tailored to your challenge</li>
           </ol>

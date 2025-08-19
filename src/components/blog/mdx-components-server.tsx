@@ -1,8 +1,20 @@
 import React from 'react';
-import { Quote as QuoteIcon, AlertTriangle, Info, CheckCircle, TrendingUp } from 'lucide-react';
+import {
+  Quote as QuoteIcon,
+  AlertTriangle,
+  Info,
+  CheckCircle,
+  TrendingUp,
+} from 'lucide-react';
 
 // Quote Component - Lighter blue colors
-export function Quote({ children, author }: { children: React.ReactNode; author?: string }) {
+export function Quote({
+  children,
+  author,
+}: {
+  children: React.ReactNode;
+  author?: string;
+}) {
   return (
     <blockquote className="relative my-4 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-300 rounded-r-lg overflow-hidden">
       <QuoteIcon className="absolute top-4 left-4 w-8 h-8 text-blue-400 opacity-30" />
@@ -51,9 +63,13 @@ export function Callout({ children, type = 'info', title }: CalloutProps) {
   const Icon = variant.icon;
 
   return (
-    <div className={`my-4 p-4 rounded-r-lg overflow-hidden ${variant.className}`}>
+    <div
+      className={`my-4 p-4 rounded-r-lg overflow-hidden ${variant.className}`}
+    >
       <div className="flex items-start gap-3">
-        <Icon className={`w-5 h-5 mt-0.5 flex-shrink-0 ${variant.iconClassName}`} />
+        <Icon
+          className={`w-5 h-5 mt-0.5 flex-shrink-0 ${variant.iconClassName}`}
+        />
         <div>
           {title && <h4 className="font-semibold mb-2">{title}</h4>}
           <div className="text-sm">{children}</div>
@@ -71,14 +87,21 @@ interface MetricCardProps {
   subtitle?: string;
 }
 
-export function MetricCard({ number, trend, label, subtitle }: MetricCardProps) {
+export function MetricCard({
+  number,
+  trend,
+  label,
+  subtitle,
+}: MetricCardProps) {
   return (
     <div className="my-4 p-6 bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-lg overflow-hidden">
       <div className="text-center">
         <div className="flex items-center justify-center gap-2 mb-2">
           <span className="text-4xl font-bold text-gray-900">{number}</span>
           {trend && (
-            <span className={`text-sm font-medium ${trend === 'up' ? 'text-green-500' : 'text-red-500'}`}>
+            <span
+              className={`text-sm font-medium ${trend === 'up' ? 'text-green-500' : 'text-red-500'}`}
+            >
               {trend === 'up' ? '↗' : '↘'}
             </span>
           )}
@@ -167,7 +190,9 @@ export function Timeline({ events }: TimelineProps) {
             </div>
             <div className="flex-shrink-0 w-4 h-4 bg-blue-400 rounded-full mt-1" />
             <div className="flex-1">
-              <h4 className="font-semibold text-gray-900 mb-1">{event.title}</h4>
+              <h4 className="font-semibold text-gray-900 mb-1">
+                {event.title}
+              </h4>
               <p className="text-gray-600">{event.description}</p>
             </div>
           </div>
@@ -178,7 +203,13 @@ export function Timeline({ events }: TimelineProps) {
 }
 
 // CodeBlock Component - Lighter colors
-export function CodeBlock({ children, language }: { children: React.ReactNode; language?: string }) {
+export function CodeBlock({
+  children,
+  language,
+}: {
+  children: React.ReactNode;
+  language?: string;
+}) {
   return (
     <div className="my-4 overflow-hidden rounded-lg border border-gray-200">
       {language && (
@@ -202,4 +233,4 @@ export const mdxComponents = {
   ComparisonTable,
   Timeline,
   CodeBlock,
-}; 
+};

@@ -1,29 +1,36 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getPostsByCategory, getAllCategories } from '@/lib/blog';
+import { getPostsByCategory } from '@/lib/blog';
 import PostCard from '@/components/blog/PostCard';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
+// Add these two exports at the top to make the page dynamic
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 interface CategoryPageProps {
   params: Promise<{ category: string }>;
 }
 
-export async function generateStaticParams() {
-  const categories = getAllCategories();
-  return categories.map((category) => ({
-    category: category.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-  }));
-}
+// Comment out generateStaticParams to prevent pre-rendering
+// export async function generateStaticParams() {
+//   const categories = getAllCategories();
+//   return categories.map((category) => ({
+//     category: category.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+//   }));
+// }
 
-export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: CategoryPageProps): Promise<Metadata> {
   const { category } = await params;
   const decodedCategory = decodeURIComponent(category);
   const posts = getPostsByCategory(decodedCategory);
-  
+
   if (posts.length === 0) {
     return {
       title: 'Category Not Found - Agent Analytics',
@@ -44,7 +51,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const { category } = await params;
   const decodedCategory = decodeURIComponent(category);
   const posts = getPostsByCategory(decodedCategory);
-  
+
   if (posts.length === 0) {
     notFound();
   }
@@ -61,13 +68,14 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               <ArrowLeft className="w-4 h-4" />
               Back to Blog
             </Link>
-            
+
             <div className="text-center">
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                 {decodedCategory}
               </h1>
               <p className="text-xl text-gray-600">
-                {posts.length} post{posts.length !== 1 ? 's' : ''} in this category
+                {posts.length} post{posts.length !== 1 ? 's' : ''} in this
+                category
               </p>
             </div>
           </div>
@@ -85,4 +93,4 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       </Section>
     </>
   );
-} 
+}

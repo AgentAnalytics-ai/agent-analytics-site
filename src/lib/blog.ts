@@ -67,9 +67,9 @@ export function getAllPosts(): BlogMeta[] {
       const fullPath = path.join(postsDirectory, fileName);
       const fileContents = fs.readFileSync(fullPath, 'utf8');
       const { data, content } = matter(fileContents);
-      
+
       const stats = readingTime(content);
-      
+
       return {
         slug,
         title: data.title,
@@ -89,7 +89,9 @@ export function getAllPosts(): BlogMeta[] {
     });
 
   // Sort posts by date (newest first)
-  return allPostsData.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return allPostsData.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
 }
 
 export function getPostBySlug(slug: string): BlogPost | null {
@@ -97,9 +99,9 @@ export function getPostBySlug(slug: string): BlogPost | null {
     const fullPath = path.join(postsDirectory, `${slug}.mdx`);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
-    
+
     const stats = readingTime(content);
-    
+
     return {
       slug,
       title: data.title,
@@ -124,53 +126,59 @@ export function getPostBySlug(slug: string): BlogPost | null {
 
 export function getPostsByCategory(category: string): BlogMeta[] {
   const allPosts = getAllPosts();
-  return allPosts.filter(post => 
-    post.category.toLowerCase() === category.toLowerCase()
+  return allPosts.filter(
+    (post) => post.category.toLowerCase() === category.toLowerCase()
   );
 }
 
-export function getRelatedPosts(currentPost: BlogMeta, limit: number = 3): BlogMeta[] {
+export function getRelatedPosts(
+  currentPost: BlogMeta,
+  limit: number = 3
+): BlogMeta[] {
   const allPosts = getAllPosts();
-  
+
   // First, try to use manually specified related posts
   if (currentPost.relatedPosts && currentPost.relatedPosts.length > 0) {
-    const manualRelated = allPosts.filter(post => 
+    const manualRelated = allPosts.filter((post) =>
       currentPost.relatedPosts!.includes(post.slug)
     );
     if (manualRelated.length >= limit) {
       return manualRelated.slice(0, limit);
     }
   }
-  
+
   // Otherwise, find posts with similar tags
-  const currentTags = new Set(currentPost.tags.map(tag => tag.toLowerCase()));
-  
+  const currentTags = new Set(currentPost.tags.map((tag) => tag.toLowerCase()));
+
   const scoredPosts = allPosts
-    .filter(post => post.slug !== currentPost.slug)
-    .map(post => {
-      const postTags = new Set(post.tags.map(tag => tag.toLowerCase()));
-      const sharedTags = [...currentTags].filter(tag => postTags.has(tag));
-      const categoryMatch = post.category.toLowerCase() === currentPost.category.toLowerCase() ? 2 : 0;
-      
+    .filter((post) => post.slug !== currentPost.slug)
+    .map((post) => {
+      const postTags = new Set(post.tags.map((tag) => tag.toLowerCase()));
+      const sharedTags = [...currentTags].filter((tag) => postTags.has(tag));
+      const categoryMatch =
+        post.category.toLowerCase() === currentPost.category.toLowerCase()
+          ? 2
+          : 0;
+
       return {
         post,
-        score: sharedTags.length + categoryMatch
+        score: sharedTags.length + categoryMatch,
       };
     })
-    .filter(item => item.score > 0)
+    .filter((item) => item.score > 0)
     .sort((a, b) => b.score - a.score);
-  
-  return scoredPosts.slice(0, limit).map(item => item.post);
+
+  return scoredPosts.slice(0, limit).map((item) => item.post);
 }
 
 export function getAllCategories(): string[] {
   const allPosts = getAllPosts();
-  const categories = new Set(allPosts.map(post => post.category));
+  const categories = new Set(allPosts.map((post) => post.category));
   return Array.from(categories).sort();
 }
 
 export function getAllTags(): string[] {
   const allPosts = getAllPosts();
-  const tags = new Set(allPosts.flatMap(post => post.tags));
+  const tags = new Set(allPosts.flatMap((post) => post.tags));
   return Array.from(tags).sort();
-} 
+}

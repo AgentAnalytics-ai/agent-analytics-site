@@ -4,23 +4,25 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "pnpm run type-check && prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
+    "prettier": "prettier --write .",
+    "prettier:check": "prettier --check .",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
-    "db:studio": "prisma studio"
-  },
-  "lint-staged": {
-    "*.{ts,tsx,js,jsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ]
+    "db:reset": "prisma migrate reset",
+    "db:studio": "prisma studio",
+    "type-check": "tsc --noEmit",
+    "vercel-build": "pnpm build",
+    "postinstall": "prisma generate",
+    "prisma:deploy": "prisma migrate deploy"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
     "@tailwindcss/typography": "^0.5.16",
+    "@types/pg": "^8.15.5",
     "@vercel/og": "^0.7.2",
     "autoprefixer": "^10.4.21",
     "clsx": "^2.1.1",
@@ -31,24 +33,25 @@
     "next": "15.3.5",
     "next-mdx-remote": "^5.0.0",
     "next-seo": "^6.8.0",
+    "pg": "^8.16.3",
     "posthog-js": "^1.118.0",
-    "prisma": "^5.22.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-intersection-observer": "^9.16.0",
     "reading-time": "^1.5.0",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-prism-plus": "^2.0.1",
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.1",
-    "resend": "^3.2.0"
+    "resend": "^3.2.0",
+    "zod": "^4.0.17"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
     "eslint": "^9",
     "eslint-config-next": "15.3.5",
     "husky": "^9.1.7",

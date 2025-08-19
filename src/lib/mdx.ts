@@ -1,23 +1,17 @@
-import { MDXRemote } from 'next-mdx-remote/rsc';
-import remarkGfm from 'remark-gfm';
+import { serialize } from 'next-mdx-remote/serialize';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypePrismPlus from 'rehype-prism-plus';
-import { mdxComponents } from '@/components/blog/mdx-components-server';
+import remarkGfm from 'remark-gfm';
+import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 
-export const mdxOptions = {
-  remarkPlugins: [remarkGfm],
-  rehypePlugins: [
-    rehypeSlug,
-    [rehypeAutolinkHeadings, { behavior: 'wrap' }],
-    [rehypePrismPlus, { ignoreMissing: true }],
-  ],
-};
+type CompileMDXResult = Promise<MDXRemoteSerializeResult>;
 
-export function compileMDX(source: string) {
-  return MDXRemote({ 
-    source, 
-    options: mdxOptions,
-    components: mdxComponents
+export async function compileMDX(source: string): CompileMDXResult {
+  return await serialize(source, {
+    mdxOptions: {
+      remarkPlugins: [remarkGfm],
+      rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings],
+    },
+    parseFrontmatter: true,
   });
-} 
+}

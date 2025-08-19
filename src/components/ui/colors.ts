@@ -15,5 +15,5 @@ export const colors = {
   border: {
     primary: 'border-gray-200 dark:border-gray-800',
     accent: 'border-blue-200 dark:border-blue-800',
-  }
-} 
+  },
+};

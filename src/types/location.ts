@@ -43,4 +43,4 @@ export interface CityData {
 
 export interface LocationPageProps {
   city: CityData;
-} 
+}

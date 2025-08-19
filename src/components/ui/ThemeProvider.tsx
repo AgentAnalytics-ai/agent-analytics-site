@@ -1,27 +1,29 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 interface ThemeProviderProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [mounted, setMounted] = useState(false)
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
-    
+    setMounted(true);
+
     // Initialize theme on mount to prevent flash
-    const savedTheme = localStorage.getItem('theme')
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia(
+      '(prefers-color-scheme: dark)'
+    ).matches;
+
     if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-      document.documentElement.classList.add('dark')
+      document.documentElement.classList.add('dark');
     } else {
-      document.documentElement.classList.remove('dark')
+      document.documentElement.classList.remove('dark');
     }
-  }, [])
+  }, []);
 
   // Prevent hydration mismatch by not rendering until mounted
   if (!mounted) {
@@ -33,8 +35,8 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
           </div>
         </div>
       </div>
-    )
+    );
   }
 
-  return <>{children}</>
-} 
+  return <>{children}</>;
+}

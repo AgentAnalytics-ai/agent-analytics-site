@@ -13,10 +13,11 @@ export function AboutHero() {
             Why We Built Agent Analytics Studio
           </h1>
           <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-12">
-            A smarter, calmer approach to AI and software systems for modern businesses.
+            A smarter, calmer approach to AI and software systems for modern
+            businesses.
           </p>
         </div>
       </Container>
     </Section>
   );
-} 
+}

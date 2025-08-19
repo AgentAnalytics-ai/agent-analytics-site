@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Sparkles, Brain, Target, Zap } from 'lucide-react';
-import { Button } from '../ui/Button';
+import Button from '../ui/Button';
 import { Container } from '../ui/Container';
 
 interface HeroProps {

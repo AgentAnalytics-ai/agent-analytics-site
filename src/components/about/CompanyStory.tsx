@@ -54,6 +54,8 @@ export function CompanyStory() {
                 technology a powerful asset, not a burden.
               </p>
 
+
+
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 This is what we do. We help you simplify, focus, and build. With
                 strategy, empathy, and the latest AI tools working on your side.

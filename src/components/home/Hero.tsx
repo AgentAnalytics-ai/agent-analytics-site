@@ -80,7 +80,7 @@ export default function Hero({
       <div className="absolute top-40 right-10 w-72 h-72 bg-slate-600/20 rounded-full blur-3xl animate-pulse animation-delay-2000"></div>
       <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-slate-700/20 rounded-full blur-3xl animate-pulse animation-delay-4000"></div>
 
-      <Container className="relative z-10 py-20">
+      <Container className="relative z-10 py-20 mt-8">
         <div className="text-center mb-16">
           {/* Professional badge */}
           <motion.div

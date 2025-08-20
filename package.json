@@ -17,7 +17,9 @@
     "type-check": "tsc --noEmit",
     "vercel-build": "pnpm build",
     "postinstall": "prisma generate",
-    "prisma:deploy": "prisma migrate deploy"
+    "prisma:deploy": "prisma migrate deploy",
+    "prepare": "husky",
+    "test": "echo \"No tests yet\""
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

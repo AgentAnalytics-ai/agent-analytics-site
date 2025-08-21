@@ -1,29 +1,27 @@
 import Hero from '../components/home/Hero';
 import WhoWeAre from '../components/home/WhoWeAre';
-import HowWeWork from '../components/home/HowWeWork';
 import { LeadForm } from '../components/home/LeadForm';
 import { Container } from '../components/ui/Container';
 import { Section } from '../components/ui/Section';
-import { Card } from '../components/ui/Card';
 
 export default function Home() {
   return (
     <>
       <Hero
-        title="Ready to Simplify Your Tech Stack?"
-        subtitle="Let's discuss how we can help you eliminate complexity and build intelligent systems that work for you."
-        primaryCTA="Start a Conversation"
-        secondaryCTA=""
+        title="Strategic Intelligence in Action"
+        subtitle="We design agentic systems that think, act, and align with your business. These aren't off-the-shelf tools — they're adaptive solutions built to understand and execute."
+        primaryCTA="Let's Talk Strategy"
+        secondaryCTA="Explore Solutions"
       />
 
       <Section spacing="xl" background="gray">
         <Container>
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Why Choose Agent Analytics
+              Transform Your Business with AI
             </h2>
             <p className="text-xl text-neutral-300 max-w-3xl mx-auto">
-              We're a consulting studio that quietly powers modern enterprises with custom strategy, technology, and internal tools.
+              Stop managing tools. Start achieving results.
             </p>
           </div>
 

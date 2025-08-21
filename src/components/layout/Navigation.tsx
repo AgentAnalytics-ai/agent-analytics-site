@@ -107,7 +107,7 @@ export function Navigation() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-700 dark:text-neutral-300 hover:text-gray-900 dark:hover:text-white font-medium transition-colors duration-200 relative group"
+                className="text-gray-800 dark:text-neutral-300 hover:text-gray-900 dark:hover:text-white font-medium transition-colors duration-200 relative group"
               >
                 {item.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
@@ -130,7 +130,7 @@ export function Navigation() {
             {/* Mobile menu button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-neutral-300 hover:text-white transition-colors"
+              className="md:hidden p-2 text-gray-800 dark:text-neutral-300 hover:text-gray-900 dark:hover:text-white transition-colors"
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -145,7 +145,7 @@ export function Navigation() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-neutral-900/95 backdrop-blur-md border-b border-neutral-800"
+            className="md:hidden bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-b border-gray-200 dark:border-neutral-800"
           >
             <Container>
               <div className="py-6 space-y-4">
@@ -154,7 +154,7 @@ export function Navigation() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block text-neutral-300 hover:text-white font-medium transition-colors duration-200"
+                    className="block text-gray-800 dark:text-neutral-300 hover:text-gray-900 dark:hover:text-white font-medium transition-colors duration-200"
                   >
                     {item.label}
                   </Link>

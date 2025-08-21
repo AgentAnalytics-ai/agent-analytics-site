@@ -7,24 +7,24 @@ import { Section } from '../ui/Section';
 
 const features = [
   {
-    title: 'Enterprise Security',
-    description: 'Built on Microsoft Azure with enterprise-grade security and compliance.',
+    title: 'Strategic Focus',
+    description: 'We solve your biggest challenges with custom AI solutions that actually work.',
   },
   {
-    title: 'Team Integration',
-    description: 'Seamlessly integrate with your existing workflows and team structures.',
+    title: 'Team Collaboration',
+    description: 'Work seamlessly with your existing team and processes.',
   },
   {
-    title: 'Global Scale',
-    description: 'Deploy solutions that scale with your business across multiple regions.',
+    title: 'Scalable Solutions',
+    description: 'Build once, scale everywhere. Solutions that grow with your business.',
   },
   {
     title: 'Proven Results',
-    description: 'Track record of delivering measurable ROI and business transformation.',
+    description: 'Track record of delivering real business impact and measurable ROI.',
   },
   {
-    title: 'Continuous Optimization',
-    description: 'Ongoing analytics and refinement to maximize performance.',
+    title: 'Continuous Improvement',
+    description: 'We don\'t just build it—we optimize it for maximum performance.',
   },
 ];
 

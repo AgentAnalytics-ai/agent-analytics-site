@@ -35,9 +35,9 @@ export default function HowWeWork() {
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 className="text-center"
               >
-                <div className="bg-neutral-800/50 rounded-2xl p-8 border border-neutral-700 hover:border-neutral-600 transition-all duration-300 hover:bg-neutral-800/70">
-                  <h3 className="text-xl font-semibold text-white mb-3">{step.title}</h3>
-                  <p className="text-neutral-300">{step.description}</p>
+                <div className="bg-white dark:bg-neutral-800/50 rounded-2xl p-8 border border-gray-200 dark:border-neutral-700 hover:border-gray-300 dark:hover:border-neutral-600 transition-all duration-300 hover:bg-gray-50 dark:hover:bg-neutral-800/70 shadow-lg hover:shadow-xl">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{step.title}</h3>
+                  <p className="text-gray-600 dark:text-neutral-300">{step.description}</p>
                 </div>
               </motion.div>
             ))}

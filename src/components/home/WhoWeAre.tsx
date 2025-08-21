@@ -38,7 +38,7 @@ export default function WhoWeAre() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-bold text-white mb-6"
+            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6"
           >
             Why Choose Agent Analytics
           </motion.h2>
@@ -47,7 +47,7 @@ export default function WhoWeAre() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-xl text-neutral-300 max-w-3xl mx-auto"
+            className="text-xl text-gray-600 dark:text-neutral-300 max-w-3xl mx-auto"
           >
             We're a consulting studio that quietly powers modern enterprises with custom strategy, technology, and internal tools. Built for scale, security, and results.
           </motion.p>
@@ -61,10 +61,10 @@ export default function WhoWeAre() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-neutral-800/50 rounded-2xl p-8 border border-neutral-700 hover:border-neutral-600 transition-all duration-300 hover:bg-neutral-800/70"
+              className="bg-white dark:bg-neutral-800/50 rounded-2xl p-8 border border-gray-200 dark:border-neutral-700 hover:border-gray-300 dark:hover:border-neutral-600 transition-all duration-300 hover:bg-gray-50 dark:hover:bg-neutral-800/70 shadow-lg hover:shadow-xl"
             >
-              <h3 className="text-xl font-semibold text-white mb-3">{feature.title}</h3>
-              <p className="text-neutral-300">{feature.description}</p>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{feature.title}</h3>
+              <p className="text-gray-600 dark:text-neutral-300">{feature.description}</p>
             </motion.div>
           ))}
         </div>
@@ -77,10 +77,10 @@ export default function WhoWeAre() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: (index + 3) * 0.1 }}
-              className="bg-neutral-800/50 rounded-2xl p-8 border border-neutral-700 hover:border-neutral-600 transition-all duration-300 hover:bg-neutral-800/70"
+              className="bg-white dark:bg-neutral-800/50 rounded-2xl p-8 border border-gray-200 dark:border-neutral-700 hover:border-gray-300 dark:hover:border-neutral-600 transition-all duration-300 hover:bg-gray-50 dark:hover:bg-neutral-800/70 shadow-lg hover:shadow-xl"
             >
-              <h3 className="text-xl font-semibold text-white mb-3">{feature.title}</h3>
-              <p className="text-neutral-300">{feature.description}</p>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{feature.title}</h3>
+              <p className="text-gray-600 dark:text-neutral-300">{feature.description}</p>
             </motion.div>
           ))}
         </div>

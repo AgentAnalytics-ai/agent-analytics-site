@@ -37,6 +37,7 @@ export function Section({
       className={clsx(
         spacingStyles[spacing],
         backgroundStyles[background],
+        'transition-colors duration-300', // Smooth background transitions
         className
       )}
     >

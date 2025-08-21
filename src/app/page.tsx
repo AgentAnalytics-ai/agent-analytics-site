@@ -17,28 +17,28 @@ export default function Home() {
       <Section spacing="xl" background="gray">
         <Container>
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
               Transform Your Business with AI
             </h2>
-            <p className="text-xl text-neutral-300 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-neutral-300 max-w-3xl mx-auto">
               Stop managing tools. Start achieving results.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-neutral-800/50 rounded-2xl p-8 border border-neutral-700 hover:border-neutral-600 transition-all duration-300">
-              <h3 className="text-xl font-semibold text-white mb-3">Strategic Focus</h3>
-              <p className="text-neutral-300">We solve your biggest challenges with custom AI solutions that actually work.</p>
+            <div className="bg-white dark:bg-neutral-800/50 rounded-2xl p-8 border border-gray-200 dark:border-neutral-700 hover:border-gray-300 dark:hover:border-neutral-600 transition-all duration-300 shadow-lg hover:shadow-xl">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Strategic Focus</h3>
+              <p className="text-gray-600 dark:text-neutral-300">We solve your biggest challenges with custom AI solutions that actually work.</p>
             </div>
             
-            <div className="bg-neutral-800/50 rounded-2xl p-8 border border-neutral-700 hover:border-neutral-600 transition-all duration-300">
-              <h3 className="text-xl font-semibold text-white mb-3">Team Collaboration</h3>
-              <p className="text-neutral-300">Work seamlessly with your existing team and processes.</p>
+            <div className="bg-white dark:bg-neutral-800/50 rounded-2xl p-8 border border-gray-200 dark:border-neutral-700 hover:border-gray-300 dark:hover:border-neutral-600 transition-all duration-300 shadow-lg hover:shadow-xl">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Team Collaboration</h3>
+              <p className="text-gray-600 dark:text-neutral-300">Work seamlessly with your existing team and processes.</p>
             </div>
             
-            <div className="bg-neutral-800/50 rounded-2xl p-8 border border-neutral-700 hover:border-neutral-600 transition-all duration-300">
-              <h3 className="text-xl font-semibold text-white mb-3">Scalable Solutions</h3>
-              <p className="text-neutral-300">Build once, scale everywhere. Solutions that grow with your business.</p>
+            <div className="bg-white dark:bg-neutral-800/50 rounded-2xl p-8 border border-gray-200 dark:border-neutral-700 hover:border-gray-300 dark:hover:border-neutral-600 transition-all duration-300 shadow-lg hover:shadow-xl">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Scalable Solutions</h3>
+              <p className="text-gray-600 dark:text-neutral-300">Build once, scale everywhere. Solutions that grow with your business.</p>
             </div>
           </div>
         </Container>

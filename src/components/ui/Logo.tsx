@@ -30,15 +30,15 @@ export function Logo({
   showLink = true,
 }: LogoProps) {
   const sizeClasses = {
-    sm: 'h-10',
-    md: 'h-16', // Increased from h-12
-    lg: 'h-20', // Increased from h-16
-    xl: 'h-24', // Increased from h-20
-    navbar: 'h-20', // Increased from h-12 - much bigger in nav
-    footer: 'h-16', // Increased from h-10
-    blog: 'h-12', // Increased from h-8
-    watermark: 'h-48', // Increased from h-32
-    '404': 'h-32', // Increased from h-24
+    sm: 'h-12', // Increased from h-8
+    md: 'h-20', // Increased from h-14
+    lg: 'h-24', // Increased from h-20
+    xl: 'h-28', // Increased from h-24
+    navbar: 'h-24', // Increased from h-16 - much bigger in nav
+    footer: 'h-20', // Increased from h-12
+    blog: 'h-16', // Increased from h-10
+    watermark: 'h-56', // Increased from h-40
+    '404': 'h-40', // Increased from h-32
   };
 
   const logoContent = (
@@ -47,8 +47,8 @@ export function Logo({
         <Image
           src="/images/agent-analytics-logo.png"
           alt="Agent Analytics"
-          width={240}
-          height={80}
+          width={300}
+          height={96}
           className="h-full w-auto object-contain"
           priority
         />
@@ -56,8 +56,8 @@ export function Logo({
         <Image
           src="/images/Agent Analytics Official Logo.png"
           alt="Agent Analytics"
-          width={80}
-          height={80}
+          width={96}
+          height={96}
           className="h-full w-auto object-contain"
           priority
         />

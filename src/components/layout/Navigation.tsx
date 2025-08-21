@@ -97,8 +97,8 @@ export function Navigation() {
       )}
     >
       <Container>
-        <nav className="flex items-center justify-between h-24">
-          {/* Logo */}
+        <nav className="flex items-center justify-between h-28"> {/* Increased height from h-24 */}
+          {/* Logo - Now bigger */}
           <Logo variant="full" size="navbar" />
 
           {/* Desktop Navigation */}

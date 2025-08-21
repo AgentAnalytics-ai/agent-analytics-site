@@ -9,7 +9,17 @@
     "lint": "next lint",
     "prettier": "prettier --write .",
     "prettier:check": "prettier --check .",
-    "type-check": "tsc --noEmit"
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:reset": "prisma migrate reset",
+    "db:studio": "prisma studio",
+    "type-check": "tsc --noEmit",
+    "vercel-build": "pnpm build",
+    "postinstall": "prisma generate",
+    "prisma:deploy": "prisma migrate deploy",
+    "prepare": "husky",
+    "test": "echo \"No tests yet\""
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.16",

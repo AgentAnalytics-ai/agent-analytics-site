@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Container } from '../ui/Container';
 import { Section } from '../ui/Section';
 import Button from '../ui/Button';
+import { Sparkles } from 'lucide-react';
 
 export default function Hero({
   title,
@@ -26,10 +27,31 @@ export default function Hero({
   };
 
   return (
-    <Section spacing="xl" className="relative min-h-screen flex items-center">
-      <Container className="relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Main Heading */}
+    <section
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
+    >
+      {/* Sophisticated background elements */}
+      <motion.div
+        className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)] opacity-20"
+      />
+      <div className="absolute top-20 left-10 w-72 h-72 bg-slate-700/20 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute top-40 right-10 w-72 h-72 bg-slate-600/20 rounded-full blur-3xl animate-pulse animation-delay-2000"></div>
+      <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-slate-700/20 rounded-full blur-3xl animate-pulse animation-delay-4000"></div>
+
+      <Container className="relative z-10 py-20 mt-8">
+        <div className="text-center mb-16">
+          {/* Professional badge */}
+          <motion.div
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500/20 to-blue-600/20 text-blue-300 px-6 py-3 rounded-full text-sm font-medium mb-8 border border-blue-500/30 backdrop-blur-sm"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <Sparkles className="w-4 h-4" />
+            Strategic Intelligence
+          </motion.div>
+
+          {/* Main headline */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -78,6 +100,6 @@ export default function Hero({
           </motion.div>
         </div>
       </Container>
-    </Section>
+    </section>
   );
 }

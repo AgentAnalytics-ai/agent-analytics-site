@@ -1,6 +1,13 @@
 packages:
-  - '.'
-  - 'src/**'
-  - 'components/**'
-  - 'lib/**'
-  - 'types/**'
+  - .
+
+ignoredBuiltDependencies:
+  - core-js
+  - unrs-resolver
+
+onlyBuiltDependencies:
+  - '@prisma/client'
+  - '@prisma/engines'
+  - '@tailwindcss/oxide'
+  - prisma
+  - sharp

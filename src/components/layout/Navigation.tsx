@@ -92,7 +92,7 @@ export function Navigation() {
       className={clsx(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         scrollState.isScrolled
-          ? 'bg-neutral-900/95 backdrop-blur-md border-b border-neutral-800 shadow-xl'
+          ? 'bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-b border-gray-200 dark:border-neutral-800 shadow-xl'
           : 'bg-transparent'
       )}
     >
@@ -107,7 +107,7 @@ export function Navigation() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-neutral-300 hover:text-white font-medium transition-colors duration-200 relative group"
+                className="text-gray-700 dark:text-neutral-300 hover:text-gray-900 dark:hover:text-white font-medium transition-colors duration-200 relative group"
               >
                 {item.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-300 group-hover:w-full"></span>

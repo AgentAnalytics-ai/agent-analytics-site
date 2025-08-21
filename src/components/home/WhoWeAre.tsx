@@ -9,27 +9,22 @@ const features = [
   {
     title: 'Enterprise Security',
     description: 'Built on Microsoft Azure with enterprise-grade security and compliance.',
-    icon: '🛡️',
   },
   {
     title: 'Team Integration',
     description: 'Seamlessly integrate with your existing workflows and team structures.',
-    icon: '🤝',
   },
   {
     title: 'Global Scale',
     description: 'Deploy solutions that scale with your business across multiple regions.',
-    icon: '🌍',
   },
   {
     title: 'Proven Results',
     description: 'Track record of delivering measurable ROI and business transformation.',
-    icon: '📈',
   },
   {
     title: 'Continuous Optimization',
     description: 'Ongoing analytics and refinement to maximize performance.',
-    icon: '⚡',
   },
 ];
 
@@ -68,7 +63,6 @@ export default function WhoWeAre() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="bg-neutral-800/50 rounded-2xl p-8 border border-neutral-700 hover:border-neutral-600 transition-all duration-300 hover:bg-neutral-800/70"
             >
-              <div className="text-3xl mb-4">{feature.icon}</div>
               <h3 className="text-xl font-semibold text-white mb-3">{feature.title}</h3>
               <p className="text-neutral-300">{feature.description}</p>
             </motion.div>
@@ -85,7 +79,6 @@ export default function WhoWeAre() {
               transition={{ duration: 0.6, delay: (index + 3) * 0.1 }}
               className="bg-neutral-800/50 rounded-2xl p-8 border border-neutral-700 hover:border-neutral-600 transition-all duration-300 hover:bg-neutral-800/70"
             >
-              <div className="text-3xl mb-4">{feature.icon}</div>
               <h3 className="text-xl font-semibold text-white mb-3">{feature.title}</h3>
               <p className="text-neutral-300">{feature.description}</p>
             </motion.div>

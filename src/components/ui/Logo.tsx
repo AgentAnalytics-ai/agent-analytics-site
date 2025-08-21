@@ -31,14 +31,14 @@ export function Logo({
 }: LogoProps) {
   const sizeClasses = {
     sm: 'h-10',
-    md: 'h-12',
-    lg: 'h-16',
-    xl: 'h-20',
-    navbar: 'h-12',
-    footer: 'h-10',
-    blog: 'h-8',
-    watermark: 'h-32',
-    '404': 'h-24',
+    md: 'h-16', // Increased from h-12
+    lg: 'h-20', // Increased from h-16
+    xl: 'h-24', // Increased from h-20
+    navbar: 'h-20', // Increased from h-12 - much bigger in nav
+    footer: 'h-16', // Increased from h-10
+    blog: 'h-12', // Increased from h-8
+    watermark: 'h-48', // Increased from h-32
+    '404': 'h-32', // Increased from h-24
   };
 
   const logoContent = (
@@ -47,18 +47,18 @@ export function Logo({
         <Image
           src="/images/agent-analytics-logo.png"
           alt="Agent Analytics"
-          width={200}
-          height={48}
-          className="h-full w-auto"
+          width={240}
+          height={80}
+          className="h-full w-auto object-contain"
           priority
         />
       ) : (
         <Image
           src="/images/Agent Analytics Official Logo.png"
           alt="Agent Analytics"
-          width={48}
-          height={48}
-          className="h-full w-auto"
+          width={80}
+          height={80}
+          className="h-full w-auto object-contain"
           priority
         />
       )}
@@ -70,7 +70,7 @@ export function Logo({
   }
 
   return (
-    <Link href={href} className="inline-block">
+    <Link href={href} className="inline-block hover:opacity-90 transition-opacity duration-200">
       {logoContent}
     </Link>
   );

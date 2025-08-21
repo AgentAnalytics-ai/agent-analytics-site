@@ -1,10 +1,11 @@
 export const runtime = 'nodejs';
 
 import { NextResponse } from 'next/server';
-import { getPrisma } from '@/lib/db';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
-  const prisma = getPrisma();
   const ct = request.headers.get('content-type') ?? '';
   let payload: Record<string, unknown> = {};
 
@@ -24,6 +25,23 @@ export async function POST(request: Request) {
   const { name, email, message } = payload as { name?: string; email?: string; message?: string };
   if (!name || !email || !message) return NextResponse.json({ error: 'Missing fields' }, { status: 422 });
 
-  await prisma.contact.create({ data: { name, email, message } });
-  return NextResponse.json({ ok: true });
+  try {
+    await resend.emails.send({
+      from: 'Agent Analytics <noreply@agentanalytics.com>',
+      to: ['grant@agentanalyticsai.com'], // Your email
+      subject: `New Contact Form Submission from ${name}`,
+      html: `
+        <h2>New Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message}</p>
+      `,
+    });
+
+    return NextResponse.json({ ok: true });
+  } catch (error) {
+    console.error('Failed to send email:', error);
+    return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
+  }
 }

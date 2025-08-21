@@ -4,25 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "pnpm run type-check && prisma generate && next build",
+    "build": "pnpm run type-check && next build",
     "start": "next start",
     "lint": "next lint",
     "prettier": "prettier --write .",
     "prettier:check": "prettier --check .",
-    "db:generate": "prisma generate",
-    "db:push": "prisma db push",
-    "db:migrate": "prisma migrate dev",
-    "db:reset": "prisma migrate reset",
-    "db:studio": "prisma studio",
-    "type-check": "tsc --noEmit",
-    "vercel-build": "pnpm build",
-    "postinstall": "prisma generate",
-    "prisma:deploy": "prisma migrate deploy"
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@prisma/client": "^5.22.0",
     "@tailwindcss/typography": "^0.5.16",
-    "@types/pg": "^8.15.5",
     "@vercel/og": "^0.7.2",
     "autoprefixer": "^10.4.21",
     "clsx": "^2.1.1",
@@ -33,7 +23,6 @@
     "next": "15.3.5",
     "next-mdx-remote": "^5.0.0",
     "next-seo": "^6.8.0",
-    "pg": "^8.16.3",
     "posthog-js": "^1.118.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -57,7 +46,6 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.1.4",
     "prettier": "^3.0.0",
-    "prisma": "^5.22.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

@@ -12,9 +12,8 @@ import { Logo } from '../ui/Logo';
 const NAV_ITEMS = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
-  { label: 'Blog', href: '/blog' },
   { label: 'Social', href: '/roundtable' },
-  { label: 'Contact', href: '/contact' }, // Add contact page
+  { label: 'Contact', href: '/contact' },
 ];
 
 export function Navigation() {
@@ -81,7 +80,7 @@ export function Navigation() {
   const handleCalendlyClick = () => {
     if (typeof window !== 'undefined' && (window as any).Calendly) {
       (window as any).Calendly.initPopupWidget({
-        url: 'https://calendly.com/d/cs46-ps2-3cq/agent-analytics-social-mixer-september',
+        url: 'https://calendly.com/your-calendly-link', // Replace with your actual Calendly link
       });
     }
   };
@@ -111,7 +110,7 @@ export function Navigation() {
                 className="text-neutral-300 hover:text-white font-medium transition-colors duration-200 relative group"
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
               </Link>
             ))}
           </div>
@@ -123,7 +122,7 @@ export function Navigation() {
             {/* CTA Button */}
             <button
               onClick={handleCalendlyClick}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95"
+              className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-emerald-700 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95"
             >
               Book a Session →
             </button>
@@ -162,7 +161,7 @@ export function Navigation() {
                 ))}
                 <button
                   onClick={handleCalendlyClick}
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
+                  className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-emerald-700 hover:to-teal-700 transition-all duration-300"
                 >
                   Book a Session →
                 </button>

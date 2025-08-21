@@ -97,9 +97,11 @@ export function Navigation() {
       )}
     >
       <Container>
-        <nav className="flex items-center justify-between h-28"> {/* Increased height from h-24 */}
-          {/* Logo - Now bigger */}
-          <Logo variant="full" size="navbar" />
+        <nav className="flex items-center justify-between h-28">
+          {/* Logo with dark background - always visible */}
+          <div className="bg-gray-900 dark:bg-gray-900 rounded-lg px-4 py-2 shadow-lg">
+            <Logo variant="full" size="navbar" />
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">

@@ -20,6 +20,7 @@ interface LogoProps {
   className?: string;
   href?: string;
   showLink?: boolean;
+  withDarkBackground?: boolean; // New prop
 }
 
 export function Logo({
@@ -28,17 +29,18 @@ export function Logo({
   className,
   href = '/',
   showLink = true,
+  withDarkBackground = false, // Default to false for backward compatibility
 }: LogoProps) {
   const sizeClasses = {
-    sm: 'h-12', // Increased from h-8
-    md: 'h-20', // Increased from h-14
-    lg: 'h-24', // Increased from h-20
-    xl: 'h-28', // Increased from h-24
-    navbar: 'h-24', // Increased from h-16 - much bigger in nav
-    footer: 'h-20', // Increased from h-12
-    blog: 'h-16', // Increased from h-10
-    watermark: 'h-56', // Increased from h-40
-    '404': 'h-40', // Increased from h-32
+    sm: 'h-12',
+    md: 'h-20',
+    lg: 'h-24',
+    xl: 'h-28',
+    navbar: 'h-24',
+    footer: 'h-20',
+    blog: 'h-16',
+    watermark: 'h-56',
+    '404': 'h-40',
   };
 
   const logoContent = (
@@ -65,13 +67,22 @@ export function Logo({
     </div>
   );
 
+  // Wrap with dark background if requested
+  const wrappedContent = withDarkBackground ? (
+    <div className="bg-gray-900 dark:bg-gray-900 rounded-lg px-4 py-2 shadow-lg">
+      {logoContent}
+    </div>
+  ) : (
+    logoContent
+  );
+
   if (!showLink) {
-    return logoContent;
+    return wrappedContent;
   }
 
   return (
     <Link href={href} className="inline-block hover:opacity-90 transition-opacity duration-200">
-      {logoContent}
+      {wrappedContent}
     </Link>
   );
 }

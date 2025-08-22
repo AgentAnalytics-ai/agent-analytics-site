@@ -12,8 +12,6 @@ import {
   MapPin,
   CheckCircle,
 } from 'lucide-react';
-import { detectUseCase, UseCaseCategory } from '@/lib/useCaseDetection';
-import { posthog } from '@/components/analytics/Analytics';
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -22,7 +20,7 @@ export function ContactForm() {
     company: '',
     phone: '',
     service: '',
-    message: '', // FIXED: Changed from 'challenge' to 'message'
+    message: '',
     timeline: '',
     budget: '',
   });
@@ -30,7 +28,6 @@ export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [useCase, setUseCase] = useState<UseCaseCategory | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,7 +35,8 @@ export function ContactForm() {
     setError(null);
 
     try {
-      console.log('Submitting form with data:', formData); // Debug log
+      console.log('=== FORM SUBMISSION START ===');
+      console.log('Form data:', formData);
 
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -48,16 +46,17 @@ export function ContactForm() {
         body: JSON.stringify(formData),
       });
 
-      console.log('Response status:', response.status); // Debug log
+      console.log('Response status:', response.status);
+      console.log('Response ok:', response.ok);
 
       const result = await response.json();
-      console.log('Response data:', result); // Debug log
+      console.log('Response data:', result);
 
       if (!response.ok) {
         throw new Error(result.error || 'Failed to send message. Please try again.');
       }
 
-      console.log('Form submitted successfully!'); // Debug log
+      console.log('=== FORM SUBMISSION SUCCESS ===');
       setIsSubmitted(true);
 
       // Reset form after 3 seconds
@@ -69,13 +68,14 @@ export function ContactForm() {
           company: '',
           phone: '',
           service: '',
-          message: '', // FIXED: Changed from 'challenge' to 'message'
+          message: '',
           timeline: '',
           budget: '',
         });
       }, 3000);
     } catch (error) {
-      console.error('Form submission error:', error);
+      console.error('=== FORM SUBMISSION ERROR ===');
+      console.error('Error:', error);
       setError(
         error instanceof Error
           ? error.message
@@ -86,21 +86,21 @@ export function ContactForm() {
     }
   };
 
-  const handleMessageChange = (value: string) => { // FIXED: Changed from handleChallengeChange
-    setFormData(prev => ({ ...prev, message: value })); // FIXED: Changed from 'challenge' to 'message'
+  const handleMessageChange = (value: string) => {
+    setFormData(prev => ({ ...prev, message: value }));
     
     // Detect use case from message text
-    const detectedUseCase = detectUseCase(value);
-    setUseCase(detectedUseCase);
+    // const detectedUseCase = detectUseCase(value);
+    // setUseCase(detectedUseCase);
     
     // Track use case detection
-    if (detectedUseCase) {
-      posthog.capture('use_case_detected', {
-        category: detectedUseCase.category,
-        confidence: detectedUseCase.confidence,
-        form_type: 'contact',
-      });
-    }
+    // if (detectedUseCase) {
+    //   posthog.capture('use_case_detected', {
+    //     category: detectedUseCase.category,
+    //     confidence: detectedUseCase.confidence,
+    //     form_type: 'contact',
+    //   });
+    // }
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -111,10 +111,10 @@ export function ContactForm() {
     setFormData(prev => ({ ...prev, service }));
     
     // Track service selection
-    posthog.capture('service_selected', {
-      service,
-      form_type: 'contact',
-    });
+    // posthog.capture('service_selected', {
+    //   service,
+    //   form_type: 'contact',
+    // });
   };
 
   const handleTimelineSelect = (timeline: string) => {

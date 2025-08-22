@@ -16,8 +16,12 @@ import {
   TrendingUp,
   Users,
 } from 'lucide-react';
+import { CALENDLY_LINKS } from '@/lib/constants';
+import { useCalendly } from '@/hooks/useCalendly';
 
 export default function ServicesPage() {
+  const { openCalendly } = useCalendly();
+
   const services = [
     {
       icon: Brain,
@@ -36,7 +40,7 @@ export default function ServicesPage() {
         'Measurable business outcomes',
       ],
       cta: 'Book Strategy Session',
-      href: 'https://calendly.com/grant-agentanalyticsai',
+      calendlyUrl: CALENDLY_LINKS.talkStrategy, // Use constants
       gradient: 'from-blue-500 to-cyan-600',
       iconBg: 'bg-gradient-to-br from-blue-500 to-cyan-600',
     },
@@ -57,7 +61,7 @@ export default function ServicesPage() {
         'Scalable solutions',
       ],
       cta: 'Discuss Your Project',
-      href: 'https://calendly.com/grant-agentanalyticsai',
+      calendlyUrl: CALENDLY_LINKS.startConversation, // Use constants
       gradient: 'from-purple-500 to-pink-600',
       iconBg: 'bg-gradient-to-br from-purple-500 to-pink-600',
     },
@@ -78,7 +82,7 @@ export default function ServicesPage() {
         'Sustainable transformation',
       ],
       cta: 'Start Implementation',
-      href: 'https://calendly.com/grant-agentanalyticsai',
+      calendlyUrl: CALENDLY_LINKS.bookSession, // Use constants
       gradient: 'from-emerald-500 to-teal-600',
       iconBg: 'bg-gradient-to-br from-emerald-500 to-teal-600',
     },
@@ -308,7 +312,7 @@ export default function ServicesPage() {
                     variant="secondary"
                     size="md"
                     className={`w-full bg-gradient-to-r ${service.gradient} hover:shadow-lg hover:shadow-blue-500/25 border-0 text-white transition-all duration-300 group-hover:scale-105`}
-                    onClick={() => (window.location.href = service.href)}
+                    onClick={() => openCalendly(service.calendlyUrl)}
                   >
                     {service.cta}
                   </Button>

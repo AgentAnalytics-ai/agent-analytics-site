@@ -67,16 +67,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <head>
-        {/* Calendly Widget Script */}
+        {/* Calendly Widget Script - Remove event handlers for Next.js 15 compatibility */}
         <Script
           src="https://assets.calendly.com/assets/external/widget.js"
           strategy="afterInteractive"
-          onLoad={() => {
-            console.log('Calendly script loaded successfully');
-          }}
-          onError={(e) => {
-            console.error('Failed to load Calendly script:', e);
-          }}
         />
       </head>
       <body className={`${inter.className} h-full`}>

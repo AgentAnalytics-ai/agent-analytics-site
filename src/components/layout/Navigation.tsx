@@ -9,6 +9,7 @@ import { Container } from '../ui/Container';
 import { DarkModeToggle } from '@/components/ui/DarkModeToggle';
 import { Logo } from '../ui/Logo';
 import { CALENDLY_LINKS } from '@/lib/constants';
+import { useCalendly } from '@/hooks/useCalendly';
 
 const NAV_ITEMS = [
   { label: 'Home', href: '/' },
@@ -26,6 +27,7 @@ export function Navigation() {
   });
   const lastScrollY = useRef(0);
   const [mounted, setMounted] = useState(false);
+  const { openCalendly } = useCalendly();
 
   useEffect(() => {
     setMounted(true);
@@ -79,11 +81,7 @@ export function Navigation() {
   }, [isMobileMenuOpen]);
 
   const handleCalendlyClick = () => {
-    if (typeof window !== 'undefined' && (window as any).Calendly) {
-      (window as any).Calendly.initPopupWidget({
-        url: CALENDLY_LINKS.bookSession,
-      });
-    }
+    openCalendly(CALENDLY_LINKS.bookSession);
   };
 
   if (!mounted) return null;

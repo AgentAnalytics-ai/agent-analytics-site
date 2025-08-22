@@ -4,6 +4,7 @@ import './globals.css';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { ThemeProvider } from '@/components/ui/ThemeProvider';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -66,9 +67,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <script
+        <Script
           src="https://assets.calendly.com/assets/external/widget.js"
-          async
+          strategy="afterInteractive"
         />
       </head>
       <body

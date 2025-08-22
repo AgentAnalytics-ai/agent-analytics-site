@@ -7,6 +7,7 @@ import { Section } from '../ui/Section';
 import Button from '../ui/Button';
 import { Sparkles } from 'lucide-react';
 import { CALENDLY_LINKS } from '@/lib/constants';
+import { useCalendly } from '@/hooks/useCalendly';
 
 export default function Hero({
   title,
@@ -19,12 +20,10 @@ export default function Hero({
   primaryCTA: string;
   secondaryCTA: string;
 }) {
+  const { openCalendly } = useCalendly();
+
   const handleCalendlyClick = () => {
-    if (typeof window !== 'undefined' && (window as any).Calendly) {
-      (window as any).Calendly.initPopupWidget({
-        url: CALENDLY_LINKS.talkStrategy, // Contextual for "Let's Talk Strategy"
-      });
-    }
+    openCalendly(CALENDLY_LINKS.talkStrategy);
   };
 
   return (

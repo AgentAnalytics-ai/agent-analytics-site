@@ -20,14 +20,11 @@ const NAV_ITEMS = [
 
 export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  // FIXED: Simplified scroll state to match what we're actually using
   const [scrollState, setScrollState] = useState({
     isScrolled: false,
-    scrollProgress: 0,
-    isScrollingUp: false,
   });
-  const lastScrollY = useRef(0);
   const [mounted, setMounted] = useState(false);
-  const { openCalendly } = useCalendly();
 
   useEffect(() => {
     setMounted(true);

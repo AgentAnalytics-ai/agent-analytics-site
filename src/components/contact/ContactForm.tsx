@@ -37,19 +37,9 @@ export function ContactForm() {
     setIsSubmitting(true);
     setError(null);
 
-    // Track form submission attempt
-    posthog.capture('form_submission_attempted', {
-      form_type: 'contact',
-      service: formData.service,
-      has_company: !!formData.company,
-      has_phone: !!formData.phone,
-      has_timeline: !!formData.timeline,
-      has_budget: !!formData.budget,
-      use_case_category: useCase?.category || 'unknown',
-      use_case_confidence: useCase?.confidence || 0,
-    });
-
     try {
+      console.log('Submitting form with data:', formData); // Debug log
+
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
@@ -58,22 +48,17 @@ export function ContactForm() {
         body: JSON.stringify(formData),
       });
 
+      console.log('Response status:', response.status); // Debug log
+
       const result = await response.json();
+      console.log('Response data:', result); // Debug log
 
       if (!response.ok) {
         throw new Error(result.error || 'Failed to send message. Please try again.');
       }
 
+      console.log('Form submitted successfully!'); // Debug log
       setIsSubmitted(true);
-
-      // Track successful form submission
-      posthog.capture('form_submitted', {
-        form_type: 'contact',
-        service: formData.service,
-        use_case_category: useCase?.category || 'unknown',
-        use_case_confidence: useCase?.confidence || 0,
-        response_time: Date.now() - (window.formStartTime || 0),
-      });
 
       // Reset form after 3 seconds
       setTimeout(() => {
@@ -96,13 +81,6 @@ export function ContactForm() {
           ? error.message
           : 'Something went wrong. Please try again or contact us directly.'
       );
-
-      // Track form submission error
-      posthog.capture('form_submission_error', {
-        form_type: 'contact',
-        error_message: error instanceof Error ? error.message : 'Unknown error',
-        use_case_category: useCase?.category || 'unknown',
-      });
     } finally {
       setIsSubmitting(false);
     }

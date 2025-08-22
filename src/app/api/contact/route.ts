@@ -9,7 +9,8 @@ export async function POST(request: Request) {
   try {
     const formData = await request.json();
     
-    if (!formData.name || !formData.email || !formData.message) {
+    const message = formData.message || formData.challenge;
+    if (!formData.name || !formData.email || !message) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
@@ -22,7 +23,7 @@ export async function POST(request: Request) {
         <p><strong>Name:</strong> ${formData.name}</p>
         <p><strong>Email:</strong> ${formData.email}</p>
         <p><strong>Message:</strong></p>
-        <p>${formData.message}</p>
+        <p>${message}</p>
       `,
       reply_to: formData.email, // Fixed: replyTo -> reply_to
     });

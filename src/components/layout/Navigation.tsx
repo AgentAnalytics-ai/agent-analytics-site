@@ -81,7 +81,17 @@ export function Navigation() {
   }, [isMobileMenuOpen]);
 
   const handleCalendlyClick = () => {
-    openCalendly(CALENDLY_LINKS.bookSession);
+    console.log('Navigation: Calendly button clicked');
+    console.log('Calendly links:', CALENDLY_LINKS);
+    console.log('Window Calendly object:', (window as any).Calendly);
+    
+    try {
+      openCalendly(CALENDLY_LINKS.bookSession);
+    } catch (error) {
+      console.error('Navigation Calendly error:', error);
+      // Fallback
+      window.open(CALENDLY_LINKS.bookSession, '_blank');
+    }
   };
 
   if (!mounted) return null;

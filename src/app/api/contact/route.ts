@@ -7,14 +7,23 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
-    const formData = await request.json();
+    console.log('Contact API called');
+    console.log('RESEND_API_KEY exists:', !!process.env.RESEND_API_KEY);
     
+    const formData = await request.json();
+    console.log('Form data received:', formData);
+    
+    // Accept both 'message' and 'challenge' fields
     const message = formData.message || formData.challenge;
+    
     if (!formData.name || !formData.email || !message) {
+      console.log('Missing required fields:', { name: !!formData.name, email: !!formData.email, message: !!message });
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    await resend.emails.send({
+    console.log('Attempting to send email...');
+    
+    const result = await resend.emails.send({
       from: 'Agent Analytics <hello@agentanalyticsai.com>',
       to: ['grant@agentanalyticsai.com'],
       subject: `New Contact Form Submission from ${formData.name}`,
@@ -22,23 +31,32 @@ export async function POST(request: Request) {
         <h2>New Contact Form Submission</h2>
         <p><strong>Name:</strong> ${formData.name}</p>
         <p><strong>Email:</strong> ${formData.email}</p>
-        <p><strong>Message:</strong></p>
+        <p><strong>Company:</strong> ${formData.company || 'Not provided'}</p>
+        <p><strong>Phone:</strong> ${formData.phone || 'Not provided'}</p>
+        <p><strong>Service Interest:</strong> ${formData.service || 'Not specified'}</p>
+        <p><strong>Timeline:</strong> ${formData.timeline || 'Not specified'}</p>
+        <p><strong>Budget Range:</strong> ${formData.budget || 'Not specified'}</p>
+        <p><strong>Challenge Description:</strong></p>
         <p>${message}</p>
       `,
-      reply_to: formData.email, // Fixed: replyTo -> reply_to
+      reply_to: formData.email,
     });
 
+    console.log('Email sent successfully:', result);
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Failed to send email:', error);
-    return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
+    console.error('Detailed error:', error);
+    return NextResponse.json({ 
+      error: 'Failed to send email. Please try again or contact us directly.',
+      details: process.env.NODE_ENV === 'development' ? error instanceof Error ? error.message : 'Unknown error' : undefined
+    }, { status: 500 });
   }
 }
 
-// Simple test endpoint
 export async function GET() {
   return NextResponse.json({ 
     message: 'Contact API is working',
-    hasResendKey: !!process.env.RESEND_API_KEY
+    hasResendKey: !!process.env.RESEND_API_KEY,
+    timestamp: new Date().toISOString()
   });
 }

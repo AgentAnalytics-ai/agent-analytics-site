@@ -121,10 +121,7 @@ export default function ServicesPage() {
               variant="primary"
               size="lg"
               className="group bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 border-0 shadow-lg hover:shadow-cyan-500/25"
-              onClick={() =>
-                (window.location.href =
-                  'https://calendly.com/grant-agentanalyticsai')
-              }
+              onClick={() => openCalendly(CALENDLY_LINKS.bookSession)}
             >
               Start Your AI Journey
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -345,10 +342,7 @@ export default function ServicesPage() {
               variant="primary"
               size="lg"
               className="group bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 border-0 shadow-lg hover:shadow-cyan-500/25"
-              onClick={() =>
-                (window.location.href =
-                  'https://calendly.com/grant-agentanalyticsai')
-              }
+              onClick={() => openCalendly(CALENDLY_LINKS.bookSession)}
             >
               Start Your AI Transformation
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

@@ -27,7 +27,7 @@ export function LeadForm() {
         body: JSON.stringify({
           name: formData.get('name'),
           email: formData.get('email'),
-          challenge: formData.get('message'),
+          message: formData.get('message'), // FIXED: Use 'message' instead of 'challenge'
           company: '',
           phone: '',
           service: '',

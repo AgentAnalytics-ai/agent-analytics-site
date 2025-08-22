@@ -24,10 +24,26 @@ function checkRateLimit(ip: string): boolean {
   return true;
 }
 
+function getClientIP(request: NextRequest): string {
+  // Next.js 15 way to get IP address
+  const forwarded = request.headers.get('x-forwarded-for');
+  const realIP = request.headers.get('x-real-ip');
+  
+  if (forwarded) {
+    return forwarded.split(',')[0].trim();
+  }
+  
+  if (realIP) {
+    return realIP;
+  }
+  
+  return 'unknown';
+}
+
 export async function POST(request: NextRequest) {
   try {
-    // Rate limiting
-    const ip = request.ip || 'unknown';
+    // Rate limiting with proper IP detection
+    const ip = getClientIP(request);
     if (!checkRateLimit(ip)) {
       return NextResponse.json(
         { error: 'Too many requests. Please try again later.' },

@@ -97,12 +97,10 @@ export function Navigation() {
     >
       <Container>
         <nav className="flex items-center justify-between h-28">
-          {/* Logo with dark background - ALWAYS visible */}
-          <div className="bg-gray-900 dark:bg-gray-900 rounded-lg px-4 py-2 shadow-lg">
-            <Logo variant="full" size="navbar" />
-          </div>
+          {/* Logo with built-in dark background */}
+          <Logo variant="full" size="navbar" withDarkBackground={true} />
 
-          {/* Desktop Navigation - fix text colors for transparent header */}
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {NAV_ITEMS.map((item) => (
               <Link

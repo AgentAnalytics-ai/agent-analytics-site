@@ -7,21 +7,25 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
-    console.log('Contact API called');
+    console.log('=== CONTACT API CALLED ===');
     console.log('RESEND_API_KEY exists:', !!process.env.RESEND_API_KEY);
     
     const formData = await request.json();
-    console.log('Form data received:', formData);
+    console.log('Form data received:', JSON.stringify(formData, null, 2));
     
     // Accept both 'message' and 'challenge' fields
     const message = formData.message || formData.challenge;
     
     if (!formData.name || !formData.email || !message) {
-      console.log('Missing required fields:', { name: !!formData.name, email: !!formData.email, message: !!message });
+      console.log('Missing required fields:', { 
+        name: !!formData.name, 
+        email: !!formData.email, 
+        message: !!message 
+      });
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    console.log('Attempting to send email...');
+    console.log('Sending email...');
     
     const result = await resend.emails.send({
       from: 'Agent Analytics <hello@agentanalyticsai.com>',
@@ -45,7 +49,11 @@ export async function POST(request: Request) {
     console.log('Email sent successfully:', result);
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Detailed error:', error);
+    console.error('=== CONTACT API ERROR ===');
+    console.error('Error details:', error);
+    console.error('Error message:', error instanceof Error ? error.message : 'Unknown error');
+    console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace');
+    
     return NextResponse.json({ 
       error: 'Failed to send email. Please try again or contact us directly.',
       details: process.env.NODE_ENV === 'development' ? error instanceof Error ? error.message : 'Unknown error' : undefined

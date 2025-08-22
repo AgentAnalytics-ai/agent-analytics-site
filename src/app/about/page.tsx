@@ -32,7 +32,7 @@ export default function AboutPage() {
             <h1 className="text-5xl md:text-6xl font-bold text-blue-600 dark:text-blue-400 mb-6">
               Ready to Simplify Your Tech Stack?
             </h1>
-            <p className="text-xl text-gray-700 dark:text-white mb-12 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-white mb-12 max-w-3xl mx-auto">
               Let's discuss how we can help you eliminate complexity and build intelligent systems that work for you.
             </p>
             

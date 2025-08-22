@@ -65,6 +65,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <script
+          src="https://assets.calendly.com/assets/external/widget.js"
+          async
+        />
+      </head>
       <body
         className={`${inter.className} antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100`}
       >

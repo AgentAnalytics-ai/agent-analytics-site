@@ -59,7 +59,7 @@ export function ContactForm() {
       console.log('=== FORM SUBMISSION SUCCESS ===');
       setIsSubmitted(true);
 
-      // Reset form after 3 seconds
+      // Reset form after 5 seconds (increased from 3)
       setTimeout(() => {
         setIsSubmitted(false);
         setFormData({
@@ -72,7 +72,7 @@ export function ContactForm() {
           timeline: '',
           budget: '',
         });
-      }, 3000);
+      }, 5000); // Increased timeout
     } catch (error) {
       console.error('=== FORM SUBMISSION ERROR ===');
       console.error('Error:', error);

@@ -65,19 +65,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="h-full">
       <head>
+        {/* Calendly Widget Script */}
         <Script
           src="https://assets.calendly.com/assets/external/widget.js"
           strategy="afterInteractive"
+          onLoad={() => {
+            console.log('Calendly script loaded successfully');
+          }}
+          onError={(e) => {
+            console.error('Failed to load Calendly script:', e);
+          }}
         />
       </head>
-      <body
-        className={`${inter.className} antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100`}
-      >
+      <body className={`${inter.className} h-full`}>
         <ThemeProvider>
           <Navigation />
-          <main>{children}</main>
+          <main className="min-h-screen pt-28">
+            {children}
+          </main>
           <Footer />
         </ThemeProvider>
       </body>

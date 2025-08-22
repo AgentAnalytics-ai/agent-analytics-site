@@ -61,10 +61,7 @@ export function ContactForm() {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(
-          result.error ||
-            'Oops! Couldn&apos;t reach us. Please email us directly at contact@agentanalyticsai.com'
-        );
+        throw new Error(result.error || 'Failed to send message. Please try again.');
       }
 
       setIsSubmitted(true);
@@ -93,10 +90,11 @@ export function ContactForm() {
         });
       }, 3000);
     } catch (error) {
+      console.error('Form submission error:', error);
       setError(
         error instanceof Error
           ? error.message
-          : 'Oops! Couldn&apos;t reach us. Please email us directly at contact@agentanalyticsai.com'
+          : 'Something went wrong. Please try again or contact us directly.'
       );
 
       // Track form submission error

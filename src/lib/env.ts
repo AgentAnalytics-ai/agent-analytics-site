@@ -27,6 +27,21 @@ export function getEnv() {
   _env = parsed.data;
   return _env;
 }
+
+export function validateEnv() {
+  const requiredEnvVars = {
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
+  };
+
+  const missingVars = Object.entries(requiredEnvVars)
+    .filter(([_, value]) => !value)
+    .map(([key]) => key);
+
+  if (missingVars.length > 0) {
+    console.error('Missing required environment variables:', missingVars);
+    throw new Error(`Missing required environment variables: ${missingVars.join(', ')}`);
+  }
+}
   
   
 

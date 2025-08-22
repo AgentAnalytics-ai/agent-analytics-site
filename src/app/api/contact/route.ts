@@ -28,8 +28,8 @@ export async function POST(request: Request) {
     console.log('Sending email...');
     
     const result = await resend.emails.send({
-      from: 'Agent Analytics <hello@agentanalyticsai.com>',
-      to: ['grant@agentanalyticsai.com'],
+      from: 'Agent Analytics <onboarding@resend.dev>', // Use Resend's verified domain
+      to: ['grantnewvisionllc@gmail.com'],
       subject: `New Contact Form Submission from ${formData.name}`,
       html: `
         <h2>New Contact Form Submission</h2>

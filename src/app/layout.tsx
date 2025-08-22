@@ -66,13 +66,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="h-full">
-      <head>
-        {/* Calendly Widget Script - Remove event handlers for Next.js 15 compatibility */}
-        <Script
-          src="https://assets.calendly.com/assets/external/widget.js"
-          strategy="afterInteractive"
-        />
-      </head>
       <body className={`${inter.className} h-full`}>
         <ThemeProvider>
           <Navigation />

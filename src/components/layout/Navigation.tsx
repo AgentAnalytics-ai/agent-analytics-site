@@ -33,29 +33,19 @@ export function Navigation() {
     setMounted(true);
   }, []);
 
-  // Scroll detection
+  // Simplified scroll detection
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    let rafId: number;
-    const updateScroll = () => {
+    const handleScroll = () => {
       const scrollY = window.scrollY;
-      const maxScroll = document.body.scrollHeight - window.innerHeight;
       setScrollState({
         isScrolled: scrollY > 20,
-        scrollProgress: Math.min(scrollY / maxScroll, 1),
-        isScrollingUp: scrollY < lastScrollY.current,
       });
-      lastScrollY.current = scrollY;
     };
-    const handleScroll = () => {
-      rafId = requestAnimationFrame(updateScroll);
-    };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      cancelAnimationFrame(rafId);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Prevent body scroll on mobile menu
@@ -81,23 +71,7 @@ export function Navigation() {
   }, [isMobileMenuOpen]);
 
   const handleCalendlyClick = () => {
-    console.log('Navigation: Calendly button clicked');
-    
-    // Try Calendly popup
-    if (typeof window !== 'undefined' && (window as any).Calendly) {
-      try {
-        (window as any).Calendly.initPopupWidget({
-          url: CALENDLY_LINKS.bookSession,
-        });
-        console.log('Calendly popup opened');
-        return;
-      } catch (error) {
-        console.error('Calendly popup failed:', error);
-      }
-    }
-    
-    // Fallback: open in new tab
-    console.log('Opening direct link');
+    // Simple direct link - no complex logic
     window.open(CALENDLY_LINKS.bookSession, '_blank', 'noopener,noreferrer');
   };
 

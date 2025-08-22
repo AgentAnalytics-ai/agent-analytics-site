@@ -97,16 +97,18 @@ export function Navigation() {
     >
       <Container>
         <nav className="flex items-center justify-between h-28">
-          {/* Logo - remove the dark background wrapper */}
-          <Logo variant="full" size="navbar" />
+          {/* Logo with dark background - ALWAYS visible */}
+          <div className="bg-gray-900 dark:bg-gray-900 rounded-lg px-4 py-2 shadow-lg">
+            <Logo variant="full" size="navbar" />
+          </div>
 
-          {/* Desktop Navigation - fix text colors */}
+          {/* Desktop Navigation - fix text colors for transparent header */}
           <div className="hidden md:flex items-center space-x-8">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-white dark:text-neutral-300 hover:text-gray-200 dark:hover:text-white font-medium transition-colors duration-200 relative group"
+                className="text-gray-800 dark:text-neutral-300 hover:text-gray-900 dark:hover:text-white font-medium transition-colors duration-200 relative group"
               >
                 {item.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-300 group-hover:w-full"></span>
@@ -129,7 +131,7 @@ export function Navigation() {
             {/* Mobile menu button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-white dark:text-neutral-300 hover:text-gray-200 dark:hover:text-white transition-colors"
+              className="md:hidden p-2 text-gray-800 dark:text-neutral-300 hover:text-gray-900 dark:hover:text-white transition-colors"
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -137,7 +139,7 @@ export function Navigation() {
         </nav>
       </Container>
 
-      {/* Mobile Menu - fix text colors */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div

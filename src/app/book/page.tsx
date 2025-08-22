@@ -30,9 +30,9 @@ export default function Book() {
         </div>
 
         <div className="bg-white dark:bg-gray-900 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-          <div
-            className="calendly-inline-widget"
-            data-url="https://calendly.com/grant-agentanalyticsai?background_color=f8fafc&text_color=1e293b&primary_color=059669"
+          <div 
+            className="calendly-inline-widget" 
+            data-url="https://calendly.com/grant-agentanalyticsai/book-a-session"
             style={{ minWidth: '320px', height: '700px' }}
           />
         </div>

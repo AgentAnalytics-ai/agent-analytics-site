@@ -8,6 +8,7 @@ import { clsx } from 'clsx';
 import { Container } from '../ui/Container';
 import { DarkModeToggle } from '@/components/ui/DarkModeToggle';
 import { Logo } from '../ui/Logo';
+import { CALENDLY_LINKS } from '@/lib/constants';
 
 const NAV_ITEMS = [
   { label: 'Home', href: '/' },
@@ -80,7 +81,7 @@ export function Navigation() {
   const handleCalendlyClick = () => {
     if (typeof window !== 'undefined' && (window as any).Calendly) {
       (window as any).Calendly.initPopupWidget({
-        url: 'https://calendly.com/your-calendly-link', // Replace with your actual Calendly link
+        url: CALENDLY_LINKS.bookSession,
       });
     }
   };

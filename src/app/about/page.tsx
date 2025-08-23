@@ -11,7 +11,6 @@ import {
   BarChart3,
   Zap,
   Globe,
-  Sparkles,
   Target,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -26,38 +25,107 @@ export default function AboutPage() {
 
   return (
     <>
-      {/* Hero Section - Match Services Page Style */}
+      {/* Hero Section - Match Home Page Style */}
       <Section
         spacing="xl"
-        background="dark"
-        className="pt-32 relative overflow-hidden"
+        className="pt-32 relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-blue-900/20"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900"></div>
-        <div className="absolute inset-0 bg-grid-pattern opacity-20"></div>
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl animate-blob"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+        {/* Background Animations - Same as Home Page */}
+        <motion.div
+          className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.08),transparent_50%)] dark:bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.12),transparent_50%)]"
+          animate={{ 
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.6, 0.3]
+          }}
+          transition={{ 
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        
+        <motion.div
+          className="absolute top-20 left-10 w-64 h-64 bg-blue-200/20 dark:bg-blue-600/8 rounded-full blur-3xl"
+          animate={{ 
+            x: [0, 30, 0],
+            y: [0, -20, 0],
+            rotate: [0, 180, 360]
+          }}
+          transition={{ 
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        
+        <motion.div
+          className="absolute top-40 right-10 w-24 h-24 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-full blur-xl"
+          animate={{ 
+            x: [0, -25, 0],
+            y: [0, 30, 0],
+            rotate: [0, -180, -360]
+          }}
+          transition={{ 
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+        />
+        
+        <motion.div
+          className="absolute bottom-32 left-1/3 w-40 h-40 bg-gradient-to-br from-sky-300/15 to-blue-500/15 rounded-full blur-2xl"
+          animate={{ 
+            scale: [1, 1.3, 1],
+            opacity: [0.2, 0.5, 0.2]
+          }}
+          transition={{ 
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 4
+          }}
+        />
 
         <Container className="relative z-10">
           <div className="text-center">
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-cyan-300 px-6 py-3 rounded-full text-sm font-medium mb-8 border border-cyan-500/30 backdrop-blur-sm">
-              <Sparkles className="w-4 h-4" />
-              Strategic AI Solutions
-            </div>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 bg-gradient-to-r from-white via-cyan-100 to-white bg-clip-text text-transparent">
-              Ready to Simplify Your Tech Stack?
-            </h1>
-            <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-12">
-              Let's discuss how we can help you eliminate complexity and build intelligent systems that work for you.
-            </p>
-            <Button
-              variant="primary"
-              size="lg"
-              className="group bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 border-0 shadow-lg hover:shadow-cyan-500/25"
-              onClick={handleCalendlyClick}
+            {/* Main headline - No more "Strategic AI Solutions" badge */}
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-8 leading-tight"
             >
-              Start a Conversation
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
+              Ready to Simplify Your Tech Stack?
+            </motion.h1>
+
+            {/* Subtitle */}
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-xl md:text-2xl text-gray-600 dark:text-neutral-300 mb-12 max-w-3xl mx-auto leading-relaxed"
+            >
+              Let's discuss how we can help you eliminate complexity and build intelligent systems that work for you.
+            </motion.p>
+
+            {/* CTA Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="flex justify-center"
+            >
+              <Button
+                variant="primary"
+                size="lg"
+                className="group bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 border-0 shadow-lg hover:shadow-xl"
+                onClick={handleCalendlyClick}
+              >
+                Start a Conversation
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </motion.div>
           </div>
         </Container>
       </Section>

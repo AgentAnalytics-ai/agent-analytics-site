@@ -3,6 +3,7 @@
 import React from 'react';
 import { Moon, Sun, Monitor } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
+import type { Theme } from '@/types/theme';
 
 export function DarkModeToggle() {
   const { theme, setTheme, resolvedTheme } = useTheme();

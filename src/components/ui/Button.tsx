@@ -29,7 +29,7 @@ function Button({
     accent: 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 focus:ring-blue-500 shadow-lg hover:shadow-xl',
     ghost: 'text-neutral-300 hover:text-white hover:bg-neutral-800/50 focus:ring-neutral-500',
     outline: 'bg-transparent text-neutral-300 border-2 border-neutral-600 hover:bg-neutral-800 hover:border-neutral-500 focus:ring-neutral-500',
-    cta: 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:from-emerald-700 hover:to-teal-700 focus:ring-emerald-500 shadow-lg hover:shadow-xl',
+    cta: 'bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 focus:ring-blue-500 shadow-lg hover:shadow-xl',
   };
   
   const sizes = {

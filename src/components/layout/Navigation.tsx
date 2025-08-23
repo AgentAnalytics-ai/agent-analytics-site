@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { clsx } from 'clsx';
 import { Container } from '../ui/Container';
 import { DarkModeToggle } from '@/components/ui/DarkModeToggle';
+import { Logo } from '../ui/Logo';
 import { CALENDLY_LINKS } from '@/lib/constants';
 import { useCalendly } from '@/hooks/useCalendly';
 
@@ -52,16 +53,6 @@ export function Navigation() {
     };
   }, [isMobileMenuOpen]);
 
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isMobileMenuOpen) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }, [isMobileMenuOpen]);
-
   const handleCalendlyClick = () => {
     window.open(CALENDLY_LINKS.bookSession, '_blank', 'noopener,noreferrer');
   };
@@ -78,8 +69,25 @@ export function Navigation() {
       )}
     >
       <Container>
-        <nav className="flex items-center justify-end h-16">
-          {/* Right side - only dark mode toggle and CTA */}
+        <nav className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <Logo variant="full" size="navbar" withDarkBackground={true} />
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-gray-800 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 font-medium transition-colors duration-200 relative group"
+              >
+                {item.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-sky-500 to-blue-600 transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+            ))}
+          </div>
+
+          {/* Right side */}
           <div className="flex items-center space-x-4">
             <DarkModeToggle />
             

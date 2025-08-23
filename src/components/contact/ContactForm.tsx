@@ -5,6 +5,7 @@ import { Container } from '../ui/Container';
 import { Section } from '../ui/Section';
 import Button from '../ui/Button';
 import { Card } from '../ui/Card';
+import { motion } from 'framer-motion';
 import {
   ArrowRight,
   Mail,
@@ -88,19 +89,6 @@ export function ContactForm() {
 
   const handleMessageChange = (value: string) => {
     setFormData(prev => ({ ...prev, message: value }));
-    
-    // Detect use case from message text
-    // const detectedUseCase = detectUseCase(value);
-    // setUseCase(detectedUseCase);
-    
-    // Track use case detection
-    // if (detectedUseCase) {
-    //   posthog.capture('use_case_detected', {
-    //     category: detectedUseCase.category,
-    //     confidence: detectedUseCase.confidence,
-    //     form_type: 'contact',
-    //   });
-    // }
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -109,12 +97,6 @@ export function ContactForm() {
 
   const handleServiceSelect = (service: string) => {
     setFormData(prev => ({ ...prev, service }));
-    
-    // Track service selection
-    // posthog.capture('service_selected', {
-    //   service,
-    //   form_type: 'contact',
-    // });
   };
 
   const handleTimelineSelect = (timeline: string) => {
@@ -151,10 +133,58 @@ export function ContactForm() {
   ];
 
   return (
-    <Section spacing="xl" background="gray">
-      <Container>
+    <Section spacing="xl" background="gray" className="relative overflow-hidden">
+      {/* Background Animations */}
+      <motion.div
+        className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.08),transparent_50%)] dark:bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.12),transparent_50%)]"
+        animate={{ 
+          scale: [1, 1.1, 1],
+          opacity: [0.3, 0.6, 0.3]
+        }}
+        transition={{ 
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      
+      <motion.div
+        className="absolute top-20 left-10 w-64 h-64 bg-blue-200/20 dark:bg-blue-600/8 rounded-full blur-3xl"
+        animate={{ 
+          x: [0, 30, 0],
+          y: [0, -20, 0],
+          rotate: [0, 180, 360]
+        }}
+        transition={{ 
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      
+      <motion.div
+        className="absolute bottom-20 right-10 w-80 h-80 bg-slate-200/20 dark:bg-slate-600/8 rounded-full blur-3xl"
+        animate={{ 
+          x: [0, -25, 0],
+          y: [0, 30, 0],
+          rotate: [0, -180, -360]
+        }}
+        transition={{ 
+          duration: 15,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2
+        }}
+      />
+
+      <Container className="relative z-10">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Ready to Transform Your Business?
             </h2>
@@ -162,11 +192,15 @@ export function ContactForm() {
               Tell us about your challenge and we&apos;ll craft a strategic
               solution tailored to your business needs.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Information */}
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
               <h3 className="text-2xl font-bold text-gray-900 mb-6">
                 Get in Touch
               </h3>
@@ -206,177 +240,183 @@ export function ContactForm() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Contact Form */}
-            <Card className="p-8">
-              {isSubmitted ? (
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle className="w-8 h-8 text-emerald-600" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                    Message Sent!
-                  </h3>
-                  <p className="text-gray-600">
-                    Thanks for reaching out. We&apos;ll get back to you within 24
-                    hours.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {error && (
-                    <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-                      <p className="text-red-800">{error}</p>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <Card className="p-8">
+                {isSubmitted ? (
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <CheckCircle className="w-8 h-8 text-emerald-600" />
                     </div>
-                  )}
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                      Message Sent!
+                    </h3>
+                    <p className="text-gray-600">
+                      Thanks for reaching out. We&apos;ll get back to you within 24
+                      hours.
+                    </p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    {error && (
+                      <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+                        <p className="text-red-800">{error}</p>
+                      </div>
+                    )}
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                          Name *
+                        </label>
+                        <input
+                          type="text"
+                          id="name"
+                          value={formData.name}
+                          onChange={e => handleInputChange('name', e.target.value)}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          placeholder="Your full name"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                          Email *
+                        </label>
+                        <input
+                          type="email"
+                          id="email"
+                          value={formData.email}
+                          onChange={e => handleInputChange('email', e.target.value)}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          placeholder="your.email@company.com"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
+                          Company
+                        </label>
+                        <input
+                          type="text"
+                          id="company"
+                          value={formData.company}
+                          onChange={e => handleInputChange('company', e.target.value)}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          placeholder="Your company"
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                          Phone
+                        </label>
+                        <input
+                          type="tel"
+                          id="phone"
+                          value={formData.phone}
+                          onChange={e => handleInputChange('phone', e.target.value)}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          placeholder="Your phone number"
+                        />
+                      </div>
+                    </div>
+
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                        Name *
+                      <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
+                        Service Interest
                       </label>
-                      <input
-                        type="text"
-                        id="name"
-                        value={formData.name}
-                        onChange={e => handleInputChange('name', e.target.value)}
+                      <select
+                        id="service"
+                        value={formData.service}
+                        onChange={e => handleServiceSelect(e.target.value)}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Your full name"
+                      >
+                        <option value="">Select a service</option>
+                        {services.map(service => (
+                          <option key={service.value} value={service.value}>
+                            {service.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                        Describe Your Challenge *
+                      </label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        rows={6}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                        placeholder="Describe the problem you're trying to solve and what you hope to achieve..."
+                        value={formData.message}
+                        onChange={e => handleMessageChange(e.target.value)}
                         required
                       />
                     </div>
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                        Email *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        value={formData.email}
-                        onChange={e => handleInputChange('email', e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="your.email@company.com"
-                        required
-                      />
-                    </div>
-                  </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-                        Company
-                      </label>
-                      <input
-                        type="text"
-                        id="company"
-                        value={formData.company}
-                        onChange={e => handleInputChange('company', e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Your company"
-                      />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="timeline" className="block text-sm font-medium text-gray-700 mb-2">
+                          Timeline
+                        </label>
+                        <select
+                          id="timeline"
+                          value={formData.timeline}
+                          onChange={e => handleTimelineSelect(e.target.value)}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        >
+                          <option value="">Select timeline</option>
+                          {timelines.map(timeline => (
+                            <option key={timeline.value} value={timeline.value}>
+                              {timeline.label}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div>
+                        <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-2">
+                          Budget Range
+                        </label>
+                        <select
+                          id="budget"
+                          value={formData.budget}
+                          onChange={e => handleBudgetSelect(e.target.value)}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        >
+                          <option value="">Select budget</option>
+                          {budgets.map(budget => (
+                            <option key={budget.value} value={budget.value}>
+                              {budget.label}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
                     </div>
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                        Phone
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        value={formData.phone}
-                        onChange={e => handleInputChange('phone', e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Your phone number"
-                      />
-                    </div>
-                  </div>
 
-                  <div>
-                    <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
-                      Service Interest
-                    </label>
-                    <select
-                      id="service"
-                      value={formData.service}
-                      onChange={e => handleServiceSelect(e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    <Button
+                      type="submit"
+                      variant="primary"
+                      size="lg"
+                      disabled={isSubmitting}
+                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 border-0 shadow-lg hover:shadow-xl"
                     >
-                      <option value="">Select a service</option>
-                      {services.map(service => (
-                        <option key={service.value} value={service.value}>
-                          {service.label}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                      Describe Your Challenge *
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={6}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                      placeholder="Describe the problem you're trying to solve and what you hope to achieve..."
-                      value={formData.message}
-                      onChange={e => handleMessageChange(e.target.value)}
-                      required
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="timeline" className="block text-sm font-medium text-gray-700 mb-2">
-                        Timeline
-                      </label>
-                      <select
-                        id="timeline"
-                        value={formData.timeline}
-                        onChange={e => handleTimelineSelect(e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      >
-                        <option value="">Select timeline</option>
-                        {timelines.map(timeline => (
-                          <option key={timeline.value} value={timeline.value}>
-                            {timeline.label}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    <div>
-                      <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-2">
-                        Budget Range
-                      </label>
-                      <select
-                        id="budget"
-                        value={formData.budget}
-                        onChange={e => handleBudgetSelect(e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      >
-                        <option value="">Select budget</option>
-                        {budgets.map(budget => (
-                          <option key={budget.value} value={budget.value}>
-                            {budget.label}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  <Button
-                    type="submit"
-                    variant="primary"
-                    size="lg"
-                    disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 border-0 shadow-lg hover:shadow-xl"
-                  >
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                  </Button>
-                </form>
-              )}
-            </Card>
+                      {isSubmitting ? 'Sending...' : 'Send Message'}
+                    </Button>
+                  </form>
+                )}
+              </Card>
+            </motion.div>
           </div>
         </div>
       </Container>

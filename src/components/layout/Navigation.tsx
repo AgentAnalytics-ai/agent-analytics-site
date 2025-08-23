@@ -8,8 +8,6 @@ import { clsx } from 'clsx';
 import { Container } from '../ui/Container';
 import { DarkModeToggle } from '@/components/ui/DarkModeToggle';
 import { Logo } from '../ui/Logo';
-import { CALENDLY_LINKS } from '@/lib/constants';
-import { useCalendly } from '@/hooks/useCalendly';
 
 const NAV_ITEMS = [
   { label: 'Home', href: '/' },
@@ -53,10 +51,6 @@ export function Navigation() {
     };
   }, [isMobileMenuOpen]);
 
-  const handleCalendlyClick = () => {
-    window.open(CALENDLY_LINKS.bookSession, '_blank', 'noopener,noreferrer');
-  };
-
   if (!mounted) return null;
 
   return (
@@ -80,9 +74,9 @@ export function Navigation() {
         </motion.div>
 
         {/* Navigation Section - Below Logo */}
-        <nav className="flex items-center justify-between h-16">
+        <nav className="flex items-center justify-center h-16">
           {/* Desktop Navigation - Centered */}
-          <div className="hidden md:flex items-center justify-center flex-1 space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             {NAV_ITEMS.map((item, index) => (
               <motion.div
                 key={item.href}
@@ -101,26 +95,13 @@ export function Navigation() {
             ))}
           </div>
 
-          {/* Right side - Controls */}
-          <div className="flex items-center space-x-4">
-            <DarkModeToggle />
-            
-            {/* CTA Button */}
-            <button
-              onClick={handleCalendlyClick}
-              className="bg-gradient-to-r from-sky-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-sky-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95"
-            >
-              Book a Session →
-            </button>
-
-            {/* Mobile menu button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-gray-800 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 text-gray-800 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </nav>
       </Container>
 
@@ -145,12 +126,6 @@ export function Navigation() {
                     {item.label}
                   </Link>
                 ))}
-                <button
-                  onClick={handleCalendlyClick}
-                  className="w-full bg-gradient-to-r from-sky-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-sky-600 hover:to-blue-700 transition-all duration-300"
-                >
-                  Book a Session →
-                </button>
               </div>
             </Container>
           </motion.div>

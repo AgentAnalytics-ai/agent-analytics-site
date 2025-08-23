@@ -7,7 +7,6 @@ import { Menu, X, ArrowRight } from 'lucide-react';
 import { clsx } from 'clsx';
 import { Container } from '../ui/Container';
 import { DarkModeToggle } from '@/components/ui/DarkModeToggle';
-import { Logo } from '../ui/Logo';
 import { CALENDLY_LINKS } from '@/lib/constants';
 import { useCalendly } from '@/hooks/useCalendly';
 
@@ -79,25 +78,8 @@ export function Navigation() {
       )}
     >
       <Container>
-        <nav className="flex items-center justify-between h-28">
-          {/* Logo with built-in dark background */}
-          <Logo variant="full" size="navbar" withDarkBackground={true} />
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-gray-800 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 font-medium transition-colors duration-200 relative group"
-              >
-                {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-sky-500 to-blue-600 transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-            ))}
-          </div>
-
-          {/* Right side */}
+        <nav className="flex items-center justify-end h-20">
+          {/* Right side - only dark mode toggle and CTA */}
           <div className="flex items-center space-x-4">
             <DarkModeToggle />
             

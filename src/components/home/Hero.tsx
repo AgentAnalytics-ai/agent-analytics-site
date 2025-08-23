@@ -9,6 +9,13 @@ import { Logo } from '../ui/Logo';
 import { CALENDLY_LINKS } from '@/lib/constants';
 import { useCalendly } from '@/hooks/useCalendly';
 
+const NAV_ITEMS = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Social', href: '/roundtable' },
+  { label: 'Contact', href: '/contact' },
+];
+
 export default function Hero({
   title,
   subtitle,
@@ -65,14 +72,14 @@ export default function Hero({
 
       <Container className="relative z-10 py-20">
         <div className="text-center">
-          {/* Centered Logo with dark background */}
+          {/* Large Centered Logo */}
           <motion.div
-            className="mb-16"
+            className="mb-12"
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
           >
-            <div className="bg-gray-900 dark:bg-gray-900 rounded-2xl px-8 py-6 shadow-2xl inline-block">
+            <div className="bg-gray-900 dark:bg-gray-900 rounded-2xl px-12 py-8 shadow-2xl inline-block">
               <Logo 
                 variant="full" 
                 size="xl" 
@@ -82,11 +89,37 @@ export default function Hero({
             </div>
           </motion.div>
 
+          {/* Navigation Buttons Underneath Logo */}
+          <motion.div
+            className="flex flex-wrap justify-center gap-6 mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            {NAV_ITEMS.map((item, index) => (
+              <motion.div
+                key={item.href}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+              >
+                <Button
+                  variant="outline"
+                  size="md"
+                  onClick={() => window.location.href = item.href}
+                  className="border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-800/50 dark:hover:border-slate-500 transition-all duration-300"
+                >
+                  {item.label}
+                </Button>
+              </motion.div>
+            ))}
+          </motion.div>
+
           {/* Main headline */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-8 leading-tight"
           >
             {title}
@@ -96,7 +129,7 @@ export default function Hero({
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
             className="text-xl md:text-2xl text-gray-600 dark:text-neutral-300 mb-12 max-w-3xl mx-auto leading-relaxed"
           >
             {subtitle}
@@ -106,7 +139,7 @@ export default function Hero({
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
+            transition={{ duration: 0.8, delay: 1 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Button

@@ -78,7 +78,7 @@ export function Navigation() {
       )}
     >
       <Container>
-        <nav className="flex items-center justify-end h-20">
+        <nav className="flex items-center justify-end h-16">
           {/* Right side - only dark mode toggle and CTA */}
           <div className="flex items-center space-x-4">
             <DarkModeToggle />

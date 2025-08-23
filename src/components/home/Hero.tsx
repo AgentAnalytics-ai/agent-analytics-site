@@ -71,7 +71,7 @@ export default function Hero({
       />
 
       <Container className="relative z-10">
-        <div className="text-center pt-32 pb-20">
+        <div className="text-center pt-20 pb-20">
           {/* Large Centered Logo - Absolute Top */}
           <motion.div
             className="mb-16"
@@ -105,7 +105,7 @@ export default function Hero({
               >
                 <button
                   onClick={() => window.location.href = item.href}
-                  className="text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 font-medium text-lg transition-all duration-300 relative group tracking-wide"
+                  className="text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 font-medium text-lg transition-all duration-300 relative group tracking-wide px-4 py-2"
                 >
                   {item.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-sky-500 to-blue-600 transition-all duration-300 group-hover:w-full"></span>

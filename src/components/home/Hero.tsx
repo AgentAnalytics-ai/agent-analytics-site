@@ -9,13 +9,6 @@ import { Logo } from '../ui/Logo';
 import { CALENDLY_LINKS } from '@/lib/constants';
 import { useCalendly } from '@/hooks/useCalendly';
 
-const NAV_ITEMS = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'Social', href: '/roundtable' },
-  { label: 'Contact', href: '/contact' },
-];
-
 export default function Hero({
   title,
   subtitle,
@@ -72,52 +65,28 @@ export default function Hero({
 
       <Container className="relative z-10 py-20">
         <div className="text-center">
-          {/* Centered Logo */}
+          {/* Centered Logo with dark background */}
           <motion.div
-            className="mb-12"
+            className="mb-16"
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
           >
-            <Logo 
-              variant="full" 
-              size="xl" 
-              showLink={false}
-              className="mx-auto"
-            />
-          </motion.div>
-
-          {/* Navigation Buttons */}
-          <motion.div
-            className="flex flex-wrap justify-center gap-4 mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            {NAV_ITEMS.map((item, index) => (
-              <motion.div
-                key={item.href}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-              >
-                <Button
-                  variant="outline"
-                  size="md"
-                  onClick={() => window.location.href = item.href}
-                  className="border-blue-200 text-blue-700 hover:bg-blue-50 hover:border-blue-300 dark:border-blue-600 dark:text-blue-300 dark:hover:bg-blue-900/20 dark:hover:border-blue-500 transition-all duration-300"
-                >
-                  {item.label}
-                </Button>
-              </motion.div>
-            ))}
+            <div className="bg-gray-900 dark:bg-gray-900 rounded-2xl px-8 py-6 shadow-2xl inline-block">
+              <Logo 
+                variant="full" 
+                size="xl" 
+                showLink={false}
+                className="mx-auto"
+              />
+            </div>
           </motion.div>
 
           {/* Main headline */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-8 leading-tight"
           >
             {title}
@@ -127,7 +96,7 @@ export default function Hero({
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
             className="text-xl md:text-2xl text-gray-600 dark:text-neutral-300 mb-12 max-w-3xl mx-auto leading-relaxed"
           >
             {subtitle}
@@ -137,7 +106,7 @@ export default function Hero({
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Button
@@ -145,7 +114,7 @@ export default function Hero({
               size="lg"
               withArrow
               onClick={handleCalendlyClick}
-              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold px-8 py-4 text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+              className="bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-semibold px-8 py-4 text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 border-0"
             >
               {primaryCTA}
             </Button>
@@ -154,7 +123,7 @@ export default function Hero({
                 variant="outline"
                 size="lg"
                 onClick={() => (window.location.href = '/services')}
-                className="border-blue-300 text-blue-700 hover:bg-blue-50 dark:border-blue-600 dark:text-blue-300 dark:hover:bg-blue-900/20"
+                className="border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-800/50 dark:hover:border-slate-500"
               >
                 {secondaryCTA}
               </Button>

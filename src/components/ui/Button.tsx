@@ -26,10 +26,10 @@ function Button({
   const variants = {
     primary: 'bg-neutral-900 text-white hover:bg-neutral-800 focus:ring-neutral-500 shadow-lg hover:shadow-xl border border-neutral-700',
     secondary: 'bg-white text-neutral-900 border-2 border-neutral-200 hover:bg-neutral-50 hover:border-neutral-300 focus:ring-neutral-500 shadow-md hover:shadow-lg',
-    accent: 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 focus:ring-blue-500 shadow-lg hover:shadow-xl',
+    accent: 'bg-gradient-to-r from-sky-500 to-blue-600 text-white hover:from-sky-600 hover:to-blue-700 focus:ring-sky-500 shadow-lg hover:shadow-xl',
     ghost: 'text-neutral-300 hover:text-white hover:bg-neutral-800/50 focus:ring-neutral-500',
     outline: 'bg-transparent text-neutral-300 border-2 border-neutral-600 hover:bg-neutral-800 hover:border-neutral-500 focus:ring-neutral-500',
-    cta: 'bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 focus:ring-blue-500 shadow-lg hover:shadow-xl',
+    cta: 'bg-gradient-to-r from-sky-500 to-blue-600 text-white hover:from-sky-600 hover:to-blue-700 focus:ring-sky-500 shadow-lg hover:shadow-xl',
   };
   
   const sizes = {

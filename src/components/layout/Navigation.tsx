@@ -89,10 +89,10 @@ export function Navigation() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-800 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors duration-200 relative group"
+                className="text-gray-800 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 font-medium transition-colors duration-200 relative group"
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-sky-500 to-blue-600 transition-all duration-300 group-hover:w-full"></span>
               </Link>
             ))}
           </div>
@@ -104,7 +104,7 @@ export function Navigation() {
             {/* CTA Button */}
             <button
               onClick={handleCalendlyClick}
-              className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95"
+              className="bg-gradient-to-r from-sky-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-sky-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95"
             >
               Book a Session →
             </button>
@@ -112,7 +112,7 @@ export function Navigation() {
             {/* Mobile menu button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-gray-800 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              className="md:hidden p-2 text-gray-800 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -136,14 +136,14 @@ export function Navigation() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block text-gray-800 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors duration-200"
+                    className="block text-gray-800 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 font-medium transition-colors duration-200"
                   >
                     {item.label}
                   </Link>
                 ))}
                 <button
                   onClick={handleCalendlyClick}
-                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300"
+                  className="w-full bg-gradient-to-r from-sky-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-sky-600 hover:to-blue-700 transition-all duration-300"
                 >
                   Book a Session →
                 </button>

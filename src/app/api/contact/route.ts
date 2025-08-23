@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
 
     // Send notification email
     const result = await resend.emails.send({
-      from: 'Agent Analytics <hello@agentanalyticsai.com>',
+      from: 'Agent Analytics <hello@agentanalyticsai.com>', // Switch back to your domain
       to: ['grant@agentanalyticsai.com'],
       subject: `New Contact Form: ${formData.name}`,
       html: `

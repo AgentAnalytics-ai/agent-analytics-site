@@ -69,25 +69,39 @@ export function Navigation() {
       )}
     >
       <Container>
-        <nav className="flex items-center justify-between h-20">
-          {/* Logo */}
+        {/* Logo Section - Above Navigation */}
+        <motion.div
+          className="flex justify-center py-4"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <Logo variant="full" size="navbar" withDarkBackground={true} />
+        </motion.div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {NAV_ITEMS.map((item) => (
-              <Link
+        {/* Navigation Section - Below Logo */}
+        <nav className="flex items-center justify-between h-16">
+          {/* Desktop Navigation - Centered */}
+          <div className="hidden md:flex items-center justify-center flex-1 space-x-8">
+            {NAV_ITEMS.map((item, index) => (
+              <motion.div
                 key={item.href}
-                href={item.href}
-                className="text-gray-800 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 font-medium transition-colors duration-200 relative group"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-sky-500 to-blue-600 transition-all duration-300 group-hover:w-full"></span>
-              </Link>
+                <Link
+                  href={item.href}
+                  className="text-gray-800 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 font-medium transition-colors duration-200 relative group"
+                >
+                  {item.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-sky-500 to-blue-600 transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+              </motion.div>
             ))}
           </div>
 
-          {/* Right side */}
+          {/* Right side - Controls */}
           <div className="flex items-center space-x-4">
             <DarkModeToggle />
             

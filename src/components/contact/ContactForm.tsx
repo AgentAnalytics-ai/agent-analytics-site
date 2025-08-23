@@ -9,7 +9,6 @@ import { motion } from 'framer-motion';
 import {
   ArrowRight,
   Mail,
-  Phone,
   MapPin,
   CheckCircle,
 } from 'lucide-react';
@@ -217,16 +216,6 @@ export function ContactForm() {
                   <div>
                     <h4 className="font-semibold text-gray-900">Email</h4>
                     <p className="text-blue-600">hello@agentanalyticsai.com</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <div className="p-3 bg-blue-100 rounded-full">
-                    <Phone className="w-6 h-6 text-blue-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Phone</h4>
-                    <p className="text-blue-600">+1 (555) 123-4567</p>
                   </div>
                 </div>
 

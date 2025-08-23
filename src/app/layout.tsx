@@ -6,7 +6,11 @@ import { Footer } from '@/components/layout/Footer';
 import { ThemeProvider } from '@/components/ui/ThemeProvider';
 import Script from 'next/script';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
 
 export const metadata: Metadata = {
   title: 'Agent Analytics - AI-Powered Problem Solving',
@@ -57,6 +61,11 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+  },
 };
 
 export default function RootLayout({
@@ -65,11 +74,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="h-full">
-      <body className={`${inter.className} h-full`}>
+    <html lang="en" className={`h-full ${inter.variable}`} suppressHydrationWarning>
+      <head>
+        <meta name="theme-color" content="#1e293b" />
+        <meta name="color-scheme" content="light dark" />
+      </head>
+      <body className={`${inter.className} h-full antialiased`}>
         <ThemeProvider>
           <Navigation />
-          <main className="min-h-screen pt-28">
+          <main className="min-h-screen pt-20 md:pt-28">
             {children}
           </main>
           <Footer />

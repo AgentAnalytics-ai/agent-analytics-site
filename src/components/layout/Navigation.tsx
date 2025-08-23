@@ -65,7 +65,7 @@ export function Navigation() {
       <Container>
         {/* Logo Section - Above Navigation */}
         <motion.div
-          className="flex justify-center py-4"
+          className="flex justify-center py-3 md:py-4"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -74,9 +74,9 @@ export function Navigation() {
         </motion.div>
 
         {/* Navigation Section - Below Logo */}
-        <nav className="flex items-center justify-center h-16">
+        <nav className="flex items-center justify-center h-12 md:h-16">
           {/* Desktop Navigation - Centered */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {NAV_ITEMS.map((item, index) => (
               <motion.div
                 key={item.href}
@@ -86,7 +86,7 @@ export function Navigation() {
               >
                 <Link
                   href={item.href}
-                  className="text-gray-800 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 font-medium transition-colors duration-200 relative group"
+                  className="text-gray-800 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 font-medium transition-colors duration-200 relative group text-sm lg:text-base"
                 >
                   {item.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-sky-500 to-blue-600 transition-all duration-300 group-hover:w-full"></span>
@@ -99,9 +99,15 @@ export function Navigation() {
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 text-gray-800 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
+            aria-label="Toggle mobile menu"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
+
+          {/* Dark mode toggle - desktop */}
+          <div className="hidden md:block ml-4">
+            <DarkModeToggle />
+          </div>
         </nav>
       </Container>
 
@@ -115,17 +121,20 @@ export function Navigation() {
             className="md:hidden bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-b border-gray-200 dark:border-neutral-800"
           >
             <Container>
-              <div className="py-6 space-y-4">
+              <div className="py-4 space-y-3">
                 {NAV_ITEMS.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block text-gray-800 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 font-medium transition-colors duration-200"
+                    className="block text-gray-800 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 font-medium transition-colors duration-200 py-2"
                   >
                     {item.label}
                   </Link>
                 ))}
+                <div className="pt-2 border-t border-gray-200 dark:border-neutral-700">
+                  <DarkModeToggle />
+                </div>
               </div>
             </Container>
           </motion.div>

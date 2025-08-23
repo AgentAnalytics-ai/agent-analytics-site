@@ -5,21 +5,31 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --font-inter: 'Inter', system-ui, sans-serif;
+  }
+  
   html {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter);
+    scroll-behavior: smooth;
   }
   
   body {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+  }
+
+  /* Prevent layout shift during theme switching */
+  * {
+    transition: background-color 0.2s ease, border-color 0.2s ease;
   }
 }
 
 @layer components {
   .font-inter {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter);
   }
   
   .tracking-tight {
@@ -72,4 +82,29 @@
 
 .dark ::-webkit-scrollbar-thumb:hover {
   background: #64748b;
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }

@@ -221,22 +221,22 @@ export function ContactForm() {
                 </div>
 
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-green-100 rounded-full">
-                    <Phone className="w-6 h-6 text-green-600" />
+                  <div className="p-3 bg-blue-100 rounded-full">
+                    <Phone className="w-6 h-6 text-blue-600" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-900">Phone</h4>
-                    <p className="text-green-600">+1 (555) 123-4567</p>
+                    <p className="text-blue-600">+1 (555) 123-4567</p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-purple-100 rounded-full">
-                    <MapPin className="w-6 h-6 text-purple-600" />
+                  <div className="p-3 bg-blue-100 rounded-full">
+                    <MapPin className="w-6 h-6 text-blue-600" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-900">Location</h4>
-                    <p className="text-purple-600">Remote-First</p>
+                    <p className="text-blue-600">Remote-First</p>
                   </div>
                 </div>
               </div>

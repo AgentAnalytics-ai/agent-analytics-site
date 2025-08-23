@@ -21,7 +21,7 @@ function Button({
   className,
   ...props
 }: ButtonProps) {
-  const baseClasses = 'inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 transform hover:scale-105 active:scale-95';
+  const baseClasses = 'inline-flex items-center justify-center font-semibold rounded-2xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 transform hover:scale-105 active:scale-95 tracking-wide';
   
   const variants = {
     primary: 'bg-neutral-900 text-white hover:bg-neutral-800 focus:ring-neutral-500 shadow-lg hover:shadow-xl border border-neutral-700',
@@ -33,14 +33,15 @@ function Button({
   };
   
   const sizes = {
-    sm: 'px-4 py-2 text-sm',
-    md: 'px-6 py-3 text-base',
-    lg: 'px-8 py-4 text-lg',
+    sm: 'px-6 py-3 text-sm',
+    md: 'px-8 py-4 text-base',
+    lg: 'px-10 py-5 text-lg',
   };
 
   return (
     <button
       className={clsx(baseClasses, variants[variant], sizes[size], className)}
+      style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
       {...props}
     >
       {children}

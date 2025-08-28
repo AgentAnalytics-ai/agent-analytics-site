@@ -9,11 +9,13 @@ export function SocialMixerForm() {
   const [submitStatus, setSubmitStatus] = useState<
     'idle' | 'success' | 'error'
   >('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
+    setErrorMessage('');
 
     const formData = new FormData(e.currentTarget);
 
@@ -32,34 +34,72 @@ export function SocialMixerForm() {
         }),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (response.ok && result.success) {
         setSubmitStatus('success');
         e.currentTarget.reset();
       } else {
         setSubmitStatus('error');
+        setErrorMessage(result.error || 'Something went wrong. Please try again.');
       }
-    } catch {
+    } catch (error) {
+      console.error('Form submission error:', error);
       setSubmitStatus('error');
+      setErrorMessage('Network error. Please check your connection and try again.');
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  // If success, show a prominent success message instead of the form
+  if (submitStatus === 'success') {
+    return (
+      <div className="max-w-md mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="bg-white rounded-lg shadow-sm p-8 text-center"
+        >
+          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h3 className="text-2xl font-bold text-gray-900 mb-2">Successfully Signed Up!</h3>
+          <p className="text-gray-600 mb-6">
+            Thanks for joining our Social Mixer! You'll receive event details and updates via email soon.
+          </p>
+          <Button
+            onClick={() => setSubmitStatus('idle')}
+            variant="primary"
+            className="w-full"
+          >
+            Sign Up Another Person
+          </Button>
+        </motion.div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-md mx-auto">
       <div className="bg-white rounded-lg shadow-sm p-6">
         <h3 className="text-xl font-bold text-gray-900 mb-4">Join Our Social Mixer</h3>
         
-        {submitStatus === 'success' && (
-          <div className="mb-4 p-3 bg-green-100 text-green-800 rounded">
-            🎉 Thanks! You'll receive event details soon.
-          </div>
-        )}
-
         {submitStatus === 'error' && (
-          <div className="mb-4 p-3 bg-red-100 text-red-800 rounded">
-            Something went wrong. Please try again.
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-4 p-4 bg-red-50 border border-red-200 text-red-800 rounded-lg"
+          >
+            <div className="flex items-center">
+              <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+              </svg>
+              {errorMessage || 'Something went wrong. Please try again.'}
+            </div>
+          </motion.div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">

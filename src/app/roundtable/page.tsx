@@ -6,6 +6,7 @@ import { Section } from '@/components/ui/Section';
 import Button from '@/components/ui/Button';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
+import { SocialMixerForm } from '@/components/social/SocialMixerForm';
 
 export default function RoundtablePage() {
   return (
@@ -98,7 +99,7 @@ export default function RoundtablePage() {
           >
             <Card className="p-8 text-center">
               <h3 className="text-2xl font-bold text-gray-900 mb-2">Monthly Social</h3>
-              <p className="text-gray-600">Every Thursday at 5:15 PM</p>
+              <p className="text-gray-600">Monthly on a Thursday at 5:15 PM</p>
             </Card>
           </motion.div>
           <motion.div
@@ -143,6 +144,14 @@ export default function RoundtablePage() {
           <p className="text-gray-700 text-lg">
             Attend your first mixer and we'll add you to our exclusive email list for future events, early access, and insider insights.
           </p>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="mt-12"
+        >
+          <SocialMixerForm />
         </motion.div>
       </Container>
     </Section>

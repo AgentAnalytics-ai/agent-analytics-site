@@ -22,7 +22,6 @@ export function ContactForm() {
     service: '',
     message: '',
     timeline: '',
-    budget: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -70,7 +69,6 @@ export function ContactForm() {
           service: '',
           message: '',
           timeline: '',
-          budget: '',
         });
       }, 5000); // Increased timeout
     } catch (error) {
@@ -102,10 +100,6 @@ export function ContactForm() {
     setFormData(prev => ({ ...prev, timeline }));
   };
 
-  const handleBudgetSelect = (budget: string) => {
-    setFormData(prev => ({ ...prev, budget }));
-  };
-
   const services = [
     { value: 'ai-strategy', label: 'AI Strategy & Roadmapping' },
     { value: 'custom-development', label: 'Custom AI Development' },
@@ -120,15 +114,6 @@ export function ContactForm() {
     { value: '3-6-months', label: '3-6 months' },
     { value: '6-plus-months', label: '6+ months' },
     { value: 'exploring', label: 'Just exploring' },
-  ];
-
-  const budgets = [
-    { value: 'under-10k', label: 'Under $10k' },
-    { value: '10k-25k', label: '$10k - $25k' },
-    { value: '25k-50k', label: '$25k - $50k' },
-    { value: '50k-100k', label: '$50k - $100k' },
-    { value: '100k-plus', label: '$100k+' },
-    { value: 'undecided', label: 'Undecided' },
   ];
 
   return (
@@ -354,43 +339,23 @@ export function ContactForm() {
                       />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label htmlFor="timeline" className="block text-sm font-medium text-gray-700 mb-2">
-                          Timeline
-                        </label>
-                        <select
-                          id="timeline"
-                          value={formData.timeline}
-                          onChange={e => handleTimelineSelect(e.target.value)}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        >
-                          <option value="">Select timeline</option>
-                          {timelines.map(timeline => (
-                            <option key={timeline.value} value={timeline.value}>
-                              {timeline.label}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                      <div>
-                        <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-2">
-                          Budget Range
-                        </label>
-                        <select
-                          id="budget"
-                          value={formData.budget}
-                          onChange={e => handleBudgetSelect(e.target.value)}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        >
-                          <option value="">Select budget</option>
-                          {budgets.map(budget => (
-                            <option key={budget.value} value={budget.value}>
-                              {budget.label}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
+                    <div>
+                      <label htmlFor="timeline" className="block text-sm font-medium text-gray-700 mb-2">
+                        Timeline
+                      </label>
+                      <select
+                        id="timeline"
+                        value={formData.timeline}
+                        onChange={e => handleTimelineSelect(e.target.value)}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      >
+                        <option value="">Select timeline</option>
+                        {timelines.map(timeline => (
+                          <option key={timeline.value} value={timeline.value}>
+                            {timeline.label}
+                          </option>
+                        ))}
+                      </select>
                     </div>
 
                     <Button

@@ -275,34 +275,6 @@ export default function ServicesPage() {
           </div>
         </Container>
       </Section>
-
-      {/* CTA Section */}
-      <Section spacing="xl" background="gray" className="relative overflow-hidden">
-        <Container className="relative z-10">
-          <motion.div 
-            className="text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Ready to Optimize Your Technology?
-            </h2>
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Let's discuss how technology can transform your business. Strategic solutions tailored to your unique challenges and goals.
-            </p>
-            <Button
-              variant="primary"
-              size="lg"
-              className="group bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 border-0 shadow-lg hover:shadow-xl"
-              onClick={() => openCalendly(CALENDLY_LINKS.bookSession)}
-            >
-              Start Your Technology Transformation
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </motion.div>
-        </Container>
-      </Section>
     </>
   );
 }

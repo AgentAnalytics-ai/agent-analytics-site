@@ -54,9 +54,15 @@ export interface BlogMeta {
 
 const postsDirectory = path.join(process.cwd(), 'src/content/posts');
 
+// Simple caching - no overengineering
+let cachedPosts: BlogMeta[] | null = null;
+
 export function getAllPosts(): BlogMeta[] {
+  if (cachedPosts) return cachedPosts;
+
   if (!fs.existsSync(postsDirectory)) {
-    return [];
+    cachedPosts = [];
+    return cachedPosts;
   }
 
   const fileNames = fs.readdirSync(postsDirectory);
@@ -88,10 +94,11 @@ export function getAllPosts(): BlogMeta[] {
       };
     });
 
-  // Sort posts by date (newest first)
-  return allPostsData.sort(
+  cachedPosts = allPostsData.sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
+  
+  return cachedPosts;
 }
 
 export function getPostBySlug(slug: string): BlogPost | null {

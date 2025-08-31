@@ -2,13 +2,9 @@ export const runtime = 'nodejs';
 
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import { validateEnv } from '@/lib/env';
 
 export async function POST(request: NextRequest) {
   try {
-    // Validate environment
-    const env = validateEnv();
-    
     // Parse and validate request
     const formData = await request.json();
     
@@ -29,8 +25,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Check for Resend API key
+    const resendApiKey = process.env.RESEND_API_KEY;
+    if (!resendApiKey) {
+      console.error('RESEND_API_KEY is missing');
+      return NextResponse.json(
+        { error: 'Email service not configured. Please try again later.' },
+        { status: 500 }
+      );
+    }
+
     // Initialize Resend
-    const resend = new Resend(env.RESEND_API_KEY);
+    const resend = new Resend(resendApiKey);
 
     // Send notification email to you
     const result = await resend.emails.send({

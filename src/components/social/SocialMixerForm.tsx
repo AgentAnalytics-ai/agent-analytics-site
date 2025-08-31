@@ -34,14 +34,32 @@ export function SocialMixerForm() {
         }),
       });
 
-      const result = await response.json();
-
-      if (response.ok && result.success) {
-        setSubmitStatus('success');
-        e.currentTarget.reset();
+      // More robust response handling
+      if (response.ok) {
+        try {
+          const result = await response.json();
+          if (result.success) {
+            setSubmitStatus('success');
+            e.currentTarget.reset();
+          } else {
+            setSubmitStatus('error');
+            setErrorMessage(result.error || 'Something went wrong. Please try again.');
+          }
+        } catch (parseError) {
+          // If JSON parsing fails but response is ok, assume success
+          console.log('Response parsing failed, but status is ok:', parseError);
+          setSubmitStatus('success');
+          e.currentTarget.reset();
+        }
       } else {
-        setSubmitStatus('error');
-        setErrorMessage(result.error || 'Something went wrong. Please try again.');
+        try {
+          const result = await response.json();
+          setSubmitStatus('error');
+          setErrorMessage(result.error || `Server error (${response.status}). Please try again.`);
+        } catch (parseError) {
+          setSubmitStatus('error');
+          setErrorMessage(`Server error (${response.status}). Please try again.`);
+        }
       }
     } catch (error) {
       console.error('Form submission error:', error);

@@ -20,6 +20,7 @@ export function SocialMixerForm() {
     const formData = new FormData(e.currentTarget);
 
     try {
+      console.log('Submitting form...');
       const response = await fetch('/api/social-mixer', {
         method: 'POST',
         headers: {
@@ -34,35 +35,31 @@ export function SocialMixerForm() {
         }),
       });
 
-      // More robust response handling
+      console.log('Response status:', response.status);
+      console.log('Response ok:', response.ok);
+
+      // If response is ok, assume success regardless of JSON parsing
       if (response.ok) {
-        try {
-          const result = await response.json();
-          if (result.success) {
-            setSubmitStatus('success');
-            e.currentTarget.reset();
-          } else {
-            setSubmitStatus('error');
-            setErrorMessage(result.error || 'Something went wrong. Please try again.');
-          }
-        } catch (parseError) {
-          // If JSON parsing fails but response is ok, assume success
-          console.log('Response parsing failed, but status is ok:', parseError);
-          setSubmitStatus('success');
-          e.currentTarget.reset();
-        }
-      } else {
-        try {
-          const result = await response.json();
-          setSubmitStatus('error');
-          setErrorMessage(result.error || `Server error (${response.status}). Please try again.`);
-        } catch (parseError) {
-          setSubmitStatus('error');
-          setErrorMessage(`Server error (${response.status}). Please try again.`);
-        }
+        console.log('Response is ok, setting success');
+        setSubmitStatus('success');
+        e.currentTarget.reset();
+        return; // Exit early on success
       }
+
+      // Only try to parse JSON if response is not ok
+      try {
+        const result = await response.json();
+        console.log('Error result:', result);
+        setSubmitStatus('error');
+        setErrorMessage(result.error || `Server error (${response.status}). Please try again.`);
+      } catch (parseError) {
+        console.log('JSON parse error:', parseError);
+        setSubmitStatus('error');
+        setErrorMessage(`Server error (${response.status}). Please try again.`);
+      }
+
     } catch (error) {
-      console.error('Form submission error:', error);
+      console.error('Network error:', error);
       setSubmitStatus('error');
       setErrorMessage('Network error. Please check your connection and try again.');
     } finally {

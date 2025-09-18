@@ -5,7 +5,7 @@ import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
-import { SocialMixerForm } from '@/components/social/SocialMixerForm';
+import { ProfessionalRoundtableForm } from '@/components/social/ProfessionalRoundtableForm';
 import { Users, Calendar, MapPin, Clock } from 'lucide-react';
 
 export default function RoundtablePage() {
@@ -36,10 +36,10 @@ export default function RoundtablePage() {
             transition={{ duration: 0.8 }}
             className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-8 leading-tight"
           >
-            Professional Networking
+            Professional Technology
             <br />
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Social Mixer
+              Roundtable
             </span>
           </motion.h1>
           <motion.p
@@ -49,7 +49,7 @@ export default function RoundtablePage() {
             className="text-xl md:text-2xl text-gray-600 dark:text-neutral-300 max-w-3xl mx-auto leading-relaxed"
           >
             Connect with technology leaders and innovators in Oklahoma City. 
-            Build meaningful relationships in a professional, relaxed atmosphere.
+            Build meaningful relationships in a professional, structured environment.
           </motion.p>
         </div>
 
@@ -62,7 +62,7 @@ export default function RoundtablePage() {
             <Card className="p-6 text-center hover-lift">
               <Calendar className="w-8 h-8 text-blue-600 mx-auto mb-3" />
               <h3 className="text-xl font-bold text-gray-900 mb-2">Monthly Events</h3>
-              <p className="text-gray-600">Professional networking</p>
+              <p className="text-gray-600">Executive networking</p>
             </Card>
           </motion.div>
           <motion.div
@@ -109,7 +109,7 @@ export default function RoundtablePage() {
           <h2 className="text-3xl font-bold text-gray-900 mb-4">Join Our Professional Network</h2>
           <p className="text-gray-700 text-lg">
             Connect with technology leaders, share insights, and build meaningful business relationships. 
-            Get exclusive access to our monthly networking events and industry insights.
+            Get exclusive access to our monthly roundtable discussions and industry insights.
           </p>
         </motion.div>
 
@@ -119,7 +119,7 @@ export default function RoundtablePage() {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="mt-12"
         >
-          <SocialMixerForm />
+          <ProfessionalRoundtableForm />
         </motion.div>
       </Container>
     </Section>

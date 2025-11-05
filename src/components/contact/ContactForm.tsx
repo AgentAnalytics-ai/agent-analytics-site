@@ -160,6 +160,20 @@ export function ContactForm() {
           delay: 2
         }}
       />
+      
+      <motion.div
+        className="absolute top-1/2 right-1/4 w-40 h-40 bg-gradient-to-br from-sky-300/15 to-blue-500/15 rounded-full blur-2xl"
+        animate={{ 
+          scale: [1, 1.3, 1],
+          opacity: [0.2, 0.5, 0.2]
+        }}
+        transition={{ 
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 4
+        }}
+      />
 
       <Container className="relative z-10">
         <div className="max-w-4xl mx-auto">

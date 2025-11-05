@@ -124,7 +124,7 @@ export default function AboutPage() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-xl md:text-2xl text-gray-600 dark:text-neutral-300 mb-12 max-w-4xl mx-auto leading-relaxed"
             >
-              We&apos;re a consulting studio that understands each organization is unique. 
+              We're a consulting studio that understands each organization is unique. 
               Like cities, every business has its own culture, challenges, and way of operating. 
               We help you navigate your tech debt and transformation in your own language.
             </motion.p>
@@ -163,7 +163,7 @@ export default function AboutPage() {
                 Why a Studio?
               </h2>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                Studios understand that every project is unique. We don&apos;t apply 
+                Studios understand that every project is unique. We don't apply 
                 cookie-cutter solutions—we learn your business, speak your language, 
                 and craft solutions that fit your culture.
               </p>
@@ -239,7 +239,7 @@ export default function AboutPage() {
             {[
               {
                 title: 'Tech Debt Resolution',
-                description: 'Identify, understand, and systematically resolve technical debt that&apos;s holding you back.',
+                description: "Identify, understand, and systematically resolve technical debt that's holding you back.",
                 icon: Zap,
               },
               {

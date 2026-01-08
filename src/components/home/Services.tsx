@@ -47,7 +47,7 @@ export default function ServicesPage() {
         'AI/ML integration',
         'Scalable infrastructure',
       ],
-      color: 'indigo',
+      color: 'sky',
     },
     {
       icon: Users,
@@ -59,7 +59,7 @@ export default function ServicesPage() {
         'Change management',
         'Leadership coaching',
       ],
-      color: 'purple',
+      color: 'blue',
     },
   ];
 
@@ -88,7 +88,7 @@ export default function ServicesPage() {
 
             <h1 className="mb-6 text-5xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
               We Turn Complex Problems Into
-              <span className="block bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent dark:from-blue-400 dark:to-indigo-400">
+              <span className="block bg-gradient-to-r from-sky-500 to-blue-600 bg-clip-text text-transparent dark:from-sky-400 dark:to-blue-400">
                 Competitive Advantages
               </span>
             </h1>
@@ -116,10 +116,8 @@ export default function ServicesPage() {
               const Icon = service.icon;
               const colorClasses = {
                 blue: 'bg-blue-50 text-blue-600 dark:bg-blue-950/30 dark:text-blue-400',
-                indigo:
-                  'bg-indigo-50 text-indigo-600 dark:bg-indigo-950/30 dark:text-indigo-400',
-                purple:
-                  'bg-purple-50 text-purple-600 dark:bg-purple-950/30 dark:text-purple-400',
+                sky:
+                  'bg-sky-50 text-sky-600 dark:bg-sky-950/30 dark:text-sky-400',
               };
 
               return (

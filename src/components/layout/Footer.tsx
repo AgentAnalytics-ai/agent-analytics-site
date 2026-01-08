@@ -6,13 +6,13 @@ import { Logo } from '../ui/Logo';
 
 export function Footer() {
   return (
-    <footer className="bg-gray-950 text-white">
+    <footer className="bg-neutral-950 text-white">
       <Container className="py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="md:col-span-2">
             <Logo variant="full" size="footer" showLink={false} />
-            <p className="mt-4 text-gray-400 max-w-md">
+            <p className="mt-4 text-neutral-400 max-w-md">
               We help businesses simplify, consolidate, and optimize their
               software and AI workflows. Technology that works for you, not the
               other way around.
@@ -20,7 +20,7 @@ export function Footer() {
             <div className="flex space-x-4 mt-6">
               <a
                 href="https://linkedin.com/company/agent-analytics"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-neutral-400 hover:text-white transition-colors"
                 aria-label="LinkedIn"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -39,7 +39,7 @@ export function Footer() {
               </a>
               <a
                 href="https://twitter.com/agentanalytics"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-neutral-400 hover:text-white transition-colors"
                 aria-label="Twitter"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -134,8 +134,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
+        <div className="border-t border-neutral-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-neutral-400 text-sm">
             © 2024 Agent Analytics Studio. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">

@@ -58,7 +58,7 @@ export function Navigation() {
       className={clsx(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         scrollState.isScrolled
-          ? 'bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-b border-gray-200 dark:border-neutral-800 shadow-xl'
+          ? 'bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 shadow-xl'
           : 'bg-transparent'
       )}
     >
@@ -86,7 +86,7 @@ export function Navigation() {
               >
                 <Link
                   href={item.href}
-                  className="text-gray-800 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 font-medium transition-colors duration-200 relative group text-sm lg:text-base"
+                  className="text-neutral-800 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 font-medium transition-colors duration-200 relative group text-sm lg:text-base"
                 >
                   {item.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-sky-500 to-blue-600 transition-all duration-300 group-hover:w-full"></span>
@@ -98,7 +98,7 @@ export function Navigation() {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-gray-800 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
+            className="md:hidden p-2 text-neutral-800 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
             aria-label="Toggle mobile menu"
           >
             {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -118,7 +118,7 @@ export function Navigation() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-b border-gray-200 dark:border-neutral-800"
+            className="md:hidden bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800"
           >
             <Container>
               <div className="py-4 space-y-3">
@@ -127,12 +127,12 @@ export function Navigation() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block text-gray-800 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 font-medium transition-colors duration-200 py-2"
+                    className="block text-neutral-800 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 font-medium transition-colors duration-200 py-2"
                   >
                     {item.label}
                   </Link>
                 ))}
-                <div className="pt-2 border-t border-gray-200 dark:border-neutral-700">
+                <div className="pt-2 border-t border-neutral-200 dark:border-neutral-700">
                   <DarkModeToggle />
                 </div>
               </div>

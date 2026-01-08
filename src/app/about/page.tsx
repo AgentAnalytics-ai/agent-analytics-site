@@ -31,7 +31,7 @@ export default function AboutPage() {
       {/* Hero Section - Business Language Studio */}
       <Section
         spacing="xl"
-        className="pt-32 relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-blue-900/20"
+        className="pt-32 relative overflow-hidden bg-gradient-to-br from-neutral-50 via-white to-blue-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-blue-900/20"
       >
         {/* Background Animations */}
         <motion.div
@@ -62,7 +62,7 @@ export default function AboutPage() {
         />
         
         <motion.div
-          className="absolute top-40 right-10 w-24 h-24 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-full blur-xl"
+          className="absolute top-40 right-10 w-24 h-24 bg-gradient-to-br from-blue-500/20 to-sky-500/20 rounded-full blur-xl"
           animate={{ 
             x: [0, -25, 0],
             y: [0, 30, 0],
@@ -109,11 +109,11 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-8 leading-tight"
+              className="text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-900 dark:text-white mb-8 leading-tight tracking-tight"
             >
               Every Business Has
               <br />
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-sky-500 to-blue-600 bg-clip-text text-transparent">
                 Its Own Language
               </span>
             </motion.h1>
@@ -122,7 +122,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-xl md:text-2xl text-gray-600 dark:text-neutral-300 mb-12 max-w-4xl mx-auto leading-relaxed"
+              className="text-xl md:text-2xl text-neutral-600 dark:text-neutral-400 mb-12 max-w-4xl mx-auto leading-relaxed"
             >
               We're a consulting studio that understands each organization is unique. 
               Like cities, every business has its own culture, challenges, and way of operating. 
@@ -151,7 +151,7 @@ export default function AboutPage() {
 
       {/* The Studio Approach */}
       <Section spacing="xl" background="gray" className="relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-50"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-neutral-50 via-blue-50/30 to-neutral-50"></div>
         <Container className="relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -159,10 +159,10 @@ export default function AboutPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 bg-clip-text text-transparent">
+              <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-6 tracking-tight">
                 Why a Studio?
               </h2>
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+              <p className="text-lg text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed">
                 Studios understand that every project is unique. We don't apply 
                 cookie-cutter solutions—we learn your business, speak your language, 
                 and craft solutions that fit your culture.
@@ -171,22 +171,22 @@ export default function AboutPage() {
                 <div className="flex items-start gap-3">
                   <Languages className="w-6 h-6 text-blue-600 mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold text-gray-900">Cultural Translation</h3>
-                    <p className="text-gray-600 text-sm">We understand your business culture and speak your language.</p>
+                    <h3 className="font-semibold text-neutral-900 dark:text-white">Cultural Translation</h3>
+                    <p className="text-neutral-600 dark:text-neutral-400 text-sm">We understand your business culture and speak your language.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <Building2 className="w-6 h-6 text-blue-600 mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold text-gray-900">Custom Solutions</h3>
-                    <p className="text-gray-600 text-sm">Every engagement is tailored to your unique challenges.</p>
+                    <h3 className="font-semibold text-neutral-900 dark:text-white">Custom Solutions</h3>
+                    <p className="text-neutral-600 dark:text-neutral-400 text-sm">Every engagement is tailored to your unique challenges.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <Target className="w-6 h-6 text-blue-600 mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold text-gray-900">Tech Debt Navigation</h3>
-                    <p className="text-gray-600 text-sm">We help you understand and resolve your technical challenges.</p>
+                    <h3 className="font-semibold text-neutral-900 dark:text-white">Tech Debt Navigation</h3>
+                    <p className="text-neutral-600 dark:text-neutral-400 text-sm">We help you understand and resolve your technical challenges.</p>
                   </div>
                 </div>
               </div>
@@ -198,14 +198,14 @@ export default function AboutPage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="bg-white rounded-2xl p-8 shadow-xl"
             >
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Approach</h3>
-              <p className="text-lg text-gray-600 mb-6">
+              <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 tracking-tight">Our Approach</h3>
+              <p className="text-lg text-neutral-600 dark:text-neutral-400 mb-6">
                 We work like a creative studio—immersing ourselves in your world, 
                 understanding your challenges, and crafting solutions that feel natural to your organization.
               </p>
-              <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 border border-blue-200">
-                <h4 className="text-xl font-bold text-gray-900 mb-3">The Studio Method</h4>
-                <p className="text-gray-700 mb-4">
+              <div className="bg-gradient-to-r from-blue-50 to-sky-50 rounded-xl p-6 border border-blue-200">
+                <h4 className="text-xl font-bold text-neutral-900 dark:text-white mb-3 tracking-tight">The Studio Method</h4>
+                <p className="text-neutral-700 dark:text-neutral-300 mb-4">
                   Learn → Understand → Craft → Implement. We become fluent in your 
                   business language before proposing solutions.
                 </p>
@@ -227,10 +227,10 @@ export default function AboutPage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-6 tracking-tight">
               We Help You Navigate
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
               The complex landscape of modern business technology and transformation.
             </p>
           </motion.div>
@@ -263,8 +263,8 @@ export default function AboutPage() {
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <service.icon className="w-8 h-8 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                <p className="text-gray-600">{service.description}</p>
+                <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3 tracking-tight">{service.title}</h3>
+                <p className="text-neutral-600 dark:text-neutral-400">{service.description}</p>
               </motion.div>
             ))}
           </div>

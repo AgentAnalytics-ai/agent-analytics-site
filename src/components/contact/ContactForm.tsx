@@ -183,11 +183,11 @@ export function ContactForm() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6 tracking-tight">
               Ready to Transform Your Business?
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Tell us about your challenge and we&apos;ll craft a strategic
+            <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
+              Tell us about your challenge and we'll craft a strategic
               solution tailored to your business needs.
             </p>
           </motion.div>
@@ -199,11 +199,11 @@ export function ContactForm() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">
+              <h3 className="text-2xl font-bold text-neutral-900 mb-6 tracking-tight">
                 Get in Touch
               </h3>
-              <p className="text-gray-600 mb-8">
-                Ready to start your AI transformation? Let&apos;s discuss how we
+              <p className="text-neutral-600 mb-8">
+                Ready to start your AI transformation? Let's discuss how we
                 can help you achieve your goals.
               </p>
 
@@ -213,7 +213,7 @@ export function ContactForm() {
                     <Mail className="w-6 h-6 text-blue-600" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900">Email</h4>
+                    <h4 className="font-semibold text-neutral-900">Email</h4>
                     <p className="text-blue-600">hello@agentanalyticsai.com</p>
                   </div>
                 </div>
@@ -223,7 +223,7 @@ export function ContactForm() {
                     <MapPin className="w-6 h-6 text-blue-600" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900">Location</h4>
+                    <h4 className="font-semibold text-neutral-900">Location</h4>
                     <p className="text-blue-600">Remote-First</p>
                   </div>
                 </div>
@@ -242,11 +242,11 @@ export function ContactForm() {
                     <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
                       <CheckCircle className="w-8 h-8 text-emerald-600" />
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                    <h3 className="text-2xl font-bold text-neutral-900 mb-2 tracking-tight">
                       Message Sent!
                     </h3>
-                    <p className="text-gray-600">
-                      Thanks for reaching out. We&apos;ll get back to you within 24
+                    <p className="text-neutral-600">
+                      Thanks for reaching out. We'll get back to you within 24
                       hours.
                     </p>
                   </div>
@@ -260,7 +260,7 @@ export function ContactForm() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                        <label htmlFor="name" className="block text-sm font-medium text-neutral-700 mb-2">
                           Name *
                         </label>
                         <input
@@ -268,13 +268,13 @@ export function ContactForm() {
                           id="name"
                           value={formData.name}
                           onChange={e => handleInputChange('name', e.target.value)}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           placeholder="Your full name"
                           required
                         />
                       </div>
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                        <label htmlFor="email" className="block text-sm font-medium text-neutral-700 mb-2">
                           Email *
                         </label>
                         <input
@@ -282,7 +282,7 @@ export function ContactForm() {
                           id="email"
                           value={formData.email}
                           onChange={e => handleInputChange('email', e.target.value)}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           placeholder="your.email@company.com"
                           required
                         />
@@ -291,7 +291,7 @@ export function ContactForm() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
+                        <label htmlFor="company" className="block text-sm font-medium text-neutral-700 mb-2">
                           Company
                         </label>
                         <input
@@ -299,12 +299,12 @@ export function ContactForm() {
                           id="company"
                           value={formData.company}
                           onChange={e => handleInputChange('company', e.target.value)}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           placeholder="Your company"
                         />
                       </div>
                       <div>
-                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                        <label htmlFor="phone" className="block text-sm font-medium text-neutral-700 mb-2">
                           Phone
                         </label>
                         <input
@@ -312,21 +312,21 @@ export function ContactForm() {
                           id="phone"
                           value={formData.phone}
                           onChange={e => handleInputChange('phone', e.target.value)}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           placeholder="Your phone number"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor="service" className="block text-sm font-medium text-neutral-700 mb-2">
                         Service Interest
                       </label>
                       <select
                         id="service"
                         value={formData.service}
                         onChange={e => handleServiceSelect(e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       >
                         <option value="">Select a service</option>
                         {services.map(service => (
@@ -338,14 +338,14 @@ export function ContactForm() {
                     </div>
 
                     <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor="message" className="block text-sm font-medium text-neutral-700 mb-2">
                         Describe Your Challenge *
                       </label>
                       <textarea
                         id="message"
                         name="message"
                         rows={6}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                        className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                         placeholder="Describe the problem you're trying to solve and what you hope to achieve..."
                         value={formData.message}
                         onChange={e => handleMessageChange(e.target.value)}
@@ -354,14 +354,14 @@ export function ContactForm() {
                     </div>
 
                     <div>
-                      <label htmlFor="timeline" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor="timeline" className="block text-sm font-medium text-neutral-700 mb-2">
                         Timeline
                       </label>
                       <select
                         id="timeline"
                         value={formData.timeline}
                         onChange={e => handleTimelineSelect(e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       >
                         <option value="">Select timeline</option>
                         {timelines.map(timeline => (
@@ -377,7 +377,7 @@ export function ContactForm() {
                       variant="primary"
                       size="lg"
                       disabled={isSubmitting}
-                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 border-0 shadow-lg hover:shadow-xl"
+                      className="w-full bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 border-0 shadow-lg hover:shadow-xl"
                     >
                       {isSubmitting ? 'Sending...' : 'Send Message'}
                     </Button>

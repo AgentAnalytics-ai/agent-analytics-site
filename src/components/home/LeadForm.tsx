@@ -54,14 +54,14 @@ export function LeadForm() {
     <Section spacing="xl" background="gray">
       <Container>
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
-            Tell us what&apos;s keeping you up at night.
+          <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-8 tracking-tight">
+            If you want AI that actually helps your business, let's build it.
           </h2>
 
           {submitStatus === 'success' && (
             <div className="mb-6 p-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-lg">
               <p className="text-emerald-800 dark:text-emerald-200">
-                Thanks! We&apos;ll get back to you within 24 hours.
+                Thanks! We'll get back to you within 24 hours.
               </p>
             </div>
           )}
@@ -79,7 +79,7 @@ export function LeadForm() {
               <textarea
                 name="message"
                 placeholder="Describe your challenge..."
-                className="w-full p-4 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent resize-none bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-all duration-300"
+                className="w-full p-4 border border-neutral-300 dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent resize-none bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white transition-all duration-300"
                 rows={4}
                 required
               />
@@ -90,14 +90,14 @@ export function LeadForm() {
                 type="text"
                 name="name"
                 placeholder="Your name"
-                className="p-4 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-all duration-300"
+                className="p-4 border border-neutral-300 dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white transition-all duration-300"
                 required
               />
               <input
                 type="email"
                 name="email"
                 placeholder="Your email"
-                className="p-4 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-all duration-300"
+                className="p-4 border border-neutral-300 dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white transition-all duration-300"
                 required
               />
             </div>
@@ -113,8 +113,8 @@ export function LeadForm() {
             </Button>
           </form>
 
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
-            We&apos;ll follow up within 24 hours.
+          <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-4">
+            We'll follow up within 24 hours.
           </p>
         </div>
       </Container>

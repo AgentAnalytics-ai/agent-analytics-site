@@ -7,16 +7,16 @@ import { Section } from '../ui/Section';
 
 const steps = [
   {
-    title: 'We build what matters.',
-    description: 'Tailored solutions for your unique challenges—no templates, no shortcuts.',
+    title: 'We connect to your data and tools.',
+    description: 'Your CRM, email, databases, and business tools—everything connects seamlessly.',
   },
   {
-    title: 'We bring clarity.',
-    description: 'Clear strategies that cut through complexity and guide your next steps.',
+    title: 'We add AI that understands your workflows.',
+    description: 'Intelligence that learns your patterns, understands context, and makes decisions based on your business logic.',
   },
   {
-    title: 'We deliver fast.',
-    description: 'Rapid results without sacrificing quality—moving from insight to impact in weeks.',
+    title: 'You get answers, actions, and automation.',
+    description: 'Real software that works. Payments flow to your account. Tasks happen automatically. You focus on growth.',
   },
 ];
 
@@ -35,9 +35,9 @@ export default function HowWeWork() {
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 className="text-center"
               >
-                <div className="bg-white dark:bg-neutral-800/50 rounded-2xl p-8 border border-gray-200 dark:border-neutral-700 hover:border-gray-300 dark:hover:border-neutral-600 transition-all duration-300 hover:bg-gray-50 dark:hover:bg-neutral-800/70 shadow-lg hover:shadow-xl">
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{step.title}</h3>
-                  <p className="text-gray-600 dark:text-neutral-300">{step.description}</p>
+                <div className="bg-white dark:bg-neutral-800/50 rounded-2xl p-8 border border-neutral-200 dark:border-neutral-700 hover:border-neutral-300 dark:hover:border-neutral-600 transition-all duration-300 hover:bg-neutral-50 dark:hover:bg-neutral-800/70 shadow-lg hover:shadow-xl">
+                  <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3 tracking-tight">{step.title}</h3>
+                  <p className="text-neutral-600 dark:text-neutral-400">{step.description}</p>
                 </div>
               </motion.div>
             ))}

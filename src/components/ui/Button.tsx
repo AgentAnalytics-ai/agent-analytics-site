@@ -41,7 +41,6 @@ function Button({
   return (
     <button
       className={clsx(baseClasses, variants[variant], sizes[size], className)}
-      style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
       {...props}
     >
       {children}

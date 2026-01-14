@@ -1,8 +1,7 @@
 import Hero from '../components/home/Hero';
 import { LeadForm } from '../components/home/LeadForm';
 import { ProblemSection } from '../components/home/ProblemSection';
-import { SolutionSection } from '../components/home/SolutionSection';
-import { AISDKDashboard } from '../components/home/AISDKDashboard';
+import { VisualShowcase } from '../components/home/VisualShowcase';
 import { FutureTechSection } from '../components/home/FutureTechSection';
 import HowWeWork from '../components/home/HowWeWork';
 import { PricingSection } from '../components/home/PricingSection';
@@ -19,9 +18,8 @@ export default function Home() {
         secondaryCTA="See How It Works"
       />
 
-      <AISDKDashboard />
       <ProblemSection />
-      <SolutionSection />
+      <VisualShowcase />
       <FutureTechSection />
       <HowWeWork />
       <PricingSection />

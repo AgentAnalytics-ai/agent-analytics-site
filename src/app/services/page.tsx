@@ -34,15 +34,16 @@ import { motion } from 'framer-motion';
 interface Service {
   id: string;
   title: string;
-  description: string;
+  problem: string;
+  whatWeDo: string;
+  outcome: string;
   icon: LucideIcon;
   color: string;
   metrics: {
     label: string;
     value: string;
   }[];
-  features: string[];
-  benefits: string[];
+  examples: string[];
   cta: string;
   calendlyUrl: string;
   systems: string[];
@@ -55,34 +56,33 @@ export default function ServicesPage() {
   const services: Service[] = useMemo(() => [
     {
       id: 'strategy',
-      title: 'Technology Strategy & Roadmapping',
-      description: 'Identify the right technology opportunities and build realistic roadmaps that avoid common pitfalls.',
+      title: 'Technology Strategy',
+      problem: 'When you don\'t know what to build first, which tools to use, or how to avoid expensive mistakes',
+      whatWeDo: 'We build your technology roadmap and specifications',
+      outcome: 'So you have a clear blueprint—exact features to build, tools to use, timeline to follow, and budget to plan—before you spend a dollar.',
       icon: Target,
       color: 'blue',
       metrics: [
-        { label: 'Projects Delivered', value: '150+' },
+        { label: 'Roadmaps Built', value: '150+' },
         { label: 'Success Rate', value: '94%' },
         { label: 'Avg. ROI', value: '3.2x' },
       ],
-      features: [
-        'Technology Opportunity Assessment',
-        'Strategic Roadmap Development',
-        'Technology Stack Selection',
-        'ROI Analysis & Planning',
+      examples: [
+        'You need automation, we map out which workflows to automate first and how',
+        'You\'re choosing tools, we build comparison docs showing exact costs and tradeoffs',
+        'You\'re planning a project, we deliver specs with features, timeline, and budget',
+        'You\'re stuck on priorities, we rank opportunities by impact and effort',
       ],
-      benefits: [
-        'Clear implementation path',
-        'Avoid costly mistakes',
-        'Measurable outcomes',
-      ],
-      cta: 'Book Strategy Session',
+      cta: 'Build Your Roadmap',
       calendlyUrl: CALENDLY_LINKS.talkStrategy,
       systems: ['Analysis', 'Planning', 'Documentation', 'Reporting'],
     },
     {
       id: 'development',
       title: 'Custom Software Development',
-      description: 'Build intelligent systems and software solutions that actually work for your business. No off-the-shelf compromises.',
+      problem: 'When you need software built for your business—not generic tools that don\'t fit',
+      whatWeDo: 'We build custom software that connects to your systems and automates your workflows',
+      outcome: 'So your team has software built for your processes—connects to CRM and email, automates routine work, and scales with you.',
       icon: Code,
       color: 'sky',
       metrics: [
@@ -90,122 +90,105 @@ export default function ServicesPage() {
         { label: 'Uptime', value: '99.9%' },
         { label: 'Client Satisfaction', value: '4.9/5' },
       ],
-      features: [
-        'Custom Software Solutions',
-        'Intelligent Automation',
-        'System Integration',
-        'API Development',
+      examples: [
+        'Your team needs a dashboard, we build it pulling data from 5 systems into one view',
+        'Your process is manual, we automate it so it runs automatically',
+        'You need client portals, we build them connected to your CRM and payments',
+        'You need integrations, we connect your tools so data flows automatically',
       ],
-      benefits: [
-        'Reduced operational costs',
-        'Competitive advantage',
-        'Scalable solutions',
-      ],
-      cta: 'Discuss Your Project',
+      cta: 'Build Your Software',
       calendlyUrl: CALENDLY_LINKS.startConversation,
       systems: ['Development', 'Testing', 'Deployment', 'Support'],
     },
     {
       id: 'infrastructure',
-      title: 'Infrastructure & Hosting Solutions',
-      description: 'Optimize your hosting infrastructure for performance, security, and cost-effectiveness.',
+      title: 'Infrastructure & Hosting',
+      problem: 'When your site is slow, crashes, or costs too much to host',
+      whatWeDo: 'We rebuild your hosting setup for speed, reliability, and cost',
+      outcome: 'So your site loads in under 2 seconds, stays online 99.99% of the time, and costs 40% less.',
       icon: Server,
-      color: 'emerald',
+      color: 'sky',
       metrics: [
-        { label: 'Performance Gain', value: '85%' },
+        { label: 'Speed Improvement', value: '85%' },
         { label: 'Cost Reduction', value: '40%' },
         { label: 'Uptime', value: '99.99%' },
       ],
-      features: [
-        'Cloud Infrastructure Setup',
-        'Performance Optimization',
-        'Security Hardening',
-        'Cost Optimization',
+      examples: [
+        'Your site loads slow, we move it to faster servers and CDNs—loads in 1-2 seconds',
+        'Your site crashes, we set up auto-scaling and monitoring—stays online',
+        'You\'re overpaying, we optimize hosting and cut costs by thousands per year',
+        'You need security, we add SSL, firewalls, and backups—protected 24/7',
       ],
-      benefits: [
-        'Improved performance',
-        'Enhanced security',
-        'Reduced hosting costs',
-      ],
-      cta: 'Optimize Infrastructure',
+      cta: 'Fix Your Hosting',
       calendlyUrl: CALENDLY_LINKS.bookSession,
       systems: ['Cloud', 'CDN', 'Security', 'Monitoring'],
     },
     {
       id: 'cost',
       title: 'Software Cost Optimization',
-      description: 'Reduce software licensing costs and optimize your technology spend without sacrificing functionality.',
+      problem: 'When you\'re paying for software you don\'t use, or overpaying for tools',
+      whatWeDo: 'We find what you\'re wasting money on and replace it with cheaper alternatives',
+      outcome: 'So you save tens of thousands per year by canceling unused licenses and switching to cheaper tools that work just as well.',
       icon: DollarSign,
-      color: 'amber',
+      color: 'blue',
       metrics: [
         { label: 'Avg. Savings', value: '$45K/yr' },
-        { label: 'License Reduction', value: '32%' },
+        { label: 'Licenses Cut', value: '32%' },
         { label: 'Efficiency Gain', value: '28%' },
       ],
-      features: [
-        'Software Audit & Analysis',
-        'License Optimization',
-        'Alternative Solutions',
-        'Cost Reduction Strategies',
+      examples: [
+        'You pay for 50 licenses, only use 30—we cancel the unused ones, save $24K/year',
+        'You pay $200/user/month for Tool A—we switch you to Tool B at $50/user/month, same features',
+        'You use 5 tools that do the same thing—we consolidate to 2, save $18K/year',
+        'You\'re overpaying vendors—we negotiate better rates, save $15K/year',
       ],
-      benefits: [
-        'Significant cost savings',
-        'Better value for money',
-        'Improved efficiency',
-      ],
-      cta: 'Reduce Software Costs',
+      cta: 'Cut Your Costs',
       calendlyUrl: CALENDLY_LINKS.bookSession,
       systems: ['Audit', 'Analysis', 'Optimization', 'Tracking'],
     },
     {
       id: 'maintenance',
-      title: 'System Improvement & Maintenance',
-      description: 'Enhance existing systems, improve performance, and ensure long-term reliability.',
+      title: 'System Maintenance',
+      problem: 'When your software is broken, slow, or outdated—but you can\'t rebuild it',
+      whatWeDo: 'We fix bugs, speed things up, and update your systems',
+      outcome: 'So your software runs fast, stops breaking, stays updated, and keeps working without disrupting your team.',
       icon: Settings,
-      color: 'indigo',
+      color: 'sky',
       metrics: [
-        { label: 'Performance Boost', value: '60%' },
-        { label: 'Downtime Reduction', value: '75%' },
+        { label: 'Speed Boost', value: '60%' },
+        { label: 'Downtime Cut', value: '75%' },
         { label: 'System Health', value: '98%' },
       ],
-      features: [
-        'Performance Optimization',
-        'System Modernization',
-        'Technical Debt Reduction',
-        'Ongoing Maintenance',
+      examples: [
+        'Your app crashes daily—we fix the bugs, add error handling, it stays online',
+        'Your pages load slow—we optimize code and database, they load 3x faster',
+        'Your system won\'t work with new tools—we update integrations, everything connects',
+        'You have tech debt—we refactor the messy code, future changes are easy',
       ],
-      benefits: [
-        'Improved system reliability',
-        'Better user experience',
-        'Reduced technical debt',
-      ],
-      cta: 'Improve Your Systems',
+      cta: 'Fix Your Systems',
       calendlyUrl: CALENDLY_LINKS.bookSession,
       systems: ['Monitoring', 'Updates', 'Optimization', 'Support'],
     },
     {
       id: 'training',
       title: 'Implementation & Training',
-      description: 'Ensure your team can use new technologies effectively. From implementation to training for maximum ROI.',
+      problem: 'When we build software for you, and your team needs to learn it',
+      whatWeDo: 'We train your team and create documentation so they can use it effectively',
+      outcome: 'So your team knows how to use the software, gets value from day one, and can train new people themselves.',
       icon: GraduationCap,
-      color: 'purple',
+      color: 'blue',
       metrics: [
         { label: 'Teams Trained', value: '500+' },
         { label: 'Adoption Rate', value: '92%' },
         { label: 'ROI Realized', value: '4.1x' },
       ],
-      features: [
-        'Implementation Support',
-        'Team Training & Enablement',
-        'Change Management',
-        'Ongoing Optimization',
+      examples: [
+        'We build software, we run training sessions showing your team exactly how to use it',
+        'Your team has questions, we create documentation and videos they can reference',
+        'You\'re rolling out new software, we help with the launch and answer questions',
+        'New team members join, they read our docs and are productive in days, not months',
       ],
-      benefits: [
-        'Faster technology adoption',
-        'Maximized ROI',
-        'Sustainable transformation',
-      ],
-      cta: 'Start Implementation',
+      cta: 'Train Your Team',
       calendlyUrl: CALENDLY_LINKS.bookSession,
       systems: ['Training', 'Documentation', 'Support', 'Optimization'],
     },
@@ -228,34 +211,6 @@ export default function ServicesPage() {
         border: 'border-sky-200 dark:border-sky-900/30',
         iconBg: 'bg-sky-100 dark:bg-sky-900/30',
         chart: 'rgb(14, 165, 233)',
-      },
-      emerald: {
-        bg: 'bg-emerald-50 dark:bg-emerald-950/20',
-        text: 'text-emerald-600 dark:text-emerald-400',
-        border: 'border-emerald-200 dark:border-emerald-900/30',
-        iconBg: 'bg-emerald-100 dark:bg-emerald-900/30',
-        chart: 'rgb(16, 185, 129)',
-      },
-      amber: {
-        bg: 'bg-amber-50 dark:bg-amber-950/20',
-        text: 'text-amber-600 dark:text-amber-400',
-        border: 'border-amber-200 dark:border-amber-900/30',
-        iconBg: 'bg-amber-100 dark:bg-amber-900/30',
-        chart: 'rgb(245, 158, 11)',
-      },
-      indigo: {
-        bg: 'bg-indigo-50 dark:bg-indigo-950/20',
-        text: 'text-indigo-600 dark:text-indigo-400',
-        border: 'border-indigo-200 dark:border-indigo-900/30',
-        iconBg: 'bg-indigo-100 dark:bg-indigo-900/30',
-        chart: 'rgb(99, 102, 241)',
-      },
-      purple: {
-        bg: 'bg-purple-50 dark:bg-purple-950/20',
-        text: 'text-purple-600 dark:text-purple-400',
-        border: 'border-purple-200 dark:border-purple-900/30',
-        iconBg: 'bg-purple-100 dark:bg-purple-900/30',
-        chart: 'rgb(168, 85, 247)',
       },
     };
     return colors[color] || colors.blue;
@@ -352,10 +307,10 @@ export default function ServicesPage() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-4 tracking-tight">
-              Comprehensive Technology Services
+              Services
             </h2>
             <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-              End-to-end technology consulting, development, and optimization—tailored to your business needs.
+              Technology strategy, custom software development, infrastructure optimization, cost reduction, system maintenance, and team training.
             </p>
           </motion.div>
 
@@ -413,69 +368,58 @@ export default function ServicesPage() {
                       <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">
                         {currentService.title}
                       </h3>
-                      <p className="text-xs text-neutral-500 dark:text-neutral-400">
-                        {currentService.description}
-                      </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+                    <div className="w-2 h-2 bg-sky-500 rounded-full animate-pulse" />
                     <span className="text-xs text-neutral-500 dark:text-neutral-400">Active</span>
                   </div>
                 </div>
               </div>
               
               <div className="flex-1 p-6 overflow-y-auto" style={{ height: '0px', minHeight: '0px' }}>
-                {/* Performance Badge */}
-                <div className="mb-4 flex items-center gap-2">
-                  <div className="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center gap-2">
-                    <div className="w-2 h-2 bg-emerald-500 rounded-full" />
-                    <span className="text-xs font-medium text-emerald-700 dark:text-emerald-400">Optimized • Proven Results</span>
+                {/* Problem Statement */}
+                <div className="mb-6 p-4 rounded-xl bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800">
+                  <div className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-2">
+                    When You Need
                   </div>
+                  <p className="text-base text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                    {currentService.problem}
+                  </p>
                 </div>
 
-                {/* Metrics Grid */}
-                <div className="grid grid-cols-3 gap-4 mb-6">
-                  {currentService.metrics.map((metric, idx) => {
-                    const colors = getColorClasses(currentService.color);
-                    return (
-                      <div key={idx} className="bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700">
-                        <div className="text-xs text-neutral-500 dark:text-neutral-400 mb-1">{metric.label}</div>
-                        <div className="text-2xl font-bold text-neutral-900 dark:text-white mb-2">{metric.value}</div>
-                        <div className="flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400">
-                          <ArrowUpRight className="w-3 h-3" />
-                          <span>Optimized</span>
-                        </div>
-                      </div>
-                    );
-                  })}
+                {/* What We Do */}
+                <div className="mb-6 p-4 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
+                  <div className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 uppercase tracking-wide mb-2">
+                    What We Do
+                  </div>
+                  <p className="text-base text-neutral-900 dark:text-white leading-relaxed">
+                    {currentService.whatWeDo}
+                  </p>
                 </div>
 
-                {/* What We Deliver */}
-                <div className="bg-white dark:bg-neutral-800/50 rounded-lg border border-neutral-200 dark:border-neutral-700 overflow-hidden mb-4">
-                  <div className="px-4 py-3 border-b border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900/50">
-                    <h4 className="text-sm font-semibold text-neutral-900 dark:text-white">What We Deliver</h4>
+                {/* Outcome */}
+                <div className="mb-6 p-4 rounded-xl bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-950/30 dark:to-blue-950/30 border-2 border-sky-200 dark:border-sky-900/50">
+                  <div className="text-xs font-semibold text-sky-600 dark:text-sky-400 uppercase tracking-wide mb-2">
+                    So You Get
                   </div>
-                  <div className="divide-y divide-neutral-200 dark:divide-neutral-700">
-                    {currentService.features.map((feature, idx) => (
-                      <div key={idx} className="px-4 py-3 flex items-center gap-3 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors">
-                        <CheckCircle className={`w-4 h-4 ${getColorClasses(currentService.color).text} flex-shrink-0`} />
-                        <span className="text-sm text-neutral-900 dark:text-white">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
+                  <p className="text-base font-medium text-neutral-900 dark:text-white leading-relaxed">
+                    {currentService.outcome}
+                  </p>
                 </div>
 
-                {/* Expected Outcomes */}
-                <div className="bg-white dark:bg-neutral-800/50 rounded-lg border border-neutral-200 dark:border-neutral-700 overflow-hidden">
-                  <div className="px-4 py-3 border-b border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900/50">
-                    <h4 className="text-sm font-semibold text-neutral-900 dark:text-white">Expected Outcomes</h4>
+                {/* Examples */}
+                <div className="mb-4">
+                  <div className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-3 uppercase tracking-wide">
+                    Examples
                   </div>
-                  <div className="divide-y divide-neutral-200 dark:divide-neutral-700">
-                    {currentService.benefits.map((benefit, idx) => (
-                      <div key={idx} className="px-4 py-3 flex items-center gap-3 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors">
-                        <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full flex-shrink-0" />
-                        <span className="text-sm text-neutral-900 dark:text-white">{benefit}</span>
+                  <div className="space-y-2">
+                    {currentService.examples.map((example, idx) => (
+                      <div key={idx} className="flex items-start gap-3 px-3 py-2 rounded-lg bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
+                        <CheckCircle className="w-4 h-4 text-sky-600 dark:text-sky-400 flex-shrink-0 mt-0.5" />
+                        <span className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                          {example}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -508,7 +452,7 @@ export default function ServicesPage() {
                         </div>
                         <span className="font-medium text-neutral-900 dark:text-white">{system}</span>
                       </div>
-                      <div className="w-2 h-2 bg-emerald-500 rounded-full" />
+                      <div className="w-2 h-2 bg-sky-500 rounded-full" />
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="flex-1 h-1.5 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">

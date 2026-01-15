@@ -320,7 +320,7 @@ export default function ServicesPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-wrap justify-center gap-2 mb-12 border-b border-neutral-200 dark:border-neutral-800 pb-1"
+            className="flex flex-wrap justify-center gap-3 mb-12 border-b border-neutral-200 dark:border-neutral-800 pb-4"
           >
             {services.map((service) => {
               const Icon = service.icon;
@@ -329,14 +329,14 @@ export default function ServicesPage() {
                 <button
                   key={service.id}
                   onClick={() => setSelectedService(service.id)}
-                  className={`px-6 py-3 font-semibold text-sm tracking-wide transition-all duration-200 flex items-center gap-2 border-b-2 ${
+                  className={`px-4 py-2.5 font-medium text-sm transition-all duration-200 flex items-center gap-2 rounded-lg border-b-2 ${
                     isSelected
-                      ? `border-neutral-900 dark:border-neutral-100 text-neutral-900 dark:text-neutral-100`
-                      : 'border-transparent text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300'
+                      ? `border-neutral-900 dark:border-neutral-100 text-neutral-900 dark:text-neutral-100 bg-neutral-50 dark:bg-neutral-800/50`
+                      : 'border-transparent text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300 hover:bg-neutral-50/50 dark:hover:bg-neutral-800/30'
                   }`}
                 >
-                  <Icon className="w-4 h-4" />
-                  {service.title.split(' ')[0]} {service.title.split(' ')[1]}
+                  <Icon className="w-4 h-4 flex-shrink-0" />
+                  <span className="whitespace-nowrap">{service.title}</span>
                 </button>
               );
             })}
@@ -348,7 +348,7 @@ export default function ServicesPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="grid lg:grid-cols-3 gap-6 mb-8"
+            className="grid lg:grid-cols-3 gap-8 mb-12"
           >
             {/* Main Dashboard View */}
             <motion.div
@@ -389,8 +389,8 @@ export default function ServicesPage() {
                 </div>
 
                 {/* What We Do */}
-                <div className="mb-6 p-4 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
-                  <div className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 uppercase tracking-wide mb-2">
+                <div className="mb-6 p-5 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
+                  <div className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 uppercase tracking-wide mb-3">
                     What We Do
                   </div>
                   <p className="text-base text-neutral-900 dark:text-white leading-relaxed">
@@ -399,7 +399,7 @@ export default function ServicesPage() {
                 </div>
 
                 {/* Outcome */}
-                <div className="mb-6 p-4 rounded-xl bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-950/30 dark:to-blue-950/30 border-2 border-sky-200 dark:border-sky-900/50">
+                <div className="mb-6 p-5 rounded-xl bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-950/30 dark:to-blue-950/30 border-2 border-sky-200 dark:border-sky-900/50">
                   <div className="text-xs font-semibold text-sky-600 dark:text-sky-400 uppercase tracking-wide mb-2">
                     So You Get
                   </div>
@@ -409,13 +409,13 @@ export default function ServicesPage() {
                 </div>
 
                 {/* Examples */}
-                <div className="mb-4">
-                  <div className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-3 uppercase tracking-wide">
+                <div>
+                  <div className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-4 uppercase tracking-wide">
                     Examples
                   </div>
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     {currentService.examples.map((example, idx) => (
-                      <div key={idx} className="flex items-start gap-3 px-3 py-2 rounded-lg bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
+                      <div key={idx} className="flex items-start gap-3 px-4 py-3 rounded-lg bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
                         <CheckCircle className="w-4 h-4 text-sky-600 dark:text-sky-400 flex-shrink-0 mt-0.5" />
                         <span className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
                           {example}

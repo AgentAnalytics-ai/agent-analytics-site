@@ -610,10 +610,10 @@ export function VisualShowcase() {
                         <motion.div
                           whileHover={{ scale: 1.02, y: -4 }}
                           whileTap={{ scale: 0.98 }}
-                          className={`
+                            className={`
                             relative p-5 rounded-2xl border-2 transition-all duration-300 ease-out backdrop-blur-sm
                             ${isSelected 
-                              ? 'border-neutral-900 dark:border-neutral-100 bg-neutral-900 dark:bg-neutral-100 shadow-xl shadow-neutral-900/20 dark:shadow-neutral-100/10' 
+                              ? 'border-neutral-800 dark:border-neutral-100 bg-neutral-800 dark:bg-neutral-100 shadow-xl shadow-neutral-800/25 dark:shadow-neutral-100/10' 
                               : 'border-neutral-200/80 dark:border-neutral-800/80 bg-white/90 dark:bg-neutral-900/60 hover:border-sky-200 dark:hover:border-sky-900/50 hover:shadow-lg hover:shadow-sky-500/5'
                             }
                           `}

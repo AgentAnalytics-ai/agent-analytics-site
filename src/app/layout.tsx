@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
+import { ScrollZoomIntoHeader } from '@/components/layout/ScrollZoomIntoHeader';
 import { ThemeProvider } from '@/components/ui/ThemeProvider';
 import Script from 'next/script';
 
@@ -83,7 +84,7 @@ export default function RootLayout({
         <ThemeProvider>
           <Navigation />
           <main className="min-h-screen pt-20 md:pt-28">
-            {children}
+            <ScrollZoomIntoHeader>{children}</ScrollZoomIntoHeader>
           </main>
           <Footer />
         </ThemeProvider>

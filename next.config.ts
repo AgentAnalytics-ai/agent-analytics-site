@@ -9,8 +9,7 @@ const nextConfig = {
     formats: ['image/webp', 'image/avif'],
   },
 
-  // ✅ Do not block production builds on ESLint or TS
-  eslint: { ignoreDuringBuilds: true },
+  // Typecheck runs in `pnpm build` before `next build`; keep Next from double-validating in CI
   typescript: { ignoreBuildErrors: true },
 };
 

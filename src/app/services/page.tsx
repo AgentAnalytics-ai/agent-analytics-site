@@ -30,6 +30,7 @@ import {
 import { CALENDLY_LINKS } from '@/lib/constants';
 import { useCalendly } from '@/hooks/useCalendly';
 import { motion } from 'framer-motion';
+import { enterTransition, fadeUpReveal } from '@/lib/motion';
 
 interface Service {
   id: string;
@@ -259,27 +260,27 @@ export default function ServicesPage() {
         <Container className="relative z-10">
           <div className="text-center">
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={enterTransition(0)}
               className="text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-900 dark:text-white mb-8 leading-tight tracking-tight"
             >
               Technology Solutions That Deliver
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={enterTransition(0.1)}
               className="text-xl md:text-2xl text-neutral-600 dark:text-neutral-400 mb-12 max-w-3xl mx-auto leading-relaxed"
             >
               Strategic technology consulting, custom development, and optimization services that drive real business results.
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={enterTransition(0.2)}
               className="flex justify-center"
             >
               <Button
@@ -299,13 +300,7 @@ export default function ServicesPage() {
       {/* Services Dashboard */}
       <Section spacing="xl" background="gray" className="relative">
         <Container className="relative z-10">
-          <motion.div 
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+          <motion.div {...fadeUpReveal()} className="mb-12 text-center">
             <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-4 tracking-tight">
               Services
             </h2>
@@ -316,11 +311,8 @@ export default function ServicesPage() {
 
           {/* Service Selector Tabs */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-wrap justify-center gap-3 mb-12 border-b border-neutral-200 dark:border-neutral-800 pb-4"
+            {...fadeUpReveal({ delay: 0.1 })}
+            className="mb-12 flex flex-wrap justify-center gap-3 border-b border-neutral-200 pb-4 dark:border-neutral-800"
           >
             {services.map((service) => {
               const Icon = service.icon;
@@ -345,17 +337,17 @@ export default function ServicesPage() {
           {/* Service Dashboard */}
           <motion.div
             key={selectedService}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="grid lg:grid-cols-3 gap-8 mb-12"
+            transition={enterTransition(0)}
+            className="mb-12 grid gap-8 lg:grid-cols-3"
           >
             {/* Main Dashboard View */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -16 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="lg:col-span-2 bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-xl overflow-hidden flex flex-col"
+              transition={enterTransition(0.04)}
+              className="flex flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-xl dark:border-neutral-800 dark:bg-neutral-900 lg:col-span-2"
               style={{ height: '600px', maxHeight: '600px', minHeight: '600px' }}
             >
               <div className="p-6 border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/50 flex-shrink-0">
@@ -429,10 +421,10 @@ export default function ServicesPage() {
 
             {/* Connected Systems */}
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-xl overflow-hidden flex flex-col"
+              transition={enterTransition(0.08)}
+              className="flex flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-xl dark:border-neutral-800 dark:bg-neutral-900"
               style={{ height: '600px', maxHeight: '600px', minHeight: '600px' }}
             >
               <div className="p-6 border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/50 flex-shrink-0">
@@ -470,13 +462,7 @@ export default function ServicesPage() {
           </motion.div>
 
           {/* CTA Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
+          <motion.div {...fadeUpReveal({ delay: 0.12 })} className="text-center">
             <Button
               variant="primary"
               size="lg"

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Button from '../ui/Button';
 import { motion } from 'framer-motion';
+import { MOTION_EASE, collapseTransition, motionDurations } from '@/lib/motion';
 
 export function ProfessionalRoundtableForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -85,10 +86,11 @@ export function ProfessionalRoundtableForm() {
   if (submitStatus === 'success') {
     return (
       <div className="max-w-md mx-auto">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bg-white rounded-lg shadow-sm p-8 text-center"
+          transition={{ duration: motionDurations.item, ease: MOTION_EASE }}
+          className="rounded-lg bg-white p-8 text-center shadow-sm"
         >
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -117,10 +119,11 @@ export function ProfessionalRoundtableForm() {
         <h3 className="text-xl font-bold text-gray-900 mb-4">Join Our Professional Roundtable</h3>
         
         {submitStatus === 'error' && (
-          <motion.div 
-            initial={{ opacity: 0, y: -10 }}
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-4 p-4 bg-red-50 border border-red-200 text-red-800 rounded-lg"
+            transition={collapseTransition}
+            className="mb-4 rounded-lg border border-red-200 bg-red-50 p-4 text-red-800"
           >
             <div className="flex items-center">
               <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">

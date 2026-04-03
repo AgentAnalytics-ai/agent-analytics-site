@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { motionStaggerContainer, motionStaggerItem } from '@/lib/motion';
 import Link from 'next/link';
 import { ArrowRight, Phone, Mail, MapPin, Calendar } from 'lucide-react';
 import { CityData } from '@/types/location';
@@ -10,28 +11,11 @@ interface LocationContactProps {
 }
 
 export default function LocationContact({ city }: LocationContactProps) {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1] as const,
-      },
-    },
-  };
+  const containerVariants = motionStaggerContainer({
+    staggerChildren: 0.2,
+    delayChildren: 0.1,
+  });
+  const itemVariants = motionStaggerItem();
 
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-950">

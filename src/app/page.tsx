@@ -8,7 +8,6 @@ import { VisualShowcase } from '../components/home/VisualShowcase';
 import { FutureTechSection } from '../components/home/FutureTechSection';
 import HowWeWork from '../components/home/HowWeWork';
 import { DifferentiationSection } from '../components/home/DifferentiationSection';
-import { BuyerConfidence } from '../components/home/BuyerConfidence';
 
 export default function Home() {
   return (

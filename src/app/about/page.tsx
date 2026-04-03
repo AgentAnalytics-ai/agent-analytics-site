@@ -17,7 +17,7 @@ import {
   Languages,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Card } from '@/components/ui/Card';
+import { enterTransition, fadeUpReveal, fadeUpStagger } from '@/lib/motion';
 
 export default function AboutPage() {
   const { openCalendly } = useCalendly();
@@ -93,12 +93,7 @@ export default function AboutPage() {
         <Container className="relative z-10">
           <div className="text-center">
             {/* Studio Positioning */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="mb-8"
-            >
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={enterTransition(0)} className="mb-8">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 rounded-full text-blue-700 dark:text-blue-300 text-sm font-medium mb-6">
                 <Languages className="w-4 h-4" />
                 We Speak Your Language
@@ -106,10 +101,10 @@ export default function AboutPage() {
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-900 dark:text-white mb-8 leading-tight tracking-tight"
+              transition={enterTransition(0.1)}
+              className="mb-8 text-5xl font-bold leading-tight tracking-tight text-neutral-900 dark:text-white md:text-6xl lg:text-7xl"
             >
               Every Business Has
               <br />
@@ -119,10 +114,10 @@ export default function AboutPage() {
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-xl md:text-2xl text-neutral-600 dark:text-neutral-400 mb-12 max-w-4xl mx-auto leading-relaxed"
+              transition={enterTransition(0.18)}
+              className="mx-auto mb-12 max-w-4xl text-xl leading-relaxed text-neutral-600 dark:text-neutral-400 md:text-2xl"
             >
               We're a consulting studio that understands each organization is unique. 
               Like cities, every business has its own culture, challenges, and way of operating. 
@@ -130,9 +125,9 @@ export default function AboutPage() {
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              transition={enterTransition(0.26)}
               className="flex justify-center"
             >
               <Button
@@ -155,9 +150,9 @@ export default function AboutPage() {
         <Container className="relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -18 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={enterTransition(0)}
             >
               <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-6 tracking-tight">
                 Why a Studio?
@@ -193,10 +188,10 @@ export default function AboutPage() {
             </motion.div>
             
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: 18 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="bg-white rounded-2xl p-8 shadow-xl"
+              transition={enterTransition(0.12)}
+              className="rounded-2xl bg-white p-8 shadow-xl"
             >
               <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4 tracking-tight">Our Approach</h3>
               <p className="text-lg text-neutral-600 dark:text-neutral-400 mb-6">
@@ -221,12 +216,7 @@ export default function AboutPage() {
       {/* What We Help With */}
       <Section spacing="xl" className="relative">
         <Container className="relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
+          <motion.div {...fadeUpReveal()} className="mb-16 text-center">
             <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-6 tracking-tight">
               We Help You Navigate
             </h2>
@@ -253,13 +243,7 @@ export default function AboutPage() {
                 icon: Target,
               },
             ].map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-                className="text-center"
-              >
+              <motion.div key={index} {...fadeUpStagger(index, 0, 0.12)} className="text-center">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <service.icon className="w-8 h-8 text-blue-600" />
                 </div>

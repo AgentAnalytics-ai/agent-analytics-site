@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { collapseTransition, fadeUpReveal, fadeUpStagger } from '@/lib/motion';
 import { Container } from '../ui/Container';
 import { Section } from '../ui/Section';
 import { ChevronDown, X, Brain, CreditCard, Shield, Users, CheckCircle } from 'lucide-react';
@@ -18,7 +19,8 @@ export function DifferentiationSection() {
     {
       icon: Brain,
       title: 'Our AI thinks ahead',
-      description: 'It doesn\'t just follow instructions—it understands context, learns patterns, and makes decisions based on your business logic. Most companies won\'t have access to this level of intelligence until 2027. You get it now.',
+      description:
+        'It doesn\'t just follow instructions—context, patterns, and decisions sit inside workflows you define, with logging and controls—not a black box.',
     },
     {
       icon: Shield,
@@ -40,13 +42,7 @@ export function DifferentiationSection() {
     <Section spacing="lg" background="white">
       <Container>
         <div className="max-w-3xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-8"
-          >
+          <motion.div {...fadeUpReveal()} className="mb-8 text-center">
             <h2 className="text-2xl md:text-3xl font-bold text-neutral-900 dark:text-white mb-2 tracking-tight">
               Why This Is Different & Buyer Confidence
             </h2>
@@ -62,11 +58,8 @@ export function DifferentiationSection() {
               return (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.03 }}
-                  className="bg-white dark:bg-neutral-800/50 rounded-lg border border-neutral-200 dark:border-neutral-700 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+                  {...fadeUpStagger(index, 0, 0.06)}
+                  className="overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm transition-all duration-300 hover:shadow-md dark:border-neutral-700 dark:bg-neutral-800/50"
                 >
                   <button
                     onClick={() => toggleItem(index)}
@@ -92,7 +85,7 @@ export function DifferentiationSection() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
+                        transition={collapseTransition}
                         className="overflow-hidden"
                       >
                         <div className="px-4 pb-4">

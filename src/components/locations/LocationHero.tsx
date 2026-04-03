@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { motionStaggerContainer, motionStaggerItem } from '@/lib/motion';
 import Link from 'next/link';
 import { ArrowRight, MapPin, Sparkles } from 'lucide-react';
 import { CityData } from '@/types/location';
@@ -10,28 +11,8 @@ interface LocationHeroProps {
 }
 
 export default function LocationHero({ city }: LocationHeroProps) {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1] as const,
-      },
-    },
-  };
+  const containerVariants = motionStaggerContainer();
+  const itemVariants = motionStaggerItem();
 
   return (
     <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-white dark:bg-gray-950">

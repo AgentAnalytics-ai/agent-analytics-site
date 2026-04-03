@@ -6,6 +6,7 @@ import { Section } from '../ui/Section';
 import Button from '../ui/Button';
 import { Card } from '../ui/Card';
 import { motion } from 'framer-motion';
+import { enterTransition } from '@/lib/motion';
 import {
   ArrowRight,
   Mail,
@@ -177,11 +178,11 @@ export function ContactForm() {
 
       <Container className="relative z-10">
         <div className="max-w-4xl mx-auto">
-          <motion.div 
-            className="text-center mb-12"
+          <motion.div
+            className="mb-12 text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={enterTransition(0)}
           >
             <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6 tracking-tight">
               Ready to Transform Your Business?
@@ -195,9 +196,9 @@ export function ContactForm() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Information */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -18 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={enterTransition(0.12)}
             >
               <h3 className="text-2xl font-bold text-neutral-900 mb-6 tracking-tight">
                 Get in Touch
@@ -232,9 +233,9 @@ export function ContactForm() {
 
             {/* Contact Form */}
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: 18 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={enterTransition(0.22)}
             >
               <Card className="p-8">
                 {isSubmitted ? (

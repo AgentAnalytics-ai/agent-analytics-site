@@ -1,132 +1,191 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import { motion, useReducedMotion } from 'framer-motion';
+import { MOTION_EASE } from '@/lib/motion';
+import { Check } from 'lucide-react';
+import { HeroInteractivePanel } from './HeroInteractivePanel';
 import { Container } from '../ui/Container';
 import Button from '../ui/Button';
 import { CALENDLY_LINKS } from '@/lib/constants';
 import { useCalendly } from '@/hooks/useCalendly';
+
+/** Export from Nano Banana (or similar) as WebP; enable with NEXT_PUBLIC_SHOW_HERO_AMBIENT=true */
+const HERO_AMBIENT_SRC = '/images/hero/ambient.webp';
+const showHeroAmbient = process.env.NEXT_PUBLIC_SHOW_HERO_AMBIENT === 'true';
+
+const TRUST_POINTS = [
+  'Portals, workflows, and custom software—not generic chat wrappers',
+  'Connected to your real systems and data',
+  'Built for operators who need it live in production',
+] as const;
 
 export default function Hero({
   title,
   subtitle,
   primaryCTA,
   secondaryCTA,
+  eyebrow = 'Software that runs your operations',
 }: {
   title: string;
   subtitle: string;
   primaryCTA: string;
   secondaryCTA: string;
+  eyebrow?: string;
 }) {
   const { openCalendly } = useCalendly();
+  const reduceMotion = useReducedMotion();
 
   const handleCalendlyClick = () => {
     openCalendly(CALENDLY_LINKS.talkStrategy);
   };
 
+  const orbTransition = reduceMotion
+    ? { duration: 0 }
+    : { duration: 10, repeat: Infinity, ease: MOTION_EASE };
+  const driftTransition = reduceMotion
+    ? { duration: 0 }
+    : { duration: 14, repeat: Infinity, ease: MOTION_EASE };
+  const driftSlow = reduceMotion
+    ? { duration: 0 }
+    : { duration: 18, repeat: Infinity, ease: MOTION_EASE };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-neutral-50 via-white to-blue-50/50 dark:from-neutral-900 dark:via-neutral-800 dark:to-blue-900/20">
-      {/* Layer 1 — Ambient background: center radial glow + slow drift (architectural, not decorative) */}
+    <section className="relative min-h-[min(100dvh,56rem)] flex items-center overflow-hidden bg-gradient-to-br from-neutral-50 via-white to-blue-50/50 py-16 dark:from-neutral-950 dark:via-neutral-900 dark:to-blue-950/25 md:py-24">
+      {showHeroAmbient ? (
+        <div
+          className="pointer-events-none absolute inset-0 z-0 hidden dark:block"
+          aria-hidden
+        >
+          <Image
+            src={HERO_AMBIENT_SRC}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+          <div
+            className="absolute inset-0 bg-gradient-to-b from-neutral-950/80 via-neutral-900/70 to-neutral-950/85"
+            aria-hidden
+          />
+        </div>
+      ) : null}
+
       <motion.div
-        className="absolute inset-0 pointer-events-none"
+        className={`absolute inset-0 z-0 pointer-events-none ${showHeroAmbient ? 'dark:opacity-40' : ''}`}
         initial={false}
-        animate={{
-          opacity: 1,
-        }}
+        animate={{ opacity: 1 }}
       >
-        {/* Center glow — primary depth */}
         <motion.div
-          className="absolute left-1/2 top-1/2 w-[min(100vw,42rem)] h-80 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-blue-200/50 via-sky-100/40 to-transparent dark:from-blue-500/20 dark:via-sky-500/15 dark:to-transparent blur-3xl"
-          animate={{
-            opacity: [0.2, 0.35, 0.2],
-            scale: [1, 1.08, 1],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        {/* Subtle side drifts — slow, layered */}
-        <motion.div
-          className="absolute left-[-8rem] top-24 h-72 w-72 rounded-full bg-blue-200/40 dark:bg-blue-500/15 blur-3xl"
-          animate={{ x: [0, 18, 0], y: [0, -12, 0] }}
-          transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute left-1/2 top-1/2 h-72 w-[min(100vw,40rem)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-blue-200/40 via-sky-100/30 to-transparent blur-3xl dark:from-blue-500/15 dark:via-sky-500/10 dark:to-transparent"
+          animate={
+            reduceMotion
+              ? { opacity: 0.28, scale: 1 }
+              : { opacity: [0.18, 0.28, 0.18], scale: [1, 1.05, 1] }
+          }
+          transition={orbTransition}
         />
         <motion.div
-          className="absolute right-[-6rem] top-40 h-64 w-64 rounded-full bg-sky-200/30 dark:bg-sky-500/15 blur-3xl"
-          animate={{ x: [0, -20, 0], y: [0, 16, 0] }}
-          transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute left-[-6rem] top-20 h-64 w-64 rounded-full bg-blue-200/35 blur-3xl dark:bg-blue-500/12"
+          animate={reduceMotion ? { x: 0, y: 0 } : { x: [0, 12, 0], y: [0, -8, 0] }}
+          transition={driftTransition}
+        />
+        <motion.div
+          className="absolute right-[-5rem] top-36 h-56 w-56 rounded-full bg-sky-200/28 blur-3xl dark:bg-sky-500/10"
+          animate={reduceMotion ? { x: 0, y: 0 } : { x: [0, -14, 0], y: [0, 10, 0] }}
+          transition={driftSlow}
         />
       </motion.div>
 
-      {/* Very subtle grid — texture, not distraction */}
-      <motion.div
-        className="absolute inset-0 opacity-[0.03] dark:opacity-[0.06] pointer-events-none"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(59,130,246,0.15) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(59,130,246,0.15) 1px, transparent 1px)
-          `,
-          backgroundSize: '48px 48px',
-        }}
-        animate={{ x: [0, -24, 0], y: [0, -24, 0] }}
-        transition={{ duration: 24, repeat: Infinity, ease: 'linear' }}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(rgba(59,130,246,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.06)_1px,transparent_1px)] bg-[size:48px_48px] opacity-[0.35] dark:opacity-[0.5] motion-reduce:opacity-25"
+        aria-hidden
       />
 
-      <Container className="relative z-10">
-        <div className="text-center">
-          {/* Main headline — 0.3s, first */}
-          <motion.h1
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-900 dark:text-white mb-6 md:mb-8 leading-[1.1] tracking-tight max-w-4xl mx-auto"
-          >
-            {title}
-          </motion.h1>
+      <Container className="relative z-10 max-w-7xl">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <div className="text-center lg:text-left">
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, ease: MOTION_EASE }}
+              className="font-display mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400"
+            >
+              {eyebrow}
+            </motion.p>
 
-          {/* Subtitle — +0.1s delay, slightly softer opacity */}
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.1, ease: 'easeOut' }}
-            className="text-xl md:text-2xl text-neutral-500 dark:text-neutral-400 mb-10 md:mb-12 max-w-2xl mx-auto leading-snug"
-          >
-            {subtitle}
-          </motion.p>
+            <motion.h1
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, ease: MOTION_EASE }}
+              className="font-display text-4xl font-bold leading-[1.08] tracking-tight text-neutral-900 dark:text-white sm:text-5xl lg:text-6xl xl:text-[3.35rem]"
+            >
+              {title}
+            </motion.h1>
 
-          {/* CTA Buttons — last, with hover lift */}
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.2, ease: 'easeOut' }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <motion.div whileHover={{ y: -2, scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <Button
-                variant="cta"
-                size="lg"
-                withArrow
-                onClick={handleCalendlyClick}
-                className="bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-semibold px-8 py-4 text-lg shadow-lg hover:shadow-xl transition-shadow duration-300 w-full sm:w-auto"
-              >
-                {primaryCTA}
-              </Button>
-            </motion.div>
-            {secondaryCTA && (
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.06, ease: MOTION_EASE }}
+              className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-neutral-600 dark:text-neutral-400 lg:mx-0 lg:max-w-[34rem]"
+            >
+              {subtitle}
+            </motion.p>
+
+            <motion.ul
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.1, ease: MOTION_EASE }}
+              className="mx-auto mt-8 flex max-w-xl flex-col gap-3 text-left text-sm text-neutral-600 dark:text-neutral-400 sm:mx-0 sm:max-w-md"
+            >
+              {TRUST_POINTS.map((line) => (
+                <li key={line} className="flex items-start gap-2.5">
+                  <Check
+                    className="mt-0.5 size-4 shrink-0 text-sky-500 dark:text-sky-400"
+                    strokeWidth={2.5}
+                    aria-hidden
+                  />
+                  <span>{line}</span>
+                </li>
+              ))}
+            </motion.ul>
+
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.14, ease: MOTION_EASE }}
+              className="mt-10 flex flex-col items-stretch justify-center gap-4 sm:flex-row sm:justify-start"
+            >
               <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
                 <Button
-                  variant="outline"
+                  variant="cta"
                   size="lg"
-                  onClick={() => (window.location.href = '/services')}
-                  className="border-neutral-300 dark:border-neutral-600 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 hover:border-neutral-400 dark:hover:border-neutral-500 w-full sm:w-auto"
+                  withArrow
+                  onClick={handleCalendlyClick}
+                  className="w-full bg-gradient-to-r from-sky-500 to-blue-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-shadow duration-300 hover:from-sky-600 hover:to-blue-700 hover:shadow-xl sm:w-auto"
                 >
-                  {secondaryCTA}
+                  {primaryCTA}
                 </Button>
               </motion.div>
-            )}
-          </motion.div>
+              {secondaryCTA ? (
+                <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+                  <Link
+                    href="/services"
+                    className="inline-flex w-full items-center justify-center rounded-2xl border-2 border-neutral-300 bg-transparent px-10 py-5 text-lg font-semibold tracking-wide text-neutral-700 transition-all duration-300 hover:scale-105 hover:bg-neutral-50 active:scale-95 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 dark:border-neutral-600 dark:text-neutral-200 dark:hover:bg-neutral-800/50 sm:w-auto"
+                  >
+                    {secondaryCTA}
+                  </Link>
+                </motion.div>
+              ) : null}
+            </motion.div>
+          </div>
+
+          <div>
+            <HeroInteractivePanel />
+          </div>
         </div>
       </Container>
     </section>

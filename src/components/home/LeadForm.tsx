@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { fadeUpReveal } from '@/lib/motion';
 import { Container } from '../ui/Container';
 import { Section } from '../ui/Section';
 import Button from '../ui/Button';
@@ -53,8 +55,8 @@ export function LeadForm() {
   return (
     <Section spacing="xl" background="gray">
       <Container>
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-8 tracking-tight">
+        <motion.div {...fadeUpReveal()} className="mx-auto max-w-2xl text-center">
+          <h2 className="mb-8 text-4xl font-bold tracking-tight text-neutral-900 dark:text-white md:text-5xl">
             If you want AI that actually helps your business, let's build it.
           </h2>
 
@@ -113,10 +115,10 @@ export function LeadForm() {
             </Button>
           </form>
 
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-4">
+          <p className="mt-4 text-sm text-neutral-500 dark:text-neutral-400">
             We'll follow up within 24 hours.
           </p>
-        </div>
+        </motion.div>
       </Container>
     </Section>
   );

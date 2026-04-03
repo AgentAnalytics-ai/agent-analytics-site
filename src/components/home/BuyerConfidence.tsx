@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { collapseTransition, fadeUpReveal, fadeUpStagger } from '@/lib/motion';
 import { Container } from '../ui/Container';
 import { Section } from '../ui/Section';
 import { ChevronDown, CheckCircle } from 'lucide-react';
@@ -44,7 +45,8 @@ export function BuyerConfidence() {
     },
     {
       question: 'Is this technology proven?',
-      answer: 'Yes. Our AI features are already powering systems in production. This isn\'t beta software—it\'s the technology that will define how businesses use AI in 2026 and beyond. You\'re getting it now, before it becomes standard.',
+      answer:
+        'Yes. We ship patterns that are already running in production environments—observable, reversible, and owned by you—not experimental chat demos.',
     },
   ];
 
@@ -56,13 +58,7 @@ export function BuyerConfidence() {
     <Section spacing="xl" background="white">
       <Container>
         <div className="max-w-3xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
+          <motion.div {...fadeUpReveal()} className="mb-16 text-center">
             <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-6 tracking-tight">
               Buyer Confidence
             </h2>
@@ -75,11 +71,8 @@ export function BuyerConfidence() {
             {questions.map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.05 }}
-                className="bg-white dark:bg-neutral-800/50 rounded-2xl border border-neutral-200 dark:border-neutral-700 overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+                {...fadeUpStagger(index, 0, 0.055)}
+                className="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-lg transition-all duration-300 hover:shadow-xl dark:border-neutral-700 dark:bg-neutral-800/50"
               >
                 <button
                   onClick={() => toggleQuestion(index)}
@@ -100,7 +93,7 @@ export function BuyerConfidence() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
+                      transition={collapseTransition}
                       className="overflow-hidden"
                     >
                       <div className="px-6 pb-6">

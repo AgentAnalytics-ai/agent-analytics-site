@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { MOTION_EASE, enterTransition, fadeUpReveal, motionDurations } from '@/lib/motion';
 import { ProfessionalRoundtableForm } from '@/components/social/ProfessionalRoundtableForm';
 import { 
   Globe, ShoppingCart, FileText, Brain, Shield, Monitor, Zap, Database, CreditCard, Mail, Users, BarChart3,
@@ -170,16 +171,16 @@ export default function RoundtablePage(): JSX.Element {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-6 tracking-tight"
+            transition={enterTransition(0)}
+            className="mb-6 text-4xl font-bold tracking-tight text-neutral-900 dark:text-white md:text-5xl"
           >
             What We Actually Build
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto"
+            transition={enterTransition(0.1)}
+            className="mx-auto max-w-3xl text-xl text-neutral-600 dark:text-neutral-400"
           >
             You get software that works—not a chatbot, not consulting, not complexity. Just real software that solves your problems.
           </motion.p>
@@ -189,8 +190,8 @@ export default function RoundtablePage(): JSX.Element {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
+          transition={enterTransition(0.2)}
+          className="mb-12 flex flex-wrap justify-center gap-3"
         >
           {capabilities.map((capability) => {
             const Icon = capability.icon;
@@ -215,10 +216,10 @@ export default function RoundtablePage(): JSX.Element {
         {/* Features Grid - Clean Format */}
         <motion.div
           key={selectedCapability}
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="max-w-4xl mx-auto mb-16"
+          transition={{ duration: motionDurations.micro, ease: MOTION_EASE }}
+          className="mx-auto mb-16 max-w-4xl"
         >
           <div className="grid md:grid-cols-2 gap-6">
             {currentCapability.features.map((feature, index) => {
@@ -226,10 +227,10 @@ export default function RoundtablePage(): JSX.Element {
               return (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="rounded-2xl p-6 border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 transition-all duration-300 hover:shadow-lg"
+                  transition={enterTransition(index * 0.085)}
+                  className="rounded-2xl border border-neutral-200 bg-white p-6 transition-all duration-300 hover:shadow-lg dark:border-neutral-800 dark:bg-neutral-900"
                 >
                   <div className="flex items-start gap-4">
                     <div className="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-800">
@@ -251,13 +252,7 @@ export default function RoundtablePage(): JSX.Element {
         </motion.div>
 
         {/* CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 md:mb-16"
-        >
+        <motion.div {...fadeUpReveal()} className="mb-12 md:mb-16">
           <div className="relative p-10 md:p-12 rounded-2xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
             <div className="text-center">
               <div className="inline-flex p-3 rounded-xl bg-neutral-900 dark:bg-neutral-100 mb-5">
@@ -274,13 +269,7 @@ export default function RoundtablePage(): JSX.Element {
         </motion.div>
 
         {/* Form Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-12 md:mb-16"
-        >
+        <motion.div {...fadeUpReveal({ delay: 0.08 })} className="mb-12 md:mb-16">
           <ProfessionalRoundtableForm />
         </motion.div>
       </Container>

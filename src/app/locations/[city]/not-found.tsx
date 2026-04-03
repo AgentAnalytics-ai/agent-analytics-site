@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { enterTransition } from '@/lib/motion';
 import { MapPin, ArrowLeft, Globe } from 'lucide-react';
 
 export default function CityNotFound() {
@@ -11,7 +12,7 @@ export default function CityNotFound() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={enterTransition(0)}
         >
           {/* Icon */}
           <div className="w-20 h-20 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-8">

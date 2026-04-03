@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
+import { fadeUpReveal, fadeUpStagger } from '@/lib/motion';
 import { Container } from '../ui/Container';
 import { Section } from '../ui/Section';
 import { 
@@ -543,13 +544,7 @@ export function VisualShowcase() {
       <Container className="relative z-10">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
+          <motion.div {...fadeUpReveal()} className="mb-16 text-center">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 dark:text-white mb-6 tracking-tight">
               What We Actually Build.<br />
               <span className="text-neutral-600 dark:text-neutral-400 font-light">And Why It Matters.</span>
@@ -563,11 +558,8 @@ export function VisualShowcase() {
           <div ref={containerRef} className="relative">
             {/* Main Dashboard Card */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, type: 'spring', stiffness: 200, damping: 25 }}
-              className="bg-white dark:bg-neutral-900 rounded-3xl border border-neutral-200/80 dark:border-neutral-800/80 shadow-2xl shadow-neutral-900/5 dark:shadow-neutral-950/50 overflow-hidden backdrop-blur-sm"
+              {...fadeUpReveal({ delay: 0.12, y: 24 })}
+              className="overflow-hidden rounded-3xl border border-neutral-200/80 bg-white shadow-2xl shadow-neutral-900/5 backdrop-blur-sm dark:border-neutral-800/80 dark:bg-neutral-900 dark:shadow-neutral-950/50"
             >
               {/* Dashboard Header */}
               <div className="px-6 md:px-8 py-5 border-b border-neutral-200/60 dark:border-neutral-800/60 bg-gradient-to-r from-neutral-50/80 via-white to-neutral-50/80 dark:from-neutral-900/80 via-neutral-900 dark:to-neutral-900/80 backdrop-blur-sm">
@@ -598,10 +590,7 @@ export function VisualShowcase() {
                     return (
                       <motion.button
                         key={product.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: index * 0.1, type: 'spring' }}
+                        {...fadeUpStagger(index, 0.06, 0.095)}
                         onMouseEnter={() => setHoveredProduct(product.id)}
                         onMouseLeave={() => setHoveredProduct(null)}
                         onClick={() => setSelectedProduct(product.id)}

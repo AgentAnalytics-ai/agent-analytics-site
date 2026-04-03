@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { enterTransition } from '@/lib/motion';
 import { Home, Mail } from 'lucide-react';
 import { Logo } from '@/components/ui/Logo';
 
@@ -17,7 +18,7 @@ export default function NotFound() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={enterTransition(0)}
         >
           {/* Logo */}
           <div className="mb-8 flex justify-center">

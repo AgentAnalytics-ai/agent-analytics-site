@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
@@ -7,10 +7,17 @@ import { ScrollZoomIntoHeader } from '@/components/layout/ScrollZoomIntoHeader';
 import { ThemeProvider } from '@/components/ui/ThemeProvider';
 import Script from 'next/script';
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
+});
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-display',
+  weight: ['500', '600', '700'],
 });
 
 export const metadata: Metadata = {
@@ -75,7 +82,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`h-full ${inter.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`h-full ${inter.variable} ${plusJakarta.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <meta name="theme-color" content="#1e293b" />
         <meta name="color-scheme" content="light dark" />

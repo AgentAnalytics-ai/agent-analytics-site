@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { motionStaggerContainer, motionStaggerItem } from '@/lib/motion';
 import { MapPin, Globe, Shield, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
@@ -20,28 +21,11 @@ interface LocalCredibilityProps {
 }
 
 export default function LocalCredibility({ city }: LocalCredibilityProps) {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1] as const,
-      },
-    },
-  };
+  const containerVariants = motionStaggerContainer({
+    staggerChildren: 0.2,
+    delayChildren: 0.1,
+  });
+  const itemVariants = motionStaggerItem();
 
   return (
     <section className="py-20 bg-gray-50 dark:bg-gray-900">

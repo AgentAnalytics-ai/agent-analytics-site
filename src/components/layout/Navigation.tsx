@@ -8,6 +8,7 @@ import { Menu, X } from 'lucide-react';
 import { Container } from '../ui/Container';
 import { DarkModeToggle } from '@/components/ui/DarkModeToggle';
 import { Logo } from '../ui/Logo';
+import { MOTION_EASE, collapseTransition, motionDurations } from '@/lib/motion';
 
 const NAV_ITEMS = [
   { label: 'Home', href: '/' },
@@ -21,7 +22,6 @@ const SCROLL_THRESHOLD = 24;
 // Stagger timing for scroll-in effect when glass state activates
 const SCROLL_IN_DURATION = 0.32;
 const SCROLL_IN_STAGGER = 0.04;
-const SCROLL_IN_EASE = [0.22, 0.61, 0.36, 1];
 
 // 2027-style: subtle "alive" motion (breathing), slow so it feels calm
 const LOGO_BREATHE_DURATION = 5;
@@ -124,7 +124,7 @@ export function Navigation() {
       }}
       transition={{
         duration: playScrollIn ? SCROLL_IN_DURATION : 0.25,
-        ease: (playScrollIn ? SCROLL_IN_EASE : 'easeOut') as any,
+        ease: MOTION_EASE,
       }}
       style={{
         backdropFilter: scrolled ? 'blur(14px)' : 'blur(0px)',
@@ -141,7 +141,7 @@ export function Navigation() {
           animate={{ opacity: 1, y: 0 }}
           transition={{
             duration: SCROLL_IN_DURATION,
-            ease: SCROLL_IN_EASE as any,
+            ease: MOTION_EASE,
             delay: 0,
           }}
         >
@@ -162,7 +162,7 @@ export function Navigation() {
             }}
             whileHover={{
               scale: 1.04,
-              transition: { duration: 0.2, ease: 'easeOut' },
+              transition: { duration: motionDurations.micro, ease: MOTION_EASE },
             }}
             whileTap={{ scale: 0.98 }}
           >
@@ -205,7 +205,7 @@ export function Navigation() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
                   duration: SCROLL_IN_DURATION,
-                  ease: SCROLL_IN_EASE as any,
+                  ease: MOTION_EASE,
                   delay: playScrollIn ? SCROLL_IN_STAGGER * (index + 1) : 0,
                 }}
                 className="relative"
@@ -256,7 +256,8 @@ export function Navigation() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800"
+            transition={collapseTransition}
+            className="md:hidden border-b border-neutral-200 bg-white/95 backdrop-blur-md dark:border-neutral-800 dark:bg-neutral-900/95"
           >
             <Container>
               <div className="py-4 space-y-3">

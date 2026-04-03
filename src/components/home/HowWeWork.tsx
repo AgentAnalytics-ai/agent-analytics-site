@@ -2,21 +2,25 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { fadeUpReveal, fadeUpStagger } from '@/lib/motion';
 import { Container } from '../ui/Container';
 import { Section } from '../ui/Section';
 
 const steps = [
   {
     title: 'We connect to your data and tools.',
-    description: 'Your CRM, email, databases, and business tools—everything connects seamlessly.',
+    description:
+      'CRM, email, databases, billing—integrated so software reflects how work really flows.',
   },
   {
-    title: 'We add AI that understands your workflows.',
-    description: 'Intelligence that learns your patterns, understands context, and makes decisions based on your business logic.',
+    title: 'We embed intelligence in the workflow—not beside it.',
+    description:
+      'Routing, drafting, and checks follow rules you approve. Context comes from your systems, not a generic chat window.',
   },
   {
-    title: 'You get answers, actions, and automation.',
-    description: 'Real software that works. Payments flow to your account. Tasks happen automatically. You focus on growth.',
+    title: 'You get actions, automation, and ownership.',
+    description:
+      'Production-ready software you can run, extend, and stand behind—focused on outcomes, not demos.',
   },
 ];
 
@@ -24,19 +28,26 @@ export default function HowWeWork() {
   return (
     <Section spacing="xl">
       <Container>
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-8">
+        <div className="mx-auto max-w-6xl">
+          <motion.div {...fadeUpReveal()} className="mx-auto mb-14 max-w-2xl text-center">
+            <p className="mb-3 font-display text-xs font-semibold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">
+              Process
+            </p>
+            <h2 className="font-display text-3xl font-bold tracking-tight text-neutral-900 dark:text-white md:text-4xl">
+              How we work
+            </h2>
+            <p className="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+              From your existing stack to shipped software—in clear, accountable steps.
+            </p>
+          </motion.div>
+
+          <div className="grid gap-8 md:grid-cols-3">
             {steps.map((step, index) => (
-              <motion.div
-                key={step.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="text-center"
-              >
-                <div className="bg-white dark:bg-neutral-800/50 rounded-2xl p-8 border border-neutral-200 dark:border-neutral-700 hover:border-neutral-300 dark:hover:border-neutral-600 transition-all duration-300 hover:bg-neutral-50 dark:hover:bg-neutral-800/70 shadow-lg hover:shadow-xl">
-                  <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3 tracking-tight">{step.title}</h3>
+              <motion.div key={step.title} {...fadeUpStagger(index)} className="text-center">
+                <div className="rounded-2xl border border-neutral-200 bg-white p-8 shadow-lg transition-all duration-300 hover:border-neutral-300 hover:bg-neutral-50 hover:shadow-xl dark:border-neutral-700 dark:bg-neutral-800/50 dark:hover:border-neutral-600 dark:hover:bg-neutral-800/70">
+                  <h3 className="mb-3 text-xl font-semibold tracking-tight text-neutral-900 dark:text-white">
+                    {step.title}
+                  </h3>
                   <p className="text-neutral-600 dark:text-neutral-400">{step.description}</p>
                 </div>
               </motion.div>

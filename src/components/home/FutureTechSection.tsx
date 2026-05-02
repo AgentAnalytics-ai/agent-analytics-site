@@ -66,7 +66,7 @@ export function FutureTechSection() {
               Embedded in operations—not bolted on as a chatbot
             </h2>
             <p className="mx-auto max-w-3xl text-xl text-neutral-600 dark:text-neutral-400">
-              After the problems above and the examples in the dashboard, this is the through-line: software that moves work forward inside your
+              After the problems above and the examples on the homepage, this is the through-line: software that moves work forward inside your
               systems, with controls you can stand behind.
             </p>
           </motion.div>

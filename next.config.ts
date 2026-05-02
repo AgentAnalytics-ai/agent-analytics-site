@@ -1,5 +1,13 @@
-// next.config.ts
+import path from 'path';
+import { fileURLToPath } from 'node:url';
+
+// Pin Turbopack root so dev/build don’t pick a parent folder’s lockfile (e.g. user home).
+const projectRoot = path.dirname(fileURLToPath(import.meta.url));
+
 const nextConfig = {
+  turbopack: {
+    root: projectRoot,
+  },
   reactStrictMode: true,
   images: {
     remotePatterns: [

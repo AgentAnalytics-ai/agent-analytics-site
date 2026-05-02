@@ -1,39 +1,47 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
 import { fadeUpReveal, fadeUpStagger } from '@/lib/motion';
 import { Container } from '../ui/Container';
 import { Section } from '../ui/Section';
-import { 
-  Globe, 
-  FileText, 
-  Zap, 
+import {
+  Globe,
+  FileText,
+  Zap,
   Brain,
-  CheckCircle2,
   Users,
-  Mail,
   CreditCard,
-  BarChart3,
   TrendingUp,
-  ArrowRight,
-  Database,
   Activity,
   Clock,
-  Shield,
-  MessageSquare,
-  Plug,
-  LucideIcon
+  LucideIcon,
 } from 'lucide-react';
+import { OFFERINGS, type OfferingSlug } from '@/data/offerings';
 
-interface Product {
+/**
+ * One lane = one job-to-be-done. Cards use a hook only; the panel carries fit, outcome, and plays—no shared sentences between layers.
+ */
+interface ShowcaseLane {
   id: string;
-  problem: string;
-  solution: string;
+  category: string;
+  /** Picker-only line—must not repeat `fit` or `outcome`. */
+  cardHook: string;
+  /** Full “where this applies” copy—only in the detail panel. */
+  fit: string;
+  /** Operating result—complementary grammar to `fit`, not a restatement. */
   outcome: string;
+  /** Consultant-style guardrail: how we’d scope or sequence this. */
+  deliveryNote: string;
+  /** Right column: one-line “why this snapshot exists.” */
+  previewCaption: string;
+  /** Map delivery pattern → packaged offering pages (context is unique; link labels come from `OFFERINGS`). */
+  offeringRefs: readonly { slug: OfferingSlug; context: string }[];
   icon: LucideIcon;
   connections: string[];
-  scenarios: string[];
+  /** Concrete micro-plays; avoid echoing `outcome` verbatim. */
+  plays: string[];
 }
 
 const containerVariants = {
@@ -84,451 +92,217 @@ export function VisualShowcase() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [mouseX, mouseY]);
 
-  const products: Product[] = [
+  const lanes: ShowcaseLane[] = [
     {
       id: 'portals',
-      problem: 'When your clients need 24/7 access to documents, payments, account management, and support—without overwhelming your team',
-      solution: 'We build business portals',
-      outcome: 'So clients serve themselves, payments process automatically, documents stay organized, and your team focuses on high-value work instead of routine requests.',
-      icon: FileText,
-      connections: ['CRM', 'Email', 'Payments', 'Storage'],
-      scenarios: [
-        'Client accesses contract, signs digitally, payment processes automatically',
-        'Client downloads invoices, views payment history, updates billing info',
-        'Client submits support ticket, gets instant response, tracks resolution',
-        'Client accesses training materials, completes courses, gets certified',
-        'Client views analytics dashboard, tracks usage, manages team access',
+      category: 'Client portals',
+      cardHook: 'Contracts, invoices, tickets—one signed-in lane.',
+      fit: 'Renewals and receipts are living in email instead of governed access.',
+      outcome: 'Self‑serve workflows; signatures and billing events reconcile cleanly.',
+      deliveryNote: 'Ship identity · audit trails · roles before pixel polish.',
+      previewCaption: 'Sample throughput only.',
+      offeringRefs: [
+        { slug: 'client-portal', context: 'Primary quote for authenticated client tools.' },
+        { slug: 'website', context: 'Public capture often runs beside the portal sprint.' },
       ],
+      icon: FileText,
+      connections: ['CRM', 'Payments', 'Identity', 'Storage'],
+      plays: ['Countersign kicks billing + CRM.', 'Billing updates without tickets.', 'SLA case visible to the client'],
     },
     {
       id: 'sales',
-      problem: 'When leads pile up in your inbox, deals stall in spreadsheets, and your sales team spends more time on data entry than closing',
-      solution: 'We build sales automation',
-      outcome: 'So leads qualify themselves, emails send at the right moment, deals move through pipeline automatically, and your team closes more with less effort.',
-      icon: Zap,
-      connections: ['CRM', 'Email', 'Payments', 'API'],
-      scenarios: [
-        'Lead fills form, gets instantly qualified, receives personalized sequence',
-        'Sales call happens, transcript automatically flows to implementation team',
-        'Deal closes, implementation gets everything they need automatically, no handoff gaps',
-        'Sales and implementation stay aligned through automatically synced notes and transcripts',
-        'Lead opens email, gets scored, moves to demo, calendar books automatically',
+      category: 'Pipeline & RevOps',
+      cardHook: 'Stages, transcripts, handoffs—without spreadsheet theater.',
+      fit: 'Pipeline truth is split across CRM, calendar, and notes.',
+      outcome: 'Instrumented exits; forecasts earn the number.',
+      deliveryNote: 'Measure aging before branching nurture automation.',
+      previewCaption: 'Sample motion only.',
+      offeringRefs: [
+        { slug: 'landing-lab', context: 'Campaign landings + measurement.' },
+        { slug: 'gtm-engine', context: 'Handoffs beside the cockpit.' },
       ],
+      icon: Zap,
+      connections: ['CRM', 'Email', 'Calendar', 'Dialer API'],
+      plays: ['Form → scored owner in SLA.', 'Transcript feeds implementation.', 'Demo no‑show branches itself'],
     },
     {
       id: 'applications',
-      problem: 'When you need a website or custom software that integrates with your existing tools, adapts to your workflows, and scales with your business',
-      solution: 'We build websites and web applications',
-      outcome: 'So you have a website or application built exactly for your needs—connects to all your systems, automates your workflows, and grows with you.',
-      icon: Globe,
-      connections: ['Database', 'API', 'CDN', 'Analytics'],
-      scenarios: [
-        'You need a website, we build it fast and modern, connects to your tools',
-        'Team logs in, sees personalized dashboard, workflows adapt to their role',
-        'Data syncs from 10+ systems in real-time, team works with single source of truth',
-        'Workflow automates: client submits form, system processes, team gets notified',
-        'Business grows, website scales automatically, performance stays fast',
+      category: 'Websites & custom apps',
+      cardHook: 'Public pages + authenticated tools sharing one backbone.',
+      fit: 'Marketers need velocity; ops need guarded workflows.',
+      outcome: 'One design system · typed integrations · sane releases.',
+      deliveryNote: 'Split marketer blocks from application logic.',
+      previewCaption: 'Sample health snapshot.',
+      offeringRefs: [
+        { slug: 'website', context: 'Public marketing surfaces.' },
+        { slug: 'client-portal', context: 'Signed-in tooling & vendor rooms.' },
       ],
+      icon: Globe,
+      connections: ['Edge CDN', 'APIs', 'Auth', 'Analytics'],
+      plays: ['Structural authoring vs hardened shell.', 'Schema‑checked forms.', 'Flags carve releases by cohort'],
     },
     {
       id: 'agents',
-      problem: 'When routine work piles up, data moves manually between systems, and important signals get missed in the noise',
-      solution: 'We build AI agents',
-      outcome: 'So routine work happens automatically, data flows between systems seamlessly, patterns get learned, anomalies get flagged, and you stay in control.',
-      icon: Brain,
-      connections: ['All Systems', 'Workflows', 'Data'],
-      scenarios: [
-        'Email arrives, agent analyzes urgency, routes to right person, flags if critical',
-        'Data needs to move, agent moves it automatically, logs action, notifies if issues',
-        'Pattern emerges, agent learns it, applies automatically, gets smarter over time',
-        'Anomaly detected, agent flags it, suggests action, learns from your response',
-        'Routine task repeats, agent automates it, frees your time, handles exceptions',
+      category: 'Workflow agents',
+      cardHook: 'Triage · route · summarize—humans approve the brittle paths.',
+      fit: 'Repetitive work leaks across consoles; noise hides real escalation.',
+      outcome: 'Clean queues · receipts · rollback when outliers spike.',
+      deliveryNote: 'SLA + checkpoints first—widen autonomy with proof.',
+      previewCaption: 'Sample runs · illustrative.',
+      offeringRefs: [
+        { slug: 'gtm-engine', context: 'Queues + approvals with the cockpit.' },
+        { slug: 'landing-lab', context: 'Fast iterate loops beside landings.' },
       ],
+      icon: Brain,
+      connections: ['Mailbox', 'Queue', 'Vector store', 'Webhooks'],
+      plays: ['Classify + page only above threshold.', 'Idempotent retries with alerts.', 'Playbooks promote after approvals'],
     },
   ];
 
-  const currentProduct = products.find(p => p.id === selectedProduct) || products[0];
+  const currentLane = lanes.find((p) => p.id === selectedProduct) || lanes[0];
 
-  // Advanced dashboard data with realistic scenarios
+  /** Lightweight “bam”—two twitching numbers + two feed lines only. */
   useEffect(() => {
-    const intervals: NodeJS.Timeout[] = [];
-    
-    if (selectedProduct === 'portals') {
-      const interval = setInterval(() => {
+    function pulse() {
+      if (selectedProduct === 'portals') {
         setDashboardData({
-          activeUsers: Math.floor(Math.random() * 50) + 150,
-          documentsAccessed: Math.floor(Math.random() * 25) + 45,
-          paymentsProcessed: Math.floor(Math.random() * 18) + 32,
-          recentActivity: [
-            { action: 'Contract signed', client: 'Acme Corp', amount: '$45,000', time: 'Just now' },
-            { action: 'Payment processed', client: 'TechStart Inc', amount: '$12,500', time: '1 min ago' },
-            { action: 'Document accessed', client: 'Global Solutions', amount: null, time: '2 min ago' },
+          n1: Math.floor(Math.random() * 42) + 158,
+          n2: Math.floor(Math.random() * 14) + 33,
+          feed: [
+            { title: 'Countersign posted', meta: 'Invoice run queued', tag: 'now' },
+            { title: 'SLA case visible', meta: 'Client · renewal block', tag: '2m' },
           ],
         });
-      }, 3000);
-      intervals.push(interval);
-    } else if (selectedProduct === 'sales') {
-      const interval = setInterval(() => {
+      } else if (selectedProduct === 'sales') {
         setDashboardData({
-          leadsToday: Math.floor(Math.random() * 35) + 120,
-          converted: Math.floor(Math.random() * 12) + 25,
-          revenue: Math.floor(Math.random() * 60000) + 75000,
-          transcriptsToday: Math.floor(Math.random() * 10) + 20,
-          pipeline: [
-            { stage: 'Qualified', count: Math.floor(Math.random() * 20) + 48, value: Math.floor(Math.random() * 200000) + 350000 },
-            { stage: 'Demo', count: Math.floor(Math.random() * 15) + 32, value: Math.floor(Math.random() * 150000) + 250000 },
-            { stage: 'Closing', count: Math.floor(Math.random() * 10) + 18, value: Math.floor(Math.random() * 100000) + 180000 },
-          ],
-          recentDeals: [
-            { company: 'StartupXYZ', stage: 'Demo', value: '$45K', rep: 'Sarah M.' },
-            { company: 'EnterpriseCo', stage: 'Closing', value: '$120K', rep: 'Mike T.' },
+          n1: Math.floor(Math.random() * 28) + 128,
+          n2: Math.floor(Math.random() * 7) + 21,
+          feed: [
+            { title: 'Demo → implementation', meta: 'Transcript + scope packet', tag: 'now' },
+            { title: 'Stage exit met', meta: 'Qualified → technical win', tag: '6m' },
           ],
         });
-      }, 2500);
-      intervals.push(interval);
-    } else if (selectedProduct === 'applications') {
-      const interval = setInterval(() => {
+      } else if (selectedProduct === 'applications') {
         setDashboardData({
-          activeUsers: Math.floor(Math.random() * 45) + 185,
-          tasksCompleted: Math.floor(Math.random() * 120) + 450,
-          dataSynced: Math.floor(Math.random() * 600) + 1200,
-          systemHealth: Math.floor(Math.random() * 5) + 98,
-          deployments: Math.floor(Math.random() * 5) + 12,
-        });
-      }, 3000);
-      intervals.push(interval);
-    } else if (selectedProduct === 'agents') {
-      const interval = setInterval(() => {
-        setDashboardData({
-          tasksAutomated: Math.floor(Math.random() * 250) + 850,
-          patternsLearned: Math.floor(Math.random() * 6) + 12,
-          dataMoved: Math.floor(Math.random() * 1200) + 2800,
-          actions: [
-            { type: 'Data moved', detail: 'CRM → Email system', time: 'Just now' },
-            { type: 'Pattern learned', detail: 'Urgent email detection', time: '2 min ago' },
-            { type: 'Anomaly flagged', detail: 'Unusual payment pattern', time: '5 min ago' },
+          n1: Math.floor(Math.random() * 4) + 97,
+          n2: Math.floor(Math.random() * 4) + 11,
+          feed: [
+            { title: 'Edge deploy', meta: 'Marketing rail · cache warm', tag: 'now' },
+            { title: 'Auth path trace', meta: 'Tenant session · clean', tag: '4m' },
           ],
         });
-      }, 2000);
-      intervals.push(interval);
+      } else {
+        setDashboardData({
+          n1: Math.floor(Math.random() * 220) + 880,
+          n2: Math.floor(Math.random() * 5) + 11,
+          feed: [
+            { title: 'Sync replay OK', meta: 'CRM → billing · idempotent', tag: 'now' },
+            { title: 'Human checkpoint', meta: 'Above SLA · flagged', tag: '1m' },
+          ],
+        });
+      }
     }
-
-    return () => intervals.forEach(clearInterval);
+    pulse();
+    const interval = setInterval(pulse, 2600);
+    return () => clearInterval(interval);
   }, [selectedProduct]);
 
-  const renderDashboard = () => {
-    if (selectedProduct === 'portals') {
-      return (
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="h-full p-6 space-y-4"
-        >
-          <div className="grid grid-cols-3 gap-4">
-            {[
-              { label: 'Active Users', value: dashboardData.activeUsers || 187, icon: Users },
-              { label: 'Documents', value: dashboardData.documentsAccessed || 52, icon: FileText },
-              { label: 'Payments', value: dashboardData.paymentsProcessed || 38, icon: CreditCard },
-            ].map((metric, idx) => (
-              <motion.div
-                key={metric.label}
-                variants={itemVariants}
-                whileHover={{ scale: 1.02, y: -2 }}
-                className="bg-white dark:bg-neutral-900 rounded-xl p-4 border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-md transition-shadow duration-200"
-              >
-                <metric.icon className="w-4 h-4 text-neutral-400 dark:text-neutral-500 mb-2" />
-                <div className="text-xs text-neutral-500 dark:text-neutral-400 mb-1">{metric.label}</div>
-                <motion.div 
-                  key={metric.value}
-                  initial={{ scale: 1.2 }}
-                  animate={{ scale: 1 }}
-                  className="text-2xl font-bold text-neutral-900 dark:text-white"
-                >
-                  {metric.value}
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
-          <motion.div 
-            variants={itemVariants}
-            className="bg-white dark:bg-neutral-900 rounded-xl p-4 border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-md transition-shadow duration-200"
-          >
-            <div className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-3 flex items-center gap-2">
-              <Activity className="w-3 h-3" />
-              Recent Activity
-            </div>
-            <div className="space-y-3">
-              {(dashboardData.recentActivity || []).map((item: any, idx: number) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="flex items-start justify-between border-b border-neutral-100 dark:border-neutral-800 pb-2 last:border-0 last:pb-0"
-                >
-                  <div className="flex-1">
-                    <div className="text-sm font-medium text-neutral-900 dark:text-white">{item.action}</div>
-                    <div className="text-xs text-neutral-500 dark:text-neutral-400">{item.client}</div>
-                  </div>
-                  <div className="text-right">
-                    {item.amount && <div className="text-sm font-semibold text-sky-600 dark:text-sky-400">{item.amount}</div>}
-                    <div className="text-xs text-neutral-400">{item.time}</div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </motion.div>
-      );
-    } else if (selectedProduct === 'sales') {
-      return (
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="h-full p-6 space-y-4"
-        >
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              { label: 'Leads Today', value: dashboardData.leadsToday || 142, trend: '+12%', icon: TrendingUp },
-              { label: 'Revenue', value: `$${((dashboardData.revenue || 78000) / 1000).toFixed(0)}K`, trend: '+28%', icon: CreditCard },
-            ].map((metric, idx) => (
-              <motion.div
-                key={metric.label}
-                variants={itemVariants}
-                whileHover={{ scale: 1.02, y: -2 }}
-                className="bg-white dark:bg-neutral-900 rounded-xl p-4 border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-md transition-shadow duration-200"
-              >
-                <metric.icon className="w-4 h-4 text-neutral-400 mb-2" />
-                <div className="text-xs text-neutral-500 dark:text-neutral-400 mb-1">{metric.label}</div>
-                <div className="flex items-baseline gap-2">
-                  <motion.div 
-                    key={metric.value}
-                    initial={{ scale: 1.2 }}
-                    animate={{ scale: 1 }}
-                    className="text-2xl font-bold text-neutral-900 dark:text-white"
-                  >
-                    {metric.value}
-                  </motion.div>
-                  <span className="text-xs text-sky-600 dark:text-sky-400 flex items-center gap-1">
-                    <TrendingUp className="w-3 h-3" />
-                    {metric.trend}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-          
-          <motion.div 
-            variants={itemVariants}
-            className="bg-white dark:bg-neutral-900 rounded-xl p-4 border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-md transition-shadow duration-200"
-          >
-            <div className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-3 flex items-center gap-2">
-              <MessageSquare className="w-3 h-3" />
-              Sales Transcripts
-            </div>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-neutral-600 dark:text-neutral-400">Today</span>
-                <span className="text-xs font-semibold text-neutral-900 dark:text-white">{dashboardData.transcriptsToday || 24}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-neutral-600 dark:text-neutral-400">Auto-synced to Implementation</span>
-                <div className="flex items-center gap-2">
-                  <motion.div 
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="w-2 h-2 bg-sky-500 rounded-full"
-                  />
-                  <span className="text-xs text-sky-600 dark:text-sky-400">Live</span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+  const renderMomentumPulse = () => {
+    const d = dashboardData as {
+      n1?: number;
+      n2?: number;
+      feed?: { title: string; meta: string; tag: string }[];
+    };
 
-          <motion.div 
-            variants={itemVariants}
-            className="bg-white dark:bg-neutral-900 rounded-xl p-4 border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-md transition-shadow duration-200"
-          >
-            <div className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-3 flex items-center gap-2">
-              <Plug className="w-3 h-3" />
-              API Connections
-            </div>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-neutral-600 dark:text-neutral-400">Active Integrations</span>
-                <span className="text-xs font-semibold text-neutral-900 dark:text-white">8/8</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-neutral-600 dark:text-neutral-400">Data Sync</span>
-                <div className="flex items-center gap-2">
-                  <motion.div 
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="w-2 h-2 bg-sky-500 rounded-full"
-                  />
-                  <span className="text-xs text-sky-600 dark:text-sky-400">Real-time</span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-      );
-    } else if (selectedProduct === 'applications') {
-      return (
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="h-full p-6 space-y-4"
+    const stat = (
+      label: string,
+      value: number | string,
+      Icon: LucideIcon,
+      sub?: string,
+    ) => (
+      <motion.div
+        variants={itemVariants}
+        className="rounded-2xl border border-neutral-200/80 bg-white p-4 shadow-sm ring-1 ring-black/[0.02] dark:border-neutral-800 dark:bg-neutral-950 dark:ring-white/[0.05]"
+      >
+        <Icon className="mb-2 size-4 text-sky-500/70 dark:text-sky-400/80" aria-hidden />
+        <p className="text-[9px] font-semibold uppercase tracking-[0.14em] text-neutral-400 dark:text-neutral-500">{label}</p>
+        <motion.p
+          key={String(value)}
+          initial={{ scale: 1.06 }}
+          animate={{ scale: 1 }}
+          className="mt-2 font-display text-2xl font-bold tabular-nums tracking-tight text-neutral-900 dark:text-white md:text-[1.75rem]"
         >
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              { label: 'Active Users', value: dashboardData.activeUsers || 195, icon: Users },
-              { label: 'Tasks Today', value: dashboardData.tasksCompleted || 487, icon: Activity },
-            ].map((metric, idx) => (
-              <motion.div
-                key={metric.label}
-                variants={itemVariants}
-                whileHover={{ scale: 1.02, y: -2 }}
-                className="bg-white dark:bg-neutral-900 rounded-xl p-4 border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-md transition-shadow duration-200"
-              >
-                <metric.icon className="w-4 h-4 text-neutral-400 dark:text-neutral-500 mb-2" />
-                <div className="text-xs text-neutral-500 dark:text-neutral-400 mb-1">{metric.label}</div>
-                <motion.div 
-                  key={metric.value}
-                  initial={{ scale: 1.2 }}
-                  animate={{ scale: 1 }}
-                  className="text-2xl font-bold text-neutral-900 dark:text-white"
-                >
-                  {metric.value}
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
-          <motion.div 
-            variants={itemVariants}
-            className="bg-white dark:bg-neutral-900 rounded-xl p-4 border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-md transition-shadow duration-200"
-          >
-            <div className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-3 flex items-center gap-2">
-              <Shield className="w-3 h-3" />
-              System Status
-            </div>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-neutral-600 dark:text-neutral-400">Data Sync</span>
-                <div className="flex items-center gap-2">
-                  <motion.div 
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="w-2 h-2 bg-sky-500 rounded-full"
-                  />
-                  <span className="text-xs text-sky-600 dark:text-sky-400">Live</span>
-                </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-neutral-600 dark:text-neutral-400">API Connections</span>
-                <span className="text-xs font-medium text-neutral-900 dark:text-white">12/12</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-neutral-600 dark:text-neutral-400">System Health</span>
-                <span className="text-xs font-medium text-sky-600 dark:text-sky-400">{dashboardData.systemHealth || 98}%</span>
-              </div>
-            </div>
-          </motion.div>
+          {value}
+          {sub ?? ''}
+        </motion.p>
+      </motion.div>
+    );
 
-          <motion.div 
-            variants={itemVariants}
-            className="bg-white dark:bg-neutral-900 rounded-xl p-4 border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-md transition-shadow duration-200"
-          >
-            <div className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-3 flex items-center gap-2">
-              <Activity className="w-3 h-3" />
-              Deployments
-            </div>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-neutral-600 dark:text-neutral-400">This Month</span>
-                <span className="text-xs font-semibold text-neutral-900 dark:text-white">{dashboardData.deployments || 12}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-neutral-600 dark:text-neutral-400">Status</span>
-                <div className="flex items-center gap-2">
-                  <motion.div 
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="w-2 h-2 bg-sky-500 rounded-full"
-                  />
-                  <span className="text-xs text-sky-600 dark:text-sky-400">Active</span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-      );
-    } else if (selectedProduct === 'agents') {
-      return (
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="h-full p-6 space-y-4"
+    const feedItems = (d.feed ?? []).slice(0, 2);
+
+    return (
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="flex h-full min-h-[240px] flex-col p-5 md:p-6"
+      >
+        <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-neutral-400 dark:text-neutral-500">
+          {currentLane.previewCaption}
+        </p>
+
+        <div className="mt-5 grid grid-cols-2 gap-3">
+          {selectedProduct === 'portals' && (
+            <>
+              {stat('Active sessions', d.n1 ?? 172, Users)}
+              {stat('Payments cleared', d.n2 ?? 38, CreditCard)}
+            </>
+          )}
+          {selectedProduct === 'sales' && (
+            <>
+              {stat('Touches today', d.n1 ?? 142, Zap)}
+              {stat('Handshake ready', d.n2 ?? 26, TrendingUp, '%')}
+            </>
+          )}
+          {selectedProduct === 'applications' && (
+            <>
+              {stat('Route health', d.n1 ?? 98, Activity, '%')}
+              {stat('Shipped this mo.', d.n2 ?? 12, Globe)}
+            </>
+          )}
+          {selectedProduct === 'agents' && (
+            <>
+              {stat('Runs today', d.n1 ?? 1040, Activity)}
+              {stat('Queued for human', d.n2 ?? 14, Brain)}
+            </>
+          )}
+        </div>
+
+        <motion.div
+          variants={itemVariants}
+          className="mt-5 rounded-2xl border border-neutral-200/80 bg-gradient-to-b from-white to-neutral-50/80 p-3.5 dark:border-neutral-800 dark:from-neutral-950 dark:to-neutral-900/80"
         >
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              { label: 'Tasks Automated', value: dashboardData.tasksAutomated || 892, icon: Activity },
-              { label: 'Patterns Learned', value: dashboardData.patternsLearned || 14, icon: Brain },
-            ].map((metric, idx) => (
-              <motion.div
-                key={metric.label}
-                variants={itemVariants}
-                whileHover={{ scale: 1.02, y: -2 }}
-                className="bg-white dark:bg-neutral-900 rounded-xl p-4 border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-md transition-shadow duration-200"
-              >
-                <metric.icon className="w-4 h-4 text-neutral-400 dark:text-neutral-500 mb-2" />
-                <div className="text-xs text-neutral-500 dark:text-neutral-400 mb-1">{metric.label}</div>
-                <motion.div 
-                  key={metric.value}
-                  initial={{ scale: 1.2 }}
-                  animate={{ scale: 1 }}
-                  className="text-2xl font-bold text-neutral-900 dark:text-white"
-                >
-                  {metric.value}
-                </motion.div>
-              </motion.div>
+          <div className="mb-2.5 flex items-center justify-between gap-2 border-b border-neutral-100 pb-2 dark:border-neutral-800">
+            <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-neutral-400 dark:text-neutral-500">
+              Live-ish
+            </span>
+          </div>
+          <div className="space-y-2.5">
+            {feedItems.map((row) => (
+              <div key={row.title + row.meta} className="flex items-center justify-between gap-2 rounded-lg bg-white/80 px-2.5 py-2 dark:bg-neutral-950/60">
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold leading-tight text-neutral-900 dark:text-white">{row.title}</p>
+                  <p className="truncate text-[10px] text-neutral-500 dark:text-neutral-400">{row.meta}</p>
+                </div>
+                <span className="shrink-0 rounded-md bg-sky-500/10 px-2 py-0.5 font-mono text-[10px] font-medium tabular-nums text-sky-700 dark:bg-sky-500/15 dark:text-sky-400">
+                  {row.tag}
+                </span>
+              </div>
             ))}
           </div>
-          <motion.div 
-            variants={itemVariants}
-            className="bg-white dark:bg-neutral-900 rounded-xl p-4 border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-md transition-shadow duration-200"
-          >
-            <div className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-3 flex items-center gap-2">
-              <Brain className="w-3 h-3" />
-              Recent Actions
-            </div>
-            <div className="space-y-2">
-              {(dashboardData.actions || []).map((action: any, idx: number) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="flex items-start gap-2 text-xs"
-                >
-                  <Activity className="w-3 h-3 text-sky-500 mt-0.5 flex-shrink-0" />
-                  <div className="flex-1">
-                    <div className="text-neutral-900 dark:text-white font-medium">{action.type}</div>
-                    <div className="text-neutral-500 dark:text-neutral-400">{action.detail}</div>
-                  </div>
-                  <div className="text-neutral-400 text-xs">{action.time}</div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
         </motion.div>
-      );
-    }
-    return null;
+      </motion.div>
+    );
   };
 
   return (
@@ -544,14 +318,30 @@ export function VisualShowcase() {
       <Container className="relative z-10">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <motion.div {...fadeUpReveal()} className="mb-16 text-center">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 dark:text-white mb-6 tracking-tight">
-              What We Actually Build.<br />
-              <span className="text-neutral-600 dark:text-neutral-400 font-light">And Why It Matters.</span>
-            </h2>
-            <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-              Four systems that solve real problems. Not features. Not complexity. Just software that works.
+          <motion.div {...fadeUpReveal()} className="mb-10 text-center md:mb-14">
+            <p className="mx-auto mb-3 font-display text-[10px] font-semibold uppercase tracking-[0.22em] text-sky-600 dark:text-sky-400 sm:text-[11px]">
+              Delivery snapshot
             </p>
+            <h2 className="text-balance font-display text-3xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-4xl md:text-5xl">
+              Four lanes<span className="text-neutral-500 dark:text-neutral-400">—see the pulse.</span>
+            </h2>
+            <p className="mx-auto mt-4 max-w-lg text-sm text-neutral-600 dark:text-neutral-400 md:text-base">
+              Tap a lane. Left = story. Right = motion. Packaging stays on Offerings—not here.
+            </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-2">
+              <Link
+                href="/offerings"
+                className="inline-flex rounded-full border border-neutral-200 bg-white px-4 py-2 text-xs font-semibold text-neutral-800 shadow-sm transition hover:border-sky-300 hover:text-sky-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100 dark:hover:border-sky-600 dark:hover:text-sky-400"
+              >
+                Open Offerings
+              </Link>
+              <Link
+                href="/client-offerings-2026.html"
+                className="inline-flex rounded-full border border-transparent bg-neutral-900 px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-white"
+              >
+                Client overview
+              </Link>
+            </div>
           </motion.div>
 
           {/* Dashboard Container */}
@@ -559,87 +349,86 @@ export function VisualShowcase() {
             {/* Main Dashboard Card */}
             <motion.div
               {...fadeUpReveal({ delay: 0.12, y: 24 })}
-              className="overflow-hidden rounded-3xl border border-neutral-200/80 bg-white shadow-2xl shadow-neutral-900/5 backdrop-blur-sm dark:border-neutral-800/80 dark:bg-neutral-900 dark:shadow-neutral-950/50"
+              className="overflow-hidden rounded-3xl border border-neutral-200/80 bg-white shadow-2xl shadow-neutral-900/[0.06] ring-1 ring-black/[0.03] dark:border-neutral-800/80 dark:bg-neutral-900 dark:shadow-neutral-950/50 dark:ring-white/[0.05]"
             >
-              {/* Dashboard Header */}
-              <div className="px-6 md:px-8 py-5 border-b border-neutral-200/60 dark:border-neutral-800/60 bg-gradient-to-r from-neutral-50/80 via-white to-neutral-50/80 dark:from-neutral-900/80 via-neutral-900 dark:to-neutral-900/80 backdrop-blur-sm">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <motion.div 
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                      className="w-2.5 h-2.5 bg-sky-500 rounded-full shadow-lg shadow-sky-500/50"
-                    />
-                    <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">Live Dashboard</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400">
-                    <Clock className="w-3 h-3" />
-                    Real-time
-                  </div>
+              <div className="flex items-center justify-between gap-3 border-b border-white/10 bg-[#101c37] px-5 py-3.5 md:px-8">
+                <div className="flex min-w-0 items-center gap-2.5">
+                  <span className="flex shrink-0 gap-1" aria-hidden>
+                    <span className="size-2 rounded-full bg-slate-500/90" />
+                    <span className="size-2 rounded-full bg-slate-500/90" />
+                    <span className="size-2 rounded-full bg-slate-500/90" />
+                  </span>
+                  <span className="truncate text-[10px] font-bold uppercase tracking-[0.14em] text-sky-200/95">
+                    Agent Analytics · build preview
+                  </span>
+                </div>
+                <div className="flex shrink-0 items-center gap-1.5 text-[10px] font-medium uppercase tracking-wider text-sky-200/70">
+                  <Clock className="size-3 opacity-80" aria-hidden />
+                  Sample
                 </div>
               </div>
 
               {/* Product Cards Grid */}
-              <div className="p-6 md:p-8 bg-neutral-50/50 dark:bg-neutral-900/30">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                  {products.map((product, index) => {
-                    const Icon = product.icon;
-                    const isHovered = hoveredProduct === product.id;
-                    const isSelected = selectedProduct === product.id;
+              <div className="bg-[radial-gradient(ellipse_90%_60%_at_50%_-20%,rgba(224,242,254,0.45)_0%,transparent_55%)] p-5 dark:bg-[radial-gradient(ellipse_90%_50%_at_50%_-15%,rgba(56,189,248,0.07)_0%,transparent_50%)] md:p-8">
+                <div className="mb-6 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+                  {lanes.map((lane, index) => {
+                    const Icon = lane.icon;
+                    const isHovered = hoveredProduct === lane.id;
+                    const isSelected = selectedProduct === lane.id;
 
                     return (
                       <motion.button
-                        key={product.id}
+                        key={lane.id}
                         {...fadeUpStagger(index, 0.06, 0.095)}
-                        onMouseEnter={() => setHoveredProduct(product.id)}
+                        onMouseEnter={() => setHoveredProduct(lane.id)}
                         onMouseLeave={() => setHoveredProduct(null)}
-                        onClick={() => setSelectedProduct(product.id)}
+                        onClick={() => setSelectedProduct(lane.id)}
                         className="relative group text-left cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 rounded-2xl"
                       >
                         <motion.div
                           whileHover={{ scale: 1.02, y: -4 }}
                           whileTap={{ scale: 0.98 }}
                             className={`
-                            relative p-5 rounded-2xl border-2 transition-all duration-300 ease-out backdrop-blur-sm
+                            relative rounded-2xl border-2 p-4 transition-all duration-300 ease-out sm:p-5
                             ${isSelected 
-                              ? 'border-neutral-800 dark:border-neutral-100 bg-neutral-800 dark:bg-neutral-100 shadow-xl shadow-neutral-800/25 dark:shadow-neutral-100/10' 
-                              : 'border-neutral-200/80 dark:border-neutral-800/80 bg-white/90 dark:bg-neutral-900/60 hover:border-sky-200 dark:hover:border-sky-900/50 hover:shadow-lg hover:shadow-sky-500/5'
+                              ? 'border-[#101c37] bg-[#101c37] shadow-lg shadow-slate-900/25 dark:border-sky-500/40 dark:bg-neutral-950 dark:shadow-sky-950/40 dark:ring-1 dark:ring-sky-500/20' 
+                              : 'border-neutral-200/90 bg-white/95 dark:border-neutral-800 dark:bg-neutral-900/70 hover:border-sky-300/60 dark:hover:border-sky-700/50'
                             }
                           `}
                         >
                           <div className="relative z-10">
                             <motion.div
                               animate={{ 
-                                scale: isHovered || isSelected ? 1.1 : 1,
+                                scale: isHovered || isSelected ? 1.08 : 1,
                                 rotate: isHovered ? [0, -5, 5, 0] : 0,
                               }}
                               transition={{ duration: 0.3 }}
-                              className={`inline-flex p-2.5 rounded-lg mb-3 ${
+                              className={`mb-2.5 inline-flex rounded-xl p-2.5 ${
                                 isSelected 
-                                  ? 'bg-white dark:bg-neutral-900' 
-                                  : 'bg-neutral-100 dark:bg-neutral-800'
+                                  ? 'bg-white/15 dark:bg-sky-950/50' 
+                                  : 'bg-sky-50 dark:bg-sky-950/40'
                               }`}
                             >
-                              <Icon className={`w-5 h-5 ${
+                              <Icon className={`size-5 ${
                                 isSelected 
-                                  ? 'text-neutral-900 dark:text-neutral-900' 
-                                  : 'text-neutral-700 dark:text-neutral-300'
+                                  ? 'text-white dark:text-sky-300' 
+                                  : 'text-sky-600 dark:text-sky-400'
                               }`} />
                             </motion.div>
 
-                            <h3 className={`text-base font-bold mb-1.5 tracking-tight leading-tight ${
+                            <h3 className={`font-display text-sm font-bold leading-snug tracking-tight sm:text-base ${
                               isSelected 
-                                ? 'text-white dark:text-neutral-900' 
+                                ? 'text-white dark:text-white' 
                                 : 'text-neutral-900 dark:text-white'
                             }`}>
-                              {product.solution}
+                              {lane.category}
                             </h3>
-                            <p className={`text-xs leading-relaxed line-clamp-2 ${
+                            <p className={`mt-1.5 line-clamp-1 text-[11px] leading-snug sm:line-clamp-2 ${
                               isSelected 
-                                ? 'text-white/70 dark:text-neutral-700' 
-                                : 'text-neutral-600 dark:text-neutral-400'
+                                ? 'text-white/75 dark:text-neutral-400' 
+                                : 'text-neutral-500 dark:text-neutral-400'
                             }`}>
-                              {product.problem.split(' ').slice(0, 9).join(' ')}...
+                              {lane.cardHook}
                             </p>
                           </div>
 
@@ -647,7 +436,7 @@ export function VisualShowcase() {
                             <motion.div
                               initial={{ scale: 0, rotate: -180 }}
                               animate={{ scale: 1, rotate: 0 }}
-                              className="absolute top-3 right-3 w-2.5 h-2.5 bg-white dark:bg-neutral-900 rounded-full shadow-lg"
+                              className="absolute right-3 top-3 size-2.5 rounded-full bg-white shadow-lg ring-2 ring-white/40 dark:bg-sky-400 dark:ring-sky-400/50"
                             />
                           )}
                         </motion.div>
@@ -666,90 +455,119 @@ export function VisualShowcase() {
                     transition={{ duration: 0.4, type: 'spring', stiffness: 300, damping: 30 }}
                     className="relative"
                   >
-                    <div className="rounded-2xl overflow-hidden bg-white/95 dark:bg-neutral-900/95 backdrop-blur-sm border border-neutral-200/60 dark:border-neutral-800/60 shadow-xl shadow-neutral-900/5 dark:shadow-neutral-950/30">
-                      <div className="grid md:grid-cols-2 gap-0">
-                        {/* Left: Content */}
-                        <div className="p-6 md:p-8 space-y-6">
-                          <div className="flex items-center gap-3">
-                            <motion.div 
-                              whileHover={{ scale: 1.1, rotate: 5 }}
-                              className="p-3 rounded-xl bg-neutral-900 dark:bg-neutral-100"
-                            >
-                              <currentProduct.icon className="w-6 h-6 text-white dark:text-neutral-900" />
-                            </motion.div>
-                            <div>
-                              <h3 className="text-2xl md:text-3xl font-bold text-neutral-900 dark:text-white tracking-tight">
-                                {currentProduct.solution}
+                    <div className="overflow-hidden rounded-2xl border border-neutral-200/70 bg-white shadow-lg shadow-neutral-900/[0.04] dark:border-neutral-800/70 dark:bg-neutral-950">
+                      <div className="grid gap-0 md:grid-cols-2 md:divide-x md:divide-neutral-200/80 dark:md:divide-neutral-800/80">
+                        {/* Pulse first on phones */}
+                        <div className="order-1 md:order-2 border-b border-neutral-200/80 bg-gradient-to-b from-neutral-50 to-neutral-50/30 dark:border-neutral-800/80 dark:from-neutral-900/95 dark:to-neutral-950 md:border-b-0">
+                          {renderMomentumPulse()}
+                        </div>
+
+                        <div className="order-2 space-y-5 p-6 md:order-1 md:p-8">
+                          <div className="flex items-start gap-3">
+                            <div className="rounded-2xl bg-[#101c37] p-3 shadow-inner ring-2 ring-black/10 dark:ring-white/15">
+                              <currentLane.icon className="size-6 text-white" />
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <h3 className="font-display text-xl font-bold tracking-tight text-neutral-900 dark:text-white md:text-2xl">
+                                {currentLane.category}
                               </h3>
+                              <p className="mt-1 text-xs leading-snug text-sky-700 dark:text-sky-400/90">{currentLane.deliveryNote}</p>
                             </div>
                           </div>
 
-                          <div className="p-4 rounded-xl bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800">
-                            <div className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-2">
-                              When You Need
+                          <div className="grid gap-3 sm:grid-cols-2">
+                            <div className="rounded-2xl border border-neutral-200/80 bg-neutral-50/80 p-4 dark:border-neutral-800 dark:bg-neutral-900/50">
+                              <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-neutral-400 dark:text-neutral-500">
+                                Fits when
+                              </p>
+                              <p className="mt-2 text-sm font-medium leading-snug text-neutral-800 dark:text-neutral-200">{currentLane.fit}</p>
                             </div>
-                            <p className="text-base text-neutral-700 dark:text-neutral-300 leading-relaxed">
-                              {currentProduct.problem}
-                            </p>
-                          </div>
-
-                          <div className="p-4 rounded-xl bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-950/30 dark:to-blue-950/30 border-2 border-sky-200 dark:border-sky-900/50">
-                            <div className="text-xs font-semibold text-sky-600 dark:text-sky-400 uppercase tracking-wide mb-2">
-                              So You Get
+                            <div className="rounded-2xl border border-sky-100 bg-gradient-to-br from-sky-50/90 to-white p-4 dark:border-sky-900/35 dark:from-sky-950/20 dark:to-neutral-950">
+                              <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-sky-600 dark:text-sky-400">
+                                Outcome
+                              </p>
+                              <p className="mt-2 text-sm font-semibold leading-snug text-neutral-900 dark:text-white">{currentLane.outcome}</p>
                             </div>
-                            <p className="text-base font-medium text-neutral-900 dark:text-white leading-relaxed">
-                              {currentProduct.outcome}
-                            </p>
                           </div>
 
                           <div>
-                            <div className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-3 uppercase tracking-wide">
-                              Real Scenarios
-                            </div>
-                            <div className="space-y-2">
-                              {currentProduct.scenarios.map((scenario, idx) => (
-                                <motion.div
-                                  key={idx}
-                                  initial={{ opacity: 0, x: -10 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: idx * 0.05 }}
-                                  className="flex items-start gap-3 px-3 py-2 rounded-lg bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800"
+                            <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-neutral-400 dark:text-neutral-500">
+                              Scoped on Offerings
+                            </p>
+                            <div className="mt-2 flex flex-wrap gap-2">
+                              {currentLane.offeringRefs.map((ref) => (
+                                <Link
+                                  key={ref.slug}
+                                  href={`/offerings/${ref.slug}`}
+                                  title={ref.context}
+                                  className="inline-flex items-center gap-1 rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-xs font-semibold text-[#101c37] shadow-sm transition hover:border-sky-300 hover:bg-sky-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-sky-200 dark:hover:border-sky-600 dark:hover:bg-sky-950/40"
                                 >
-                                  <CheckCircle2 className="w-4 h-4 text-sky-600 dark:text-sky-400 flex-shrink-0 mt-0.5" />
-                                  <span className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
-                                    {scenario}
+                                  {OFFERINGS[ref.slug].shortLabel}
+                                  <span className="text-neutral-400 dark:text-neutral-500" aria-hidden>
+                                    →
                                   </span>
-                                </motion.div>
+                                </Link>
                               ))}
                             </div>
                           </div>
 
-                          <div className="pt-4 border-t border-neutral-200 dark:border-neutral-800">
-                            <div className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-3">
-                              Connects To
-                            </div>
-                            <div className="flex flex-wrap gap-2">
-                              {currentProduct.connections.map((connection, idx) => (
-                                <motion.div
-                                  key={connection}
-                                  initial={{ opacity: 0, scale: 0.8 }}
-                                  animate={{ opacity: 1, scale: 1 }}
-                                  transition={{ delay: idx * 0.05, type: 'spring' }}
-                                  whileHover={{ scale: 1.05 }}
-                                  className="px-3 py-1.5 rounded-md bg-neutral-100 dark:bg-neutral-800 text-xs font-medium text-neutral-600 dark:text-neutral-400"
-                                >
-                                  {connection}
-                                </motion.div>
+                          <div>
+                            <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-neutral-400 dark:text-neutral-500">
+                              Moves
+                            </p>
+                            <ul className="space-y-1.5">
+                              {currentLane.plays.map((play) => (
+                                <li key={play} className="flex gap-2 text-sm leading-snug text-neutral-700 dark:text-neutral-300">
+                                  <span className="mt-2 inline-block size-1 shrink-0 rounded-full bg-sky-400" aria-hidden />
+                                  <span>{play}</span>
+                                </li>
                               ))}
-                            </div>
+                            </ul>
                           </div>
-                        </div>
 
-                        {/* Right: Real Dashboard */}
-                        <div className="bg-gradient-to-br from-neutral-50/80 to-neutral-100/40 dark:from-neutral-900/40 dark:to-neutral-900/60 border-l border-neutral-200/60 dark:border-neutral-800/60 p-6 backdrop-blur-sm" style={{ minHeight: '500px' }}>
-                          {renderDashboard()}
+                          <div className="flex flex-wrap gap-1.5 border-t border-neutral-100 pt-4 dark:border-neutral-800">
+                            {currentLane.connections.map((connection) => (
+                              <span
+                                key={connection}
+                                className="rounded-md bg-neutral-100 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wide text-neutral-600 dark:bg-neutral-800/80 dark:text-neutral-400"
+                              >
+                                {connection}
+                              </span>
+                            ))}
+                          </div>
                         </div>
                       </div>
+
+                      <details className="group border-t border-white/10 bg-[#101c37] px-5 py-4 md:px-8">
+                        <summary className="flex cursor-pointer list-none items-center justify-between gap-2 text-left text-[11px] font-semibold uppercase tracking-[0.16em] text-sky-200/90 outline-none marker:content-none [&::-webkit-details-marker]:hidden">
+                          <span>Same rail across every package · optional technical sketch</span>
+                          <span className="text-sky-300/70 transition group-open:rotate-180">▼</span>
+                        </summary>
+                        <div className="mt-4 overflow-x-auto">
+                          <div className="mb-4 flex min-w-[260px] flex-wrap items-center justify-center gap-x-1 gap-y-2 text-[10px] font-semibold uppercase tracking-[0.1em] text-sky-100/90 md:justify-start md:gap-x-2">
+                            {(['Ingest', 'Scrub', 'Playbook', 'Human gate', 'CRM / webhook'] as const).map((step, i, arr) => (
+                              <span key={step} className="flex flex-wrap items-center gap-x-2">
+                                <span className="whitespace-nowrap rounded-lg border border-white/15 bg-white/10 px-2.5 py-1">{step}</span>
+                                {i < arr.length - 1 ? <span aria-hidden className="text-white/35">→</span> : null}
+                              </span>
+                            ))}
+                          </div>
+                          <p className="mb-3 max-w-prose text-xs leading-relaxed text-sky-100/65">
+                            Surfaces swap; receipts and gates don&apos;t.&nbsp;
+                            <Link href="/offerings" className="font-semibold text-white underline underline-offset-2 hover:text-sky-200">
+                              Packages
+                            </Link>
+                            {' —pick lanes there.'}
+                          </p>
+                          <pre className="overflow-x-auto rounded-xl border border-white/15 bg-black/25 p-3 font-mono text-[10px] leading-relaxed text-sky-50/95" tabIndex={0}>
+                            {`handle(signal, surface):
+  scrub(signal)
+  route = playbook.for(surface, YOU)
+  if !route.allows(signal): return HOLD
+  dispatch(route.hooks); return receipt(signal.id)`}
+                          </pre>
+                        </div>
+                      </details>
                     </div>
                   </motion.div>
                 </AnimatePresence>

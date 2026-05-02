@@ -67,9 +67,9 @@ export function Logo({
     </div>
   );
 
-  // Wrap with dark background if requested
+  // Brand navy plate (matches site primary mark)—only around the logo when requested
   const wrappedContent = withDarkBackground ? (
-    <div className="bg-gray-900 dark:bg-gray-900 rounded-lg px-4 py-2 shadow-lg">
+    <div className="rounded-lg bg-[#101c37] px-3 py-2 shadow-lg ring-1 ring-white/10">
       {logoContent}
     </div>
   ) : (

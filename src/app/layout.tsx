@@ -83,19 +83,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`h-full ${inter.variable} ${plusJakarta.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" className={`${inter.variable} ${plusJakarta.variable}`} suppressHydrationWarning>
       <head>
         <meta name="theme-color" content="#1e293b" />
         <meta name="color-scheme" content="light dark" />
       </head>
-      <body className={`${inter.className} h-full antialiased`}>
+      {/* Block flow only: flex+flex-1 on main was swallowing free viewport height as empty white band above the footer. */}
+      <body className={`${inter.className} antialiased`}>
         <ThemeProvider>
           <Navigation />
-          <main className="min-h-screen pt-20 md:pt-28">
+          <main className="w-full pt-20 md:pt-28">
             <ScrollZoomIntoHeader>{children}</ScrollZoomIntoHeader>
           </main>
           <Footer />

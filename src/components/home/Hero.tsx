@@ -106,8 +106,8 @@ export default function Hero({
       />
 
       <Container className="relative z-10 max-w-7xl">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <div className="text-center lg:text-left">
+        <div className="mx-auto grid max-w-6xl items-start gap-10 lg:grid-cols-2 lg:items-center lg:gap-x-14 lg:gap-y-10">
+          <div className="mx-auto max-w-xl text-center sm:max-w-2xl lg:mx-0 lg:max-w-none lg:text-left">
             <motion.p
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
@@ -183,8 +183,18 @@ export default function Hero({
             </motion.div>
           </div>
 
-          <div>
-            <HeroInteractivePanel />
+          <div className="relative mx-auto flex w-full max-w-xl justify-center sm:max-w-2xl lg:mx-0 lg:w-full lg:max-w-[min(44rem,calc(100vw-3rem))] lg:justify-self-stretch xl:max-w-none">
+            {/*
+              No vertical rule—air + gap carries separation.
+              Radial wash feathered to neutral-50 (page ground) reads “soft glow,” not a box.
+            */}
+            <div
+              className="relative w-full rounded-[2rem] p-6 sm:p-8 md:p-9
+                bg-[radial-gradient(ellipse_105%_95%_at_94%_35%,rgba(125,211,252,0.38)_0%,rgba(239,246,255,0.42)_42%,rgba(250,250,250,1)_74%,rgba(250,250,250,1)_100%)]
+                dark:bg-[radial-gradient(ellipse_100%_90%_at_94%_32%,rgba(56,189,248,0.11)_0%,rgba(59,130,246,0.05)_38%,transparent_76%)]"
+            >
+              <HeroInteractivePanel />
+            </div>
           </div>
         </div>
       </Container>

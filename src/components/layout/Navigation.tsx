@@ -12,6 +12,7 @@ import { MOTION_EASE, collapseTransition, motionDurations } from '@/lib/motion';
 
 const NAV_ITEMS = [
   { label: 'Home', href: '/' },
+  { label: 'Offerings', href: '/offerings' },
   { label: 'About', href: '/about' },
   { label: 'Social', href: '/roundtable' },
   { label: 'Contact', href: '/contact' },
@@ -133,7 +134,7 @@ export function Navigation() {
       className="fixed top-0 left-0 right-0 z-50 border-b border-transparent"
     >
       <Container>
-        {/* Logo — 2027 AI feel: scroll-in + breathing + hover/tap + subtle shimmer */}
+        {/* Main logo: centered—the sample workspace preview on /offerings is where the top-left chrome lives */}
         <motion.div
           key={playScrollIn ? 'scroll-in' : 'idle'}
           className="flex justify-center py-2 md:py-3"
@@ -147,7 +148,7 @@ export function Navigation() {
         >
           <motion.a
             href="/"
-            className="relative inline-block origin-center scale-90 md:scale-95 rounded-xl overflow-hidden"
+            className="relative inline-block origin-center scale-90 overflow-hidden rounded-xl md:scale-95"
             initial={false}
             animate={{
               scale: [1, 1.012, 1],
@@ -166,15 +167,15 @@ export function Navigation() {
             }}
             whileTap={{ scale: 0.98 }}
           >
-            {/* Subtle sweep — "neural" hint, very low opacity */}
             <motion.span
-              className="pointer-events-none absolute inset-0 z-10 rounded-xl overflow-hidden"
+              className="pointer-events-none absolute inset-0 z-10 overflow-hidden rounded-xl"
               aria-hidden
             >
               <motion.span
                 className="absolute inset-y-0 w-1/2 opacity-[0.06] dark:opacity-[0.08]"
                 style={{
-                  background: 'linear-gradient(90deg, transparent, rgba(59,130,246,0.4), transparent)',
+                  background:
+                    'linear-gradient(90deg, transparent, rgba(59,130,246,0.4), transparent)',
                 }}
                 animate={{ x: ['0%', '200%'] }}
                 transition={{
@@ -191,17 +192,12 @@ export function Navigation() {
           </motion.a>
         </motion.div>
 
-        {/* Nav — scroll-in + 2027 sliding pill on hover/active */}
-        <nav className="flex items-center justify-center h-10 md:h-12">
-          <div className="hidden md:flex items-center relative gap-1 rounded-full bg-neutral-100/80 dark:bg-neutral-800/50 px-1.5 py-1">
+        <nav className="flex h-10 items-center justify-center md:h-12">
+          <div className="relative hidden items-center gap-1 rounded-full bg-neutral-100/80 px-1.5 py-1 md:flex dark:bg-neutral-800/50">
             {NAV_ITEMS.map((item, index) => (
               <motion.div
                 key={playScrollIn ? `scroll-in-${item.href}` : item.href}
-                initial={
-                  playScrollIn
-                    ? { opacity: 0, y: -8 }
-                    : { opacity: 1, y: 0 }
-                }
+                initial={playScrollIn ? { opacity: 0, y: -8 } : { opacity: 1, y: 0 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
                   duration: SCROLL_IN_DURATION,
@@ -212,14 +208,14 @@ export function Navigation() {
               >
                 <Link
                   href={item.href}
-                  className="relative z-10 block px-4 py-2 rounded-full text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+                  className="relative z-10 block rounded-full px-4 py-2 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
                   onMouseEnter={() => setHoveredNavIndex(index)}
                   onMouseLeave={() => setHoveredNavIndex(null)}
                 >
                   {pillIndex === index && (
                     <motion.span
                       layoutId="nav-pill"
-                      className="absolute inset-0 z-0 rounded-full bg-white dark:bg-neutral-700 shadow-sm dark:shadow-none border border-neutral-200/80 dark:border-neutral-600/50"
+                      className="absolute inset-0 z-0 rounded-full border border-neutral-200/80 bg-white shadow-sm dark:border-neutral-600/50 dark:bg-neutral-700 dark:shadow-none"
                       transition={{
                         type: 'spring',
                         stiffness: 400,
@@ -233,17 +229,16 @@ export function Navigation() {
             ))}
           </div>
 
-          {/* Mobile menu button */}
           <button
+            type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-neutral-800 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
+            className="p-2 text-neutral-800 transition-colors hover:text-sky-600 md:hidden dark:text-neutral-300 dark:hover:text-sky-400"
             aria-label="Toggle mobile menu"
           >
             {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
 
-          {/* Dark mode toggle - desktop */}
-          <div className="hidden md:block ml-4">
+          <div className="ml-4 hidden md:block">
             <DarkModeToggle />
           </div>
         </nav>
